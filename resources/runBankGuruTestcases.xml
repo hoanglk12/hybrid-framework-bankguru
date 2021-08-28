@@ -3,6 +3,8 @@
   <test name="Run on Firefox" >
     <classes>
       <class name="com.bankguru.login.Login_01_Register_And_Login"/>
+      <class name="com.bankguru.login.Login_01_Register_And_Login_By_Initial_Object"/>
+       <class name="com.bankguru.login.Login_01_Register_And_Login_By_Inheritance"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
