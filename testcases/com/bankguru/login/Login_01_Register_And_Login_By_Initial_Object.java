@@ -23,14 +23,14 @@ public class Login_01_Register_And_Login_By_Initial_Object {
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-		basePage =  BasePage.getBasePage();
-		driver.get("https://demo.guru99.com/v4/");
+		basePage = new BasePage();
+		basePage.openPageUrl(driver, "https://demo.guru99.com/v4/");
 		
 	}
 
 	@Test
 	public void Login_01_Register_Account() {
-		loginPageUrl = driver.getCurrentUrl();
+		loginPageUrl = basePage.getCurrentPageUrl(driver);
 		
 		basePage.clickToElement(driver, "//a[(text()='here')]");
 		basePage.sendkeyToElement(driver, "//input[@name='emailid']", generateEmail());
