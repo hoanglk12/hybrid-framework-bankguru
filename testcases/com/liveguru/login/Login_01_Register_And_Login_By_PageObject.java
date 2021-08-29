@@ -1,37 +1,34 @@
 package com.liveguru.login;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import commons.BaseTest;
 import pageObjects.liveGuru.HomePageObject;
 import pageObjects.liveGuru.LoginPageObject;
 import pageObjects.liveGuru.MyDashboardPageObject;
 
-public class Login_01_Register_And_Login_By_PageObject {
+public class Login_01_Register_And_Login_By_PageObject extends BaseTest {
 	WebDriver driver;
-	String projectPath = System.getProperty("user.dir");
+	
 	String email, firstName, lastName, password, confirmPassword;
-
+	
+	@Parameters({"browser","url"})
 	@BeforeClass
-	public void initBrowser() {
-		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
-		driver = new FirefoxDriver();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
+	public void initBrowser(String browserName, String url) {
+		driver = getBrowser(browserName, url);
 		email = generateEmail();
 	}
 
 	@Test
 	public void Login_00_Open_Home_Page() {
 		homePage = new HomePageObject(driver);
-		homePage.openPageUrl(driver, "http://live.demoguru99.com/");
 		Assert.assertTrue(homePage.isLogoPageDisplayed());
 		homePage.clickToMyAccountLinkAtFooter();
 	}
