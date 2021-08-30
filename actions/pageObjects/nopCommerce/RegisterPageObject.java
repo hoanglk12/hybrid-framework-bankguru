@@ -46,4 +46,40 @@ public class RegisterPageObject extends BasePage {
 		waitForElementVisible(driver, RegisterPageUI.SUCCESS_MESSAGE);
 		return isElementDisplayed(driver, RegisterPageUI.SUCCESS_MESSAGE);
 	}
+	public String getEmptyFirstNameErrorMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getEmptyLastNameErrorMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getEmptyEmailErrorMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getEmptyPasswordErrorMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getEmptyConfirmPasswordErrorMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getInvalidEmailErrorMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getEmailExistErrorMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public boolean isPasswordLessThanSixErrorMsgDisplayed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	public String getPassNotMatchConfirmPassErrorMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

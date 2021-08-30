@@ -28,18 +28,13 @@ public class Login_To_Page extends BaseTest {
 		email = generateEmail(); 
 		firstName = "Cristiano"; 
 		lastName = "Ronaldo"; 
+		email = "hp95@mail.com";
 		password = "123456";
-		confirmPassword = password;
-		email = generateEmail();
 	}
 	
+
 	@Test
-	public void Login_06_01_Register_Account() {
-		registerAccount.Register_06_All_Info_Correct(driver, firstName, lastName, email, password, confirmPassword);
-	}
-	
-	@Test
-	public void Login_06_02_Correct_Email_Password() {
+	public void Login_06_Correct_Email_Password() {
 		//Step 1: HomePage -> Click to Login link
 		homePage = new HomePageObject(driver);
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
