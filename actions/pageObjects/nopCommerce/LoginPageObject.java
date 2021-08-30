@@ -23,5 +23,15 @@ public class LoginPageObject extends BasePage {
 		waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);
 		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
 	}
+	public String getEmailErrorMessage() {
+		waitForElementVisible(driver, LoginPageUI.EMAIL_ERROR_MSG);
+		return getTextElement(driver, LoginPageUI.EMAIL_ERROR_MSG);
+	}
+	public boolean isUnregEmailEmptyWrongPassErrorMsgDisplayed() {
+		waitForElementVisible(driver, LoginPageUI.UNREG_EMAIL_EMPTY_PASS_ERROR_MSG);
+		return isElementDisplayed(driver, LoginPageUI.UNREG_EMAIL_EMPTY_PASS_ERROR_MSG);
 
+	}
+	
+	
 }

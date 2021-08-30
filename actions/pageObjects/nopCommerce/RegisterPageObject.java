@@ -47,39 +47,41 @@ public class RegisterPageObject extends BasePage {
 		return isElementDisplayed(driver, RegisterPageUI.SUCCESS_MESSAGE);
 	}
 	public String getEmptyFirstNameErrorMsg() {
-		// TODO Auto-generated method stub
-		return null;
+		waitForElementVisible(driver, RegisterPageUI.EMPTY_FIRSTNAME_ERROR_MSG);
+		return getTextElement(driver, RegisterPageUI.EMPTY_FIRSTNAME_ERROR_MSG);
+		
+		
 	}
 	public String getEmptyLastNameErrorMsg() {
-		// TODO Auto-generated method stub
-		return null;
+		waitForElementVisible(driver, RegisterPageUI.EMPTY_LASTNAME_ERROR_MSG);
+		return getTextElement(driver, RegisterPageUI.EMPTY_LASTNAME_ERROR_MSG);
 	}
 	public String getEmptyEmailErrorMsg() {
-		// TODO Auto-generated method stub
-		return null;
+		waitForElementVisible(driver, RegisterPageUI.EMPTY_EMAIL_ERROR_MSG);
+		return getTextElement(driver, RegisterPageUI.EMPTY_EMAIL_ERROR_MSG);
 	}
 	public String getEmptyPasswordErrorMsg() {
-		// TODO Auto-generated method stub
-		return null;
+		waitForElementVisible(driver, RegisterPageUI.EMPTY_PASS_ERROR_MSG);
+		return getTextElement(driver, RegisterPageUI.EMPTY_PASS_ERROR_MSG);
 	}
 	public String getEmptyConfirmPasswordErrorMsg() {
-		// TODO Auto-generated method stub
-		return null;
+		waitForElementVisible(driver, RegisterPageUI.EMPTY_CONFIRM_PASS_ERROR_MSG);
+		return getTextElement(driver, RegisterPageUI.EMPTY_CONFIRM_PASS_ERROR_MSG);
 	}
 	public String getInvalidEmailErrorMsg() {
-		// TODO Auto-generated method stub
-		return null;
+		waitForElementVisible(driver, RegisterPageUI.INVALID_EMAIL_ERROR_MSG);
+		return getTextElement(driver, RegisterPageUI.INVALID_EMAIL_ERROR_MSG);
 	}
 	public String getEmailExistErrorMsg() {
-		// TODO Auto-generated method stub
-		return null;
+		waitForElementVisible(driver, RegisterPageUI.EXIST_EMAIL_ERROR_MSG);
+		return getTextElement(driver, RegisterPageUI.EXIST_EMAIL_ERROR_MSG);
 	}
 	public boolean isPasswordLessThanSixErrorMsgDisplayed() {
-		// TODO Auto-generated method stub
-		return false;
+		waitForElementVisible(driver, RegisterPageUI.PASS_LESS_THAN_SIX_ERROR_MSG);
+		return isElementDisplayed(driver, RegisterPageUI.PASS_LESS_THAN_SIX_ERROR_MSG);
 	}
 	public String getPassNotMatchConfirmPassErrorMsg() {
-		// TODO Auto-generated method stub
-		return null;
+		waitForElementVisible(driver, RegisterPageUI.PASS_NOT_MATCH_CONFIRMPASS_ERROR_MSG);
+		return getTextElement(driver, RegisterPageUI.PASS_NOT_MATCH_CONFIRMPASS_ERROR_MSG);
 	}
 }

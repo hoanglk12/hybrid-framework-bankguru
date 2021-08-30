@@ -324,6 +324,14 @@ public class BasePage {
 			e.printStackTrace();
 		}
 	}
+
+	public void handleUnexpectedAlert(WebDriver driver) {
+		try {
+			driver.switchTo().alert().dismiss();
+		} catch (Exception e) {
+			System.out.println("unexpected alert not present");
+		}
+	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 
 	private long timeOut = 30;

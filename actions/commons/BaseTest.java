@@ -1,5 +1,6 @@
 package commons;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -50,7 +51,12 @@ public class BaseTest {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(urlPage);
+		
 		return driver;
+	}
+	public String generateEmail() {
+		Random rand = new Random();
+		return "cr7_" + rand.nextInt(99999) + "@mail.com";
 	}
 
 	private WebDriver driver;

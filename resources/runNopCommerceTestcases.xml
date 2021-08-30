@@ -8,6 +8,7 @@
 			<class name="com.nopcommerce.login.Login_To_Page" />
 		</classes>
 	</test> 
+	
 	<test name="Run on Chrome">
 		<parameter name="browser" value="chrome"/>
 		<classes>
@@ -21,5 +22,6 @@
 			<class name="com.nopcommerce.register.Register_Account" />
 			<class name="com.nopcommerce.login.Login_To_Page" />
 		</classes>
-	</test> 
+	</test>
+	-->
 </suite> 
