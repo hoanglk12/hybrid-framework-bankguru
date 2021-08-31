@@ -15,9 +15,9 @@ import pageObjects.nopCommerce.RegisterPageObject;
 
 public class Register_Account extends BaseTest {
 	WebDriver driver;
-	String firstName, lastName, confirmPassword, browserRunning;
+	String firstName, lastName, confirmPassword;
 
-	public String email = generateEmail();
+	public String email = "cr7_" + generateEmail();
 	public String password = "123456";
 
 	@Parameters({ "browser", "url" })
@@ -33,7 +33,6 @@ public class Register_Account extends BaseTest {
 	@Test
 	public void Register_01_Empty_Data() {
 		homePage = PageGeneratorManager.getHomePage(driver);
-		//homePage = new HomePageObject(driver);
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
 		registerPage = homePage.clickToRegisterLink();
 		
@@ -56,8 +55,6 @@ public class Register_Account extends BaseTest {
 
 	@Test
 	public void Register_02_Invalid_Email() {
-		//registerPage.refreshCurrentPage(driver);
-
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
 		registerPage.enterToLastnameTextbox(lastName);
@@ -73,9 +70,6 @@ public class Register_Account extends BaseTest {
 
 	@Test
 	public void Register_03_Email_Exist() {
-		//registerPage.refreshCurrentPage(driver);
-		
-		//registerPage.handleUnexpectedAlert(driver);
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
 		registerPage.enterToLastnameTextbox(lastName);
@@ -90,9 +84,6 @@ public class Register_Account extends BaseTest {
 
 	@Test
 	public void Register_04_Password_Less_Than_Six_Characters() {
-
-		//registerPage.refreshCurrentPage(driver);
-		//registerPage.handleUnexpectedAlert(driver);
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
 		registerPage.enterToLastnameTextbox(lastName);
@@ -107,9 +98,6 @@ public class Register_Account extends BaseTest {
 
 	@Test
 	public void Register_05_Password_Not_Match_ConfimPassword() {
-
-		//registerPage.refreshCurrentPage(driver);
-		registerPage.handleUnexpectedAlert(driver);
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
 		registerPage.enterToLastnameTextbox(lastName);
@@ -124,8 +112,6 @@ public class Register_Account extends BaseTest {
 
 	@Test
 	public void Register_06_All_Info_Correct() {
-		//registerPage.refreshCurrentPage(driver);
-		//registerPage.handleUnexpectedAlert(driver);
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
 		registerPage.enterToLastnameTextbox(lastName);

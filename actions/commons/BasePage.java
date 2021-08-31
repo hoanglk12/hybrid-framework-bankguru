@@ -16,6 +16,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageObjects.nopCommerce.AddressesPageObject;
+import pageObjects.nopCommerce.MyAccountPageObject;
+import pageObjects.nopCommerce.OrdersPageObject;
+import pageObjects.nopCommerce.PageGeneratorManager;
+import pageObjects.nopCommerce.SearchPageObject;
+import pageObjects.nopCommerce.WishlistPageObject;
+import pageUIs.nopCommerce.BasePageUI;
+
 public class BasePage {
 	
 	public static BasePage getBasePage()  {
@@ -332,6 +340,31 @@ public class BasePage {
 		} catch (Exception e) {
 
 		}
+	}
+	public SearchPageObject openSearchPage(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.SEARCH_PAGE_FOOTER);
+		clickToElement(driver, BasePageUI.SEARCH_PAGE_FOOTER);
+		return PageGeneratorManager.getSearchPage(driver);
+	}
+	public OrdersPageObject openOrdersPage(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.ORDERS_PAGE_FOOTER);
+		clickToElement(driver, BasePageUI.ORDERS_PAGE_FOOTER);
+		return PageGeneratorManager.getOrdersPage(driver);
+	}
+	public MyAccountPageObject openMyAccountPage(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.MYACCOUNT_PAGE_FOOTER);
+		clickToElement(driver, BasePageUI.MYACCOUNT_PAGE_FOOTER);
+		return PageGeneratorManager.getMyAccountPage(driver);
+	}
+	public WishlistPageObject openWishlistPage(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.WISHLIST_PAGE_FOOTER);
+		clickToElement(driver, BasePageUI.WISHLIST_PAGE_FOOTER);
+		return PageGeneratorManager.getWishlistPage(driver);
+	}
+	public AddressesPageObject addressesPage(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.ADDRESSES_PAGE_FOOTER);
+		clickToElement(driver, BasePageUI.ADDRESSES_PAGE_FOOTER);
+		return PageGeneratorManager.getAddressesPage(driver);
 	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 

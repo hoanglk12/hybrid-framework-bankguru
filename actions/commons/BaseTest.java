@@ -57,7 +57,7 @@ public class BaseTest {
 	}
 	public String generateEmail() {
 		Random rand = new Random();
-		return "cr7_" + rand.nextInt(99999) + "@mail.com";
+		return rand.nextInt(99999) + "@mail.com";
 	}
 
 	private WebDriver driver;

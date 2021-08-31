@@ -22,10 +22,9 @@ public class Login_To_Page extends BaseTest {
 	@BeforeClass
 	public void initBrowser(String browserName, String urlNopCommerce) {
 		driver = getBrowser(browserName, urlNopCommerce);
-		email = generateEmail();
 		firstName = "Cristiano";
 		lastName = "Ronaldo";
-		email = generateEmail();
+		email = "cr7_" + generateEmail();
 		password = "123456";
 		confirmPassword = password;
 	}

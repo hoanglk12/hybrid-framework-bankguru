@@ -3,6 +3,7 @@ package pageObjects.nopCommerce;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
+import pageUIs.nopCommerce.BasePageUI;
 import pageUIs.nopCommerce.RegisterPageUI;
 
 public class RegisterPageObject extends BasePage {
@@ -11,20 +12,20 @@ public class RegisterPageObject extends BasePage {
 		this.driver = driver;
 	}
 	public void clickToGenderMaleRadioButton() {
-		waitForElementClickable(driver, RegisterPageUI.GENDER_MALE_RADIO);
-		clickToElement(driver, RegisterPageUI.GENDER_MALE_RADIO);
+		waitForElementClickable(driver, BasePageUI.GENDER_MALE_RADIO);
+		clickToElement(driver, BasePageUI.GENDER_MALE_RADIO);
 	}
 	public void enterToFirstnameTextbox(String firstName) {
-		waitForElementVisible(driver, RegisterPageUI.FIRSTNAME_TEXTBOX);
-		sendkeyToElement(driver, RegisterPageUI.FIRSTNAME_TEXTBOX, firstName);
+		waitForElementVisible(driver, BasePageUI.FIRSTNAME_TEXTBOX);
+		sendkeyToElement(driver, BasePageUI.FIRSTNAME_TEXTBOX, firstName);
 	}
 	public void enterToLastnameTextbox(String lastName) {
-		waitForElementVisible(driver, RegisterPageUI.LASTNAME_TEXTBOX);
-		sendkeyToElement(driver, RegisterPageUI.LASTNAME_TEXTBOX, lastName);
+		waitForElementVisible(driver, BasePageUI.LASTNAME_TEXTBOX);
+		sendkeyToElement(driver, BasePageUI.LASTNAME_TEXTBOX, lastName);
 	}
 	public void enterToEmailTextbox(String email) {
-		waitForElementVisible(driver, RegisterPageUI.EMAIL_TEXTBOX);
-		sendkeyToElement(driver, RegisterPageUI.EMAIL_TEXTBOX, email);
+		waitForElementVisible(driver, BasePageUI.EMAIL_TEXTBOX);
+		sendkeyToElement(driver, BasePageUI.EMAIL_TEXTBOX, email);
 	}
 	public void enterToPasswordTextbox(String password) {
 		waitForElementVisible(driver, RegisterPageUI.PASSWORD_TEXTBOX);
