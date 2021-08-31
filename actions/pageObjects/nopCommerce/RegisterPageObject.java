@@ -51,8 +51,6 @@ public class RegisterPageObject extends BasePage {
 	public String getEmptyFirstNameErrorMsg() {
 		waitForElementVisible(driver, RegisterPageUI.EMPTY_FIRSTNAME_ERROR_MSG);
 		return getTextElement(driver, RegisterPageUI.EMPTY_FIRSTNAME_ERROR_MSG);
-		
-		
 	}
 	public String getEmptyLastNameErrorMsg() {
 		waitForElementVisible(driver, RegisterPageUI.EMPTY_LASTNAME_ERROR_MSG);

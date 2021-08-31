@@ -33,7 +33,6 @@ public class BaseTest {
 		driver.manage().window().maximize();
 		return driver;
 	}
-
 	protected WebDriver getBrowser(String browserName, String urlPage) {
 		BROWSER browser = BROWSER.valueOf(browserName.toUpperCase());
 		if (browser == BROWSER.FIREFOX) {
@@ -59,6 +58,5 @@ public class BaseTest {
 		Random rand = new Random();
 		return rand.nextInt(99999) + "@mail.com";
 	}
-
 	private WebDriver driver;
 }

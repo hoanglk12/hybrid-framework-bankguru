@@ -48,11 +48,11 @@ public class My_Account extends BaseTest {
 		
 		registerPage = homePage.clickToRegisterLink();
 		registerPage.clickToGenderMaleRadioButton();
-		registerPage.enterToFirstnameTextbox(firstName);
-		registerPage.enterToLastnameTextbox(lastName);
-		registerPage.enterToEmailTextbox(email);
-		registerPage.enterToPasswordTextbox(password);
-		registerPage.enterToConfirmPasswordTextbox(confirmPassword);
+		registerPage.enterToTextboxByName(driver, firstName, "FirstName");
+		registerPage.enterToTextboxByName(driver, lastName, "LastName");
+		registerPage.enterToTextboxByName(driver, email, "Email");
+		registerPage.enterToTextboxByName(driver, password, "Password");
+		registerPage.enterToTextboxByName(driver, confirmPassword, "ConfirmPassword");
 		registerPage.clickToRegisterButton();
 		Assert.assertTrue(registerPage.isSuccessMessageDisplayed());
 		homePage = registerPage.clickToLogoutLink();
@@ -62,8 +62,8 @@ public class My_Account extends BaseTest {
 	public void My_Account_00_1_Correct_Email_Password() {
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
 		loginPage = homePage.clickToLoginLink();
-		loginPage.enterToEmailTextbox(email);
-		loginPage.enterToPasswordTextbox(password);
+		loginPage.enterToTextboxByName(driver, email, "Email");
+		loginPage.enterToTextboxByName(driver, password, "Password");
 		homePage = loginPage.clickToLoginButton();
 		homePage.sleepInSecond(1);
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
@@ -71,24 +71,25 @@ public class My_Account extends BaseTest {
 
 	@Test
 	public void My_Account_01_Update_Customer_Info() {
-		myAccountPage = homePage.openMyAccountPage(driver);
+		homePage.openPageFooterByName(driver,"My account");
+		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
 		myAccountPage.clickToGenderFemaleRadioButton();
-		myAccountPage.enterToFirstnameTextbox(editFirstName);
-		myAccountPage.enterToLastnameTextbox(editLastName);
+		myAccountPage.enterToTextboxByName(driver, editFirstName, "FirstName");
+		myAccountPage.enterToTextboxByName(driver, editLastName, "LastName");
 		myAccountPage.selectDayFromDayDropdown(dayItem);
 		myAccountPage.selectMonthFromMonthDropdown(monthItem);
 		myAccountPage.selectYearFromYearDropdown(yearItem);
-		myAccountPage.enterToEmailTextbox(editEmail);
-		myAccountPage.enterToCompanyName(editCompanyName);
+		myAccountPage.enterToTextboxByName(driver, editEmail, "Email");
+		myAccountPage.enterToTextboxByName(driver, editCompanyName, "Company");
 		myAccountPage.clickToSaveButton();
 		
 		Assert.assertTrue(myAccountPage.isGenderFemaleRadioSelected());
-		Assert.assertEquals(myAccountPage.getValueFirstNameTextbox(), editFirstName);
-		Assert.assertEquals(myAccountPage.getValueLastNameTexbox(), editLastName);
+		Assert.assertEquals(myAccountPage.getAttributeValueFromTextboxByName(driver, "value", "FirstName"), editFirstName);
+		Assert.assertEquals(myAccountPage.getAttributeValueFromTextboxByName(driver, "value", "LastName"), editLastName);
 		Assert.assertEquals(myAccountPage.getSelectedItemFromDayDropdown(), dayItem);
 		Assert.assertEquals(myAccountPage.getSeletecItemFromMonthDropdown(), monthItem);
 		Assert.assertEquals(myAccountPage.getSelectedItemFromYearDropdown(), yearItem);
-		Assert.assertEquals(myAccountPage.getValueCompanyTextbox(), editCompanyName);
+		Assert.assertEquals(myAccountPage.getAttributeValueFromTextboxByName(driver, "value", "Company"), editCompanyName);
 	}
 	@Test
 	public void My_Account_02_Add_Addresses() {
