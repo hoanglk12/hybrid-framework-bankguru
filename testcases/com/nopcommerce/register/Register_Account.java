@@ -10,11 +10,12 @@ import org.testng.annotations.Test;
 import commons.BaseTest;
 import pageObjects.nopCommerce.HomePageObject;
 import pageObjects.nopCommerce.LoginPageObject;
+import pageObjects.nopCommerce.PageGeneratorManager;
 import pageObjects.nopCommerce.RegisterPageObject;
 
 public class Register_Account extends BaseTest {
 	WebDriver driver;
-	String firstName, lastName, confirmPassword;
+	String firstName, lastName, confirmPassword, browserRunning;
 
 	public String email = generateEmail();
 	public String password = "123456";
@@ -27,18 +28,15 @@ public class Register_Account extends BaseTest {
 		firstName = "Cristiano";
 		lastName = "Ronaldo";
 		confirmPassword = password;
-
 	}
 
 	@Test
 	public void Register_01_Empty_Data() {
-
-		homePage = new HomePageObject(driver);
-
+		homePage = PageGeneratorManager.getHomePage(driver);
+		//homePage = new HomePageObject(driver);
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
-		homePage.clickToRegisterLink();
-
-		registerPage = new RegisterPageObject(driver);
+		registerPage = homePage.clickToRegisterLink();
+		
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox("");
 		registerPage.enterToLastnameTextbox("");
@@ -58,7 +56,7 @@ public class Register_Account extends BaseTest {
 
 	@Test
 	public void Register_02_Invalid_Email() {
-		registerPage.refreshCurrentPage(driver);
+		//registerPage.refreshCurrentPage(driver);
 
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
@@ -75,8 +73,9 @@ public class Register_Account extends BaseTest {
 
 	@Test
 	public void Register_03_Email_Exist() {
-		registerPage.refreshCurrentPage(driver);
-		registerPage.handleUnexpectedAlert(driver);
+		//registerPage.refreshCurrentPage(driver);
+		
+		//registerPage.handleUnexpectedAlert(driver);
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
 		registerPage.enterToLastnameTextbox(lastName);
@@ -92,9 +91,8 @@ public class Register_Account extends BaseTest {
 	@Test
 	public void Register_04_Password_Less_Than_Six_Characters() {
 
-		registerPage.refreshCurrentPage(driver);
-		registerPage.handleUnexpectedAlert(driver);
-		registerPage.sleepInSecond(2);
+		//registerPage.refreshCurrentPage(driver);
+		//registerPage.handleUnexpectedAlert(driver);
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
 		registerPage.enterToLastnameTextbox(lastName);
@@ -110,7 +108,7 @@ public class Register_Account extends BaseTest {
 	@Test
 	public void Register_05_Password_Not_Match_ConfimPassword() {
 
-		registerPage.refreshCurrentPage(driver);
+		//registerPage.refreshCurrentPage(driver);
 		registerPage.handleUnexpectedAlert(driver);
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
@@ -126,8 +124,8 @@ public class Register_Account extends BaseTest {
 
 	@Test
 	public void Register_06_All_Info_Correct() {
-		registerPage.refreshCurrentPage(driver);
-		registerPage.handleUnexpectedAlert(driver);
+		//registerPage.refreshCurrentPage(driver);
+		//registerPage.handleUnexpectedAlert(driver);
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
 		registerPage.enterToLastnameTextbox(lastName);
@@ -143,6 +141,7 @@ public class Register_Account extends BaseTest {
 	@AfterClass
 	public void closeBrowser() {
 		driver.quit();
+	
 	}
 
 	HomePageObject homePage;

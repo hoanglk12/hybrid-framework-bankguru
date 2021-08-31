@@ -41,6 +41,7 @@ public class BaseTest {
 			driver = new FirefoxDriver();
 		} else if (browser == BROWSER.CHROME) {
 			WebDriverManager.chromedriver().setup();
+			System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
 			driver = new ChromeDriver();
 		} else if (browser == BROWSER.EDGE_CHROMIUM) {
 			WebDriverManager.edgedriver().setup();

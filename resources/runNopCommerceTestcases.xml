@@ -15,7 +15,8 @@
 			<class name="com.nopcommerce.register.Register_Account" />
 			<class name="com.nopcommerce.login.Login_To_Page" />
 		</classes>
-	</test> 
+	</test>
+	
 	<test name="Run on Edge Chromium">
 		<parameter name="browser" value="edge_chromium"/>
 		<classes>
@@ -23,5 +24,5 @@
 			<class name="com.nopcommerce.login.Login_To_Page" />
 		</classes>
 	</test>
-	-->
+	
 </suite> 

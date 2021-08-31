@@ -328,8 +328,9 @@ public class BasePage {
 	public void handleUnexpectedAlert(WebDriver driver) {
 		try {
 			driver.switchTo().alert().dismiss();
+			sleepInSecond(2);
 		} catch (Exception e) {
-			System.out.println("unexpected alert not present");
+
 		}
 	}
 	private Alert alert;

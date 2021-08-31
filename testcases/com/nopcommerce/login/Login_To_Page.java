@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import commons.BaseTest;
 import pageObjects.nopCommerce.HomePageObject;
 import pageObjects.nopCommerce.LoginPageObject;
+import pageObjects.nopCommerce.PageGeneratorManager;
 import pageObjects.nopCommerce.RegisterPageObject;
 
 public class Login_To_Page extends BaseTest {
@@ -31,12 +32,11 @@ public class Login_To_Page extends BaseTest {
 
 	@Test
 	public void Login_01_Empty_Data() {
-		homePage = new HomePageObject(driver);
+		homePage = PageGeneratorManager.getHomePage(driver);
 		homePageUrl = homePage.getCurrentPageUrl(driver);
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
-		homePage.clickToLoginLink();
-
-		loginPage = new LoginPageObject(driver);
+		
+		loginPage = homePage.clickToLoginLink();
 		loginPage.enterToEmailTextbox("");
 		loginPage.enterToPasswordTextbox("");
 		loginPage.clickToLoginButton();
@@ -46,10 +46,6 @@ public class Login_To_Page extends BaseTest {
 
 	@Test
 	public void Login_02_Invalid_Email() {
-
-		loginPage.refreshCurrentPage(driver);
-
-		loginPage = new LoginPageObject(driver);
 		loginPage.enterToEmailTextbox("123@");
 		loginPage.enterToPasswordTextbox(password);
 		loginPage.clickToLoginButton();
@@ -59,10 +55,6 @@ public class Login_To_Page extends BaseTest {
 
 	@Test
 	public void Login_03_Unregisted_Email() {
-
-		loginPage.refreshCurrentPage(driver);
-
-		loginPage = new LoginPageObject(driver);
 		loginPage.enterToEmailTextbox("lucifer@hgmail.com");
 		loginPage.enterToPasswordTextbox(password);
 		loginPage.clickToLoginButton();
@@ -73,11 +65,6 @@ public class Login_To_Page extends BaseTest {
 
 	@Test
 	public void Login_04_Registed_Email_Empty_Password() {
-
-		loginPage.refreshCurrentPage(driver);
-
-		loginPage.handleUnexpectedAlert(driver);
-		loginPage = new LoginPageObject(driver);
 		loginPage.enterToEmailTextbox(email);
 		loginPage.enterToPasswordTextbox("");
 		loginPage.clickToLoginButton();
@@ -87,11 +74,6 @@ public class Login_To_Page extends BaseTest {
 
 	@Test
 	public void Login_05_Registed_Email_Wrong_Password() {
-
-		loginPage.refreshCurrentPage(driver);
-		loginPage.handleUnexpectedAlert(driver);
-		loginPage.handleUnexpectedAlert(driver);
-		loginPage = new LoginPageObject(driver);
 		loginPage.enterToEmailTextbox(email);
 		loginPage.enterToPasswordTextbox("123457");
 		loginPage.clickToLoginButton();
@@ -103,11 +85,10 @@ public class Login_To_Page extends BaseTest {
 	public void Login_05_Register_With_All_Info_Correct() {
 
 		loginPage.openPageUrl(driver, homePageUrl);
-		loginPage.handleUnexpectedAlert(driver);
-		homePage = new HomePageObject(driver);
+		homePage = PageGeneratorManager.getHomePage(driver);
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
-		homePage.clickToRegisterLink();
-		registerPage = new RegisterPageObject(driver);
+		
+		registerPage = homePage.clickToRegisterLink();
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
 		registerPage.enterToLastnameTextbox(lastName);
@@ -116,24 +97,17 @@ public class Login_To_Page extends BaseTest {
 		registerPage.enterToConfirmPasswordTextbox(confirmPassword);
 		registerPage.clickToRegisterButton();
 		Assert.assertTrue(registerPage.isSuccessMessageDisplayed());
-		registerPage.clickToLogoutLink();
+		homePage = registerPage.clickToLogoutLink();
 	}
 
 	@Test
 	public void Login_06_Correct_Email_Password() {
-
-		homePage = new HomePageObject(driver);
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
-		homePage.clickToLoginLink();
-
-		loginPage = new LoginPageObject(driver);
-		loginPage.handleUnexpectedAlert(driver);
+		loginPage = homePage.clickToLoginLink();
 		loginPage.enterToEmailTextbox(email);
 		loginPage.enterToPasswordTextbox(password);
-		loginPage.clickToLoginButton();
-		loginPage.sleepInSecond(2);
-
-		homePage = new HomePageObject(driver);
+		homePage = loginPage.clickToLoginButton();
+		loginPage.sleepInSecond(1);
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
 	}
 
