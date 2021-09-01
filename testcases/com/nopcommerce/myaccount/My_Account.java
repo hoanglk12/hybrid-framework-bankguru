@@ -148,8 +148,20 @@ public class My_Account extends BaseTest {
 	public void My_Account_04_Add_Review() {
 		myAccountPage.openPageFooterByName(driver, "Search");
 		searchPage = PageGeneratorManager.getSearchPage(driver);
-		searchPage.enterToSearchTextBox("");
+		searchPage.enterToTextboxByName(driver, "MacBook","q");
 		searchPage.clickToSearchButton();
+		searchPage.clickToProductTitleLink();
+		searchPage.clickToAddYourReviewLink();
+		searchPage.enterToTextboxByName(driver, "Worth money", "AddProductReview_Title");
+		searchPage.enterToReviewTextArea("Excellent product");
+		searchPage.clickToSubmitReviewButton();
+		searchPage.openPageFooterByName(driver, "My account");
+		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
+		myAccountPage.clickToMyProductsReviewLink();
+		
+		Assert.assertEquals(myAccountPage.getTextReviewTitle(), "Worth money");
+		Assert.assertEquals(myAccountPage.getTextReviewText(), "Excellent product");
+		
 	}
 
 	

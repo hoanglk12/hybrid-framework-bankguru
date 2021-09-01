@@ -12,7 +12,7 @@ public class MyAccountPageObject extends BasePage {
 		this.driver = driver;
 	}
 	public void clickToGenderFemaleRadioButton() {
-		waitForElementVisible(driver, BasePageUI.GENDER_FEMALE_RADIO);
+		waitForElementClickable(driver, BasePageUI.GENDER_FEMALE_RADIO);
 		clickToElement(driver, BasePageUI.GENDER_FEMALE_RADIO);
 		
 	}
@@ -83,16 +83,29 @@ public class MyAccountPageObject extends BasePage {
 		return getAttributeValue(driver, BasePageUI.COMPANY_TEXTBOX, "value");
 	}
 	public void clickToChangePasswordLink() {
-		waitForElementVisible(driver, MyAccountPageUI.CHANGE_PASSWORD_LINK);
+		waitForElementClickable(driver, MyAccountPageUI.CHANGE_PASSWORD_LINK);
 		clickToElement(driver, MyAccountPageUI.CHANGE_PASSWORD_LINK);
 	}
 	public void clickToChangePasswordButton() {
-		waitForElementVisible(driver, MyAccountPageUI.CHANGE_PASSWORD_BUTTON);
+		waitForElementClickable(driver, MyAccountPageUI.CHANGE_PASSWORD_BUTTON);
 		clickToElement(driver, MyAccountPageUI.CHANGE_PASSWORD_BUTTON);
 	}
 	public String getTextPasswordSuccessMsg() {
 		waitForElementVisible(driver, MyAccountPageUI.SUCCESS_CHANGE_PASSWORD_MSG);
 		return getTextElement(driver, MyAccountPageUI.SUCCESS_CHANGE_PASSWORD_MSG);
+	}
+	public void clickToMyProductsReviewLink() {
+		waitForElementClickable(driver, MyAccountPageUI.MY_PRODUCTS_REVIEW_LINK);
+		clickToElement(driver, MyAccountPageUI.MY_PRODUCTS_REVIEW_LINK);
+		
+	}
+	public String getTextReviewTitle() {
+		waitForElementVisible(driver, MyAccountPageUI.REVIEW_TITLE);
+		return getTextElement(driver, MyAccountPageUI.REVIEW_TITLE);
+	}
+	public String getTextReviewText() {
+		waitForElementVisible(driver, MyAccountPageUI.REVIEW_TEXT);
+		return getTextElement(driver, MyAccountPageUI.REVIEW_TEXT);
 	}
 	
 }

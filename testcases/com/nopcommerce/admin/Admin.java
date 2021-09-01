@@ -33,15 +33,14 @@ public class Admin extends BaseTest {
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 		loginPage.enterToTextboxByName(driver, email, "Email");
 		loginPage.enterToTextboxByName(driver, password, "Password");
-		loginPage.clickToLoginButton();
-		dashboardPage = PageGeneratorManager.getDashboardPage(driver);
+		dashboardPage = loginPage.clickToLoginButton();
+		
 		Assert.assertTrue(dashboardPage.isDashBoardHeaderDisplayed());
 	}
 	@Test
 	public void Admin_01_Search_With_Product_Name() {
 		dashboardPage.clickToCatalogMenuByJs();
-		dashboardPage.clickToProductsSubMenu();
-		productSearchPage = PageGeneratorManager.getProductSearchPage(driver);
+		productSearchPage = dashboardPage.clickToProductsSubMenu();
 		productSearchPage.sleepInSecond(1);
 		productSearchPage.enterToTextboxByName(driver, productName, "SearchProductName");
 		productSearchPage.clickToSearchButton();
@@ -72,6 +71,30 @@ public class Admin extends BaseTest {
 		
 		Assert.assertTrue(productSearchPage.isRowValueDisplayed(productName,sku,price,stockQuantity));
 		Assert.assertEquals(productSearchPage.getTotalImageProduct(), 1);
+	}
+	@Test
+	public void Admin_04_Search_With_Product_Name_Child_Category() {
+		productSearchPage.refreshCurrentPage(driver);
+		productSearchPage.sleepInSecond(1);
+		productSearchPage.enterToTextboxByName(driver, productName, "SearchProductName");
+		productSearchPage.selectItemInDropdownByName("Computers >> Desktops","SearchCategoryId");
+		productSearchPage.clickToSearchButton();
+		productSearchPage.sleepInSecond(1);
+		
+		Assert.assertTrue(productSearchPage.isRowValueDisplayed(productName,sku,price,stockQuantity));
+		Assert.assertEquals(productSearchPage.getTotalImageProduct(), 1);
+	}
+	@Test
+	public void Admin_05_Search_With_Product_Name_Child_Category() {
+		productSearchPage.refreshCurrentPage(driver);
+		productSearchPage.sleepInSecond(1);
+		productSearchPage.enterToTextboxByName(driver, productName, "SearchProductName");
+		productSearchPage.selectItemInDropdownByName("All","SearchCategoryId");
+		productSearchPage.selectItemInDropdownByName("Apple","SearchManufacturerId");
+		productSearchPage.clickToSearchButton();
+		productSearchPage.sleepInSecond(1);
+		
+		Assert.assertTrue(productSearchPage.isNoDataMsgDisplayed());
 	}
 	
 

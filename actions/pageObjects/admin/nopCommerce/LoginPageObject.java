@@ -3,7 +3,7 @@ package pageObjects.admin.nopCommerce;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
-import pageUIs.user.nopCommerce.LoginPageUI;
+import pageUIs.admin.nopCommerce.LoginPageUI;
 
 public class LoginPageObject extends BasePage {
 	WebDriver driver;
