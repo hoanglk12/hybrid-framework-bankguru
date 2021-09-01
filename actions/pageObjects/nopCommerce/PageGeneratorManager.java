@@ -36,4 +36,7 @@ public class PageGeneratorManager {
 	public static AddressesPageObject getAddressesPage(WebDriver driver) {
 		return new AddressesPageObject(driver);
 	}
+	public static AdminPageObject getAdminPage(WebDriver driver) {
+		return new AdminPageObject(driver);
+	}
 }

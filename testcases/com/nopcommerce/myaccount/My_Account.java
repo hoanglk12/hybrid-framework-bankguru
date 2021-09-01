@@ -8,19 +8,22 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
+import pageObjects.nopCommerce.AddressesPageObject;
 import pageObjects.nopCommerce.HomePageObject;
 import pageObjects.nopCommerce.LoginPageObject;
 import pageObjects.nopCommerce.MyAccountPageObject;
 import pageObjects.nopCommerce.PageGeneratorManager;
 import pageObjects.nopCommerce.RegisterPageObject;
+import pageObjects.nopCommerce.SearchPageObject;
 
 public class My_Account extends BaseTest {
 	WebDriver driver;
 	String email, password, firstName, lastName , confirmPassword, 
 	editFirstName, editLastName, editFullName, editEmail, newPassword, newConfirmPassword,
-	dayItem, monthItem, yearItem, editCompanyName;
-
-
+	dayItem, monthItem, yearItem, editCompanyName, addressFirstName, addressLastName, addressFullName,
+	addressEmail, addressCompany, addressCountry, addressState, addressCity, addressAddress1, addressAddress2, 
+	addressPostCode, addressPhone, addressFax;
+	
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String urlNopCommerce) {
@@ -30,16 +33,25 @@ public class My_Account extends BaseTest {
 		lastName = "Ronaldo";
 		password = "123456";
 		confirmPassword = password;
-		editFirstName = "Automation";
-		editLastName = "FC";
-		editFullName = editFirstName + editLastName;
+		addressFirstName = editFirstName = "Automation";
+		addressLastName = editLastName = "FC";
+		addressFullName = editFullName = editFirstName + " "+ editLastName;
 		newPassword = "123457";
 		newConfirmPassword = newPassword;
 		dayItem = "1";
 		monthItem = "January";
 		yearItem = "1999";
-		editEmail = "automationfc.vn" + generateEmail();
+		addressEmail = editEmail = "automationfc.vn" + generateEmail();
 		editCompanyName = "Automation FC";
+		addressCountry = "Viet Nam";
+		addressCompany = "Automation FC";
+		addressState = "Other";
+		addressCity = "Da Nang";
+		addressAddress1 = "123/04 Le Lai";
+		addressAddress2 = "234/05 Hai Phong";
+		addressPostCode = "550000"; 
+		addressPhone = "0123456789";
+		addressFax = "0987654321";
 	}
 	@Test
 	public void My_Account_00_0_Register_With_All_Info_Correct() {
@@ -93,15 +105,51 @@ public class My_Account extends BaseTest {
 	}
 	@Test
 	public void My_Account_02_Add_Addresses() {
+		myAccountPage.openPageFooterByName(driver, "Addresses");
+		addressesPage = PageGeneratorManager.getAddressesPage(driver);
+		addressesPage.clickToAddNewButton();
+		addressesPage.enterToAddressTextboxByName(driver, addressFirstName, "FirstName");
+		addressesPage.enterToAddressTextboxByName(driver, addressLastName, "LastName");
+		addressesPage.enterToAddressTextboxByName(driver, addressEmail, "Email");
+		addressesPage.enterToAddressTextboxByName(driver, addressCompany, "Company");
+		addressesPage.selectToCountryDropdown(addressCountry);
+		addressesPage.enterToAddressTextboxByName(driver, addressCity, "City");
+		addressesPage.enterToAddressTextboxByName(driver, addressAddress1, "Address1");
+		addressesPage.enterToAddressTextboxByName(driver, addressAddress2, "Address2");
+		addressesPage.enterToAddressTextboxByName(driver, addressPostCode, "ZipPostalCode");
+		addressesPage.enterToAddressTextboxByName(driver, addressPhone, "PhoneNumber");
+		addressesPage.enterToAddressTextboxByName(driver, addressFax, "FaxNumber");
+		addressesPage.clickToSaveButton();
+		
+		Assert.assertTrue(addressesPage.isAddressInfoContains("name", addressFullName));
+		Assert.assertTrue(addressesPage.isAddressInfoContains("email", addressEmail));
+		Assert.assertTrue(addressesPage.isAddressInfoContains("fax", addressFax));
+		Assert.assertTrue(addressesPage.isAddressInfoContains("company", addressCompany));
+		Assert.assertTrue(addressesPage.isAddressInfoContains("address1", addressAddress1));
+		Assert.assertTrue(addressesPage.isAddressInfoContains("address2", addressAddress2));
+		Assert.assertTrue(addressesPage.isAddressInfoContains("city-state-zip", addressCity));
+		Assert.assertTrue(addressesPage.isAddressInfoContains("city-state-zip", addressPostCode));
+		Assert.assertTrue(addressesPage.isAddressInfoContains("country", addressCountry));
 		
 	}
 	@Test
 	public void My_Account_03_Change_Info() {
+		addressesPage.openPageFooterByName(driver, "My account");
+		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
+		myAccountPage.clickToChangePasswordLink();
+		myAccountPage.enterToTextboxByName(driver, password, "OldPassword");
+		myAccountPage.enterToTextboxByName(driver, newPassword, "NewPassword");
+		myAccountPage.enterToTextboxByName(driver, newConfirmPassword, "ConfirmNewPassword");
+		myAccountPage.clickToChangePasswordButton();
 		
+		Assert.assertEquals(myAccountPage.getTextPasswordSuccessMsg(), "Password was changed");
 	}
 	@Test
 	public void My_Account_04_Add_Review() {
-		
+		myAccountPage.openPageFooterByName(driver, "Search");
+		searchPage = PageGeneratorManager.getSearchPage(driver);
+		searchPage.enterToSearchTextBox("");
+		searchPage.clickToSearchButton();
 	}
 
 	
@@ -114,4 +162,6 @@ public class My_Account extends BaseTest {
 	LoginPageObject loginPage;
 	RegisterPageObject registerPage;
 	MyAccountPageObject myAccountPage;
+	AddressesPageObject addressesPage;
+	SearchPageObject searchPage;
 }

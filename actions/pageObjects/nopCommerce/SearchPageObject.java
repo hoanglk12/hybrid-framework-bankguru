@@ -9,5 +9,13 @@ public class SearchPageObject extends BasePage {
 	public SearchPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
+	public void enterToSearchTextBox(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void clickToSearchButton() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

@@ -82,5 +82,17 @@ public class MyAccountPageObject extends BasePage {
 		waitForElementVisible(driver, BasePageUI.COMPANY_TEXTBOX);
 		return getAttributeValue(driver, BasePageUI.COMPANY_TEXTBOX, "value");
 	}
+	public void clickToChangePasswordLink() {
+		waitForElementVisible(driver, MyAccountPageUI.CHANGE_PASSWORD_LINK);
+		clickToElement(driver, MyAccountPageUI.CHANGE_PASSWORD_LINK);
+	}
+	public void clickToChangePasswordButton() {
+		waitForElementVisible(driver, MyAccountPageUI.CHANGE_PASSWORD_BUTTON);
+		clickToElement(driver, MyAccountPageUI.CHANGE_PASSWORD_BUTTON);
+	}
+	public String getTextPasswordSuccessMsg() {
+		waitForElementVisible(driver, MyAccountPageUI.SUCCESS_CHANGE_PASSWORD_MSG);
+		return getTextElement(driver, MyAccountPageUI.SUCCESS_CHANGE_PASSWORD_MSG);
+	}
 	
 }

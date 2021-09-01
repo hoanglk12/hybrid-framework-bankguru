@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="NopCommerce" parallel="false">
 	<parameter name="url" value="https://demo.nopcommerce.com/"/>
+	<parameter name="urlAdmin" value="https://admin-demo.nopcommerce.com/login?ReturnUrl=/admin/"/>
 	<test name="Run on Firefox">
 		<parameter name="browser" value="firefox"/>
 		<classes>
 			<!--<class name="com.nopcommerce.register.Register_Account" />-->
 			<!--<class name="com.nopcommerce.login.Login_To_Page" />-->
-			<class name="com.nopcommerce.myaccount.My_Account" />
+			<!--<class name="com.nopcommerce.myaccount.My_Account" />-->
+			<class name="com.nopcommerce.admin.Admin" />
 		</classes>
 	</test> 
 	
-	<test name="Run on Chrome">
+	<!--<test name="Run on Chrome">
 		<parameter name="browser" value="chrome"/>
 		<classes>
-			<!--<class name="com.nopcommerce.register.Register_Account" />-->
-			<!--<class name="com.nopcommerce.login.Login_To_Page" />-->
+			<class name="com.nopcommerce.register.Register_Account" />
+			<class name="com.nopcommerce.login.Login_To_Page" />
 			<class name="com.nopcommerce.myaccount.My_Account" />
 		</classes>
 	</test>
@@ -22,10 +24,12 @@
 	<test name="Run on Edge Chromium">
 		<parameter name="browser" value="edge_chromium"/>
 		<classes>
-			<!--<class name="com.nopcommerce.register.Register_Account" />-->
-			<!--<class name="com.nopcommerce.login.Login_To_Page" />-->
+			<class name="com.nopcommerce.register.Register_Account" />
+			<class name="com.nopcommerce.login.Login_To_Page" />
 			<class name="com.nopcommerce.myaccount.My_Account" />
 		</classes>
-	</test>
-	
+	</test>-->
 </suite> 
+
+	
+

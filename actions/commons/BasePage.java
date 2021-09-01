@@ -124,6 +124,10 @@ public class BasePage {
 		select = new Select(getElement(driver, locator));
 		select.selectByVisibleText(textItem);
 	}
+	public void selectItemInDropdown(WebDriver driver, String locator, String textItem, String...params) {
+		select = new Select(getElement(driver, getDynamicLocator(locator, params)));
+		select.selectByVisibleText(textItem);
+	}
 	public String getSelectedItemInDropdown(WebDriver driver, String locator) {
 		select = new Select(getElement(driver, locator));
 		return select.getFirstSelectedOption().getText();
@@ -169,11 +173,18 @@ public class BasePage {
 	public int getElementSize(WebDriver driver, String locator) {
 		return getElements(driver, locator).size();
 	}
+	
 	public void checkToCheckboxOrRadio(WebDriver driver, String locator) {
 		if(!getElement(driver, locator).isSelected()) {
 			getElement(driver, locator).click();
 		}
 	}
+	public void checkToCheckboxOrRadio(WebDriver driver, String locator, String...params) {
+		if(!getElement(driver, getDynamicLocator(locator, params)).isSelected()) {
+			getElement(driver, getDynamicLocator(locator, params)).click();
+		}
+	}
+	
 	public void uncheckToCheckbox(WebDriver driver, String locator) {
 		if(getElement(driver, locator).isSelected()) {
 			getElement(driver, locator).click();
@@ -373,6 +384,10 @@ public class BasePage {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, textboxName);
 		sendkeyToElement(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, value, textboxName);
 	}
+	public void checkToCheckboxOrRadioByName(WebDriver driver, String checboxAndRadioName) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, checboxAndRadioName);
+		clickToElement(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, checboxAndRadioName);
+	}
 	public String getAttributeValueFromTextboxByName(WebDriver driver, String attributeValue, String textboxName) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, textboxName);
 		return getAttributeValue(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, attributeValue, textboxName);
@@ -384,3 +399,4 @@ public class BasePage {
 	private JavascriptExecutor jsExecutor;
 	private Actions action;
 }
+
