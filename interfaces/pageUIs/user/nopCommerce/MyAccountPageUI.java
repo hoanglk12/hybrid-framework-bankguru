@@ -1,4 +1,4 @@
-package pageUIs.nopCommerce;
+package pageUIs.user.nopCommerce;
 
 public class MyAccountPageUI {
 	public static final String SAVE_BUTTON = "//button[@id='save-info-button']";

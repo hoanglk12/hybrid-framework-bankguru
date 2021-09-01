@@ -7,10 +7,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import commons.BasePage;
 import commons.BaseTest;
-import pageObjects.nopCommerce.AdminPageObject;
-import pageObjects.nopCommerce.PageGeneratorManager;
+import pageObjects.admin.nopCommerce.DashboardPageObject;
+import pageObjects.admin.nopCommerce.LoginPageObject;
+import pageObjects.admin.nopCommerce.PageGeneratorManager;
+import pageObjects.admin.nopCommerce.ProductSearchPageObject;
 
 public class Admin extends BaseTest {
 	WebDriver driver;
@@ -29,49 +30,48 @@ public class Admin extends BaseTest {
 	}
 	@Test
 	public void Admin_00_Login_To_Admin_Page() {
-		adminPage = PageGeneratorManager.getAdminPage(driver);
-		adminPage.enterToTextboxByName(driver, email, "Email");
-		adminPage.enterToTextboxByName(driver, password, "Password");
-		adminPage.clickToLoginButton();
-		
-		Assert.assertTrue(adminPage.isDashBoardHeaderDisplayed());
+		loginPage = PageGeneratorManager.getLoginPage(driver);
+		loginPage.enterToTextboxByName(driver, email, "Email");
+		loginPage.enterToTextboxByName(driver, password, "Password");
+		loginPage.clickToLoginButton();
+		dashboardPage = PageGeneratorManager.getDashboardPage(driver);
+		Assert.assertTrue(dashboardPage.isDashBoardHeaderDisplayed());
 	}
 	@Test
 	public void Admin_01_Search_With_Product_Name() {
-		adminPage = PageGeneratorManager.getAdminPage(driver);
-		adminPage.clickToCatalogMenuByJs();
-		adminPage.clickToProductsSubMenu();
-		adminPage.sleepInSecond(1);
-		adminPage.enterToTextboxByName(driver, productName, "SearchProductName");
-		adminPage.clickToSearchButton();
+		dashboardPage.clickToCatalogMenuByJs();
+		dashboardPage.clickToProductsSubMenu();
+		productSearchPage = PageGeneratorManager.getProductSearchPage(driver);
+		productSearchPage.sleepInSecond(1);
+		productSearchPage.enterToTextboxByName(driver, productName, "SearchProductName");
+		productSearchPage.clickToSearchButton();
 		
-		Assert.assertTrue(adminPage.isRowValueDisplayed(productName,sku,price,stockQuantity));
-		Assert.assertEquals(adminPage.getTotalImageProduct(), 1);
+		Assert.assertTrue(productSearchPage.isRowValueDisplayed(productName,sku,price,stockQuantity));
+		Assert.assertEquals(productSearchPage.getTotalImageProduct(), 1);
 	}
 	@Test
 	public void Admin_02_Search_With_Product_Name_Parent_Category_Unchecked() {
-		adminPage.refreshCurrentPage(driver);
-		adminPage.sleepInSecond(1);
-		adminPage.enterToTextboxByName(driver, productName, "SearchProductName");
-		adminPage.selectItemInDropdownByName("Computers","SearchCategoryId");
-		adminPage.clickToSearchButton();
+		productSearchPage.refreshCurrentPage(driver);
+		productSearchPage.sleepInSecond(1);
+		productSearchPage.enterToTextboxByName(driver, productName, "SearchProductName");
+		productSearchPage.selectItemInDropdownByName("Computers","SearchCategoryId");
+		productSearchPage.clickToSearchButton();
 		
-		
-		Assert.assertTrue(adminPage.isNoDataMsgDisplayed());
+		Assert.assertTrue(productSearchPage.isNoDataMsgDisplayed());
 		
 	}
 	@Test
 	public void Admin_03_Search_With_Product_Name_Parent_Category_Checked() {
-		adminPage.refreshCurrentPage(driver);
-		adminPage.sleepInSecond(1);
-		adminPage.enterToTextboxByName(driver, productName, "SearchProductName");
-		adminPage.selectItemInDropdownByName("Computers","SearchCategoryId");
-		adminPage.checkToCheckboxOrRadioByName(driver, "SearchIncludeSubCategories");
-		adminPage.clickToSearchButton();
-
+		productSearchPage.refreshCurrentPage(driver);
+		productSearchPage.sleepInSecond(1);
+		productSearchPage.enterToTextboxByName(driver, productName, "SearchProductName");
+		productSearchPage.selectItemInDropdownByName("Computers","SearchCategoryId");
+		productSearchPage.checkToCheckboxOrRadioByName(driver, "SearchIncludeSubCategories");
+		productSearchPage.clickToSearchButton();
+		productSearchPage.sleepInSecond(1);
 		
-		Assert.assertTrue(adminPage.isRowValueDisplayed(productName,sku,price,stockQuantity));
-		Assert.assertEquals(adminPage.getTotalImageProduct(), 1);
+		Assert.assertTrue(productSearchPage.isRowValueDisplayed(productName,sku,price,stockQuantity));
+		Assert.assertEquals(productSearchPage.getTotalImageProduct(), 1);
 	}
 	
 
@@ -81,6 +81,7 @@ public class Admin extends BaseTest {
 		driver.quit();
 	}
 
-	AdminPageObject adminPage;
-	BasePage basePage;
+	LoginPageObject loginPage;
+	DashboardPageObject dashboardPage;
+	ProductSearchPageObject productSearchPage;
 }

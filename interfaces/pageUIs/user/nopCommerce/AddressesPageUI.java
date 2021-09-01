@@ -1,4 +1,4 @@
-package pageUIs.nopCommerce;
+package pageUIs.user.nopCommerce;
 
 public class AddressesPageUI {
 	public static final String ADD_NEW_BUTTON = "//div[@class='add-button']/button[text()='Add new']";

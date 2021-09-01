@@ -1,4 +1,4 @@
-package pageUIs.nopCommerce;
+package pageUIs.user.nopCommerce;
 
 public class RegisterPageUI {
 	public static final String PASSWORD_TEXTBOX = "//input[@id='Password']";

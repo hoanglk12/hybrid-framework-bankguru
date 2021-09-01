@@ -1,6 +1,6 @@
-package pageUIs.nopCommerce;
+package pageUIs.admin.nopCommerce;
 
-public class AdminPageUI {
+public class DashboardPageUI {
 	
 	public static final String PRODUCT_NAME_TEXTBOX = "//input[@id='SearchProductName']";
 	public static final String DYNAMIC_ADMIN_SEARCH_DROPDOWN = "//select[@id='%s']";

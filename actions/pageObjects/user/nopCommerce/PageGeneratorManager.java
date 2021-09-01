@@ -1,4 +1,4 @@
-package pageObjects.nopCommerce;
+package pageObjects.user.nopCommerce;
 
 import org.openqa.selenium.WebDriver;
 
@@ -36,7 +36,5 @@ public class PageGeneratorManager {
 	public static AddressesPageObject getAddressesPage(WebDriver driver) {
 		return new AddressesPageObject(driver);
 	}
-	public static AdminPageObject getAdminPage(WebDriver driver) {
-		return new AdminPageObject(driver);
-	}
+
 }

@@ -8,13 +8,13 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import pageObjects.nopCommerce.AddressesPageObject;
-import pageObjects.nopCommerce.HomePageObject;
-import pageObjects.nopCommerce.LoginPageObject;
-import pageObjects.nopCommerce.MyAccountPageObject;
-import pageObjects.nopCommerce.PageGeneratorManager;
-import pageObjects.nopCommerce.RegisterPageObject;
-import pageObjects.nopCommerce.SearchPageObject;
+import pageObjects.user.nopCommerce.AddressesPageObject;
+import pageObjects.user.nopCommerce.HomePageObject;
+import pageObjects.user.nopCommerce.LoginPageObject;
+import pageObjects.user.nopCommerce.MyAccountPageObject;
+import pageObjects.user.nopCommerce.PageGeneratorManager;
+import pageObjects.user.nopCommerce.RegisterPageObject;
+import pageObjects.user.nopCommerce.SearchPageObject;
 
 public class My_Account extends BaseTest {
 	WebDriver driver;
