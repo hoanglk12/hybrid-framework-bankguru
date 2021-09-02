@@ -115,7 +115,7 @@ public class Admin extends BaseTest {
 	public void Admin_07_Create_New_Customer() {
 		productDetailsPage.refreshCurrentPage(driver);
 		dashboardPage = productDetailsPage.openDashboardMenu("Dashboard");
-		dashboardPage.sleepInSecond(2);
+		dashboardPage.sleepInSecond(1);
 		dashboardPage.openMenuSubMenuByName("Customers", "Customers");
 		customersPage = PageGeneratorManager.getCustomersPage(driver);
 		customersPage.sleepInSecond(1);
@@ -124,6 +124,7 @@ public class Admin extends BaseTest {
 		customersPage.sleepInSecond(1);
 		customerEditPage = PageGeneratorManager.getCustomerEditPage(driver);
 		customerEditPage.openExpandIconByCardTitle(driver, "class","Customer info");
+		
 	}
 
 	
