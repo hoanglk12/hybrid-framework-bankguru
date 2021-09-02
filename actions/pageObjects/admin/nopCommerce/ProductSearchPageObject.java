@@ -3,6 +3,7 @@ package pageObjects.admin.nopCommerce;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
+import pageUIs.admin.nopCommerce.DashboardPageUI;
 import pageUIs.admin.nopCommerce.ProductSearchPageUI;
 
 
@@ -33,5 +34,9 @@ public class ProductSearchPageObject extends BasePage {
 		waitForAllElementVisible(driver, ProductSearchPageUI.PRODUCT_IMG);
 		return getElementSize(driver, ProductSearchPageUI.PRODUCT_IMG);
 	}
-	
+	public DashboardPageObject openDashboardMenu(String menu) {
+		waitForElementClickable(driver, DashboardPageUI.DYNAMIC_MENU, menu);
+		clickToElementByJS(driver, DashboardPageUI.DYNAMIC_MENU, menu);
+		return PageGeneratorManager.getDashboardPage(driver);
+	}
 }

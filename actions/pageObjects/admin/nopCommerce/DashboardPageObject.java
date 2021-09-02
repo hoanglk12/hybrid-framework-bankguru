@@ -19,15 +19,10 @@ public class DashboardPageObject extends BasePage {
 		waitForElementVisible(driver, DashboardPageUI.DASHBOARD_HEADER);
 		return isElementDisplayed(driver, DashboardPageUI.DASHBOARD_HEADER);
 	}
-	
-	public void clickToCatalogMenuByJs() {
-		waitForElementVisible(driver, DashboardPageUI.CATALOG_MENU);
-		clickToElementByJS(driver, DashboardPageUI.CATALOG_MENU);
+	public void openMenuSubMenuByName(String menu, String subMenu) {
+		waitForElementClickable(driver, DashboardPageUI.DYNAMIC_MENU, menu);
+		clickToElementByJS(driver, DashboardPageUI.DYNAMIC_MENU, menu);
+		waitForElementClickable(driver, DashboardPageUI.DYNAMIC_SUBMENU, subMenu);
+		clickToElement(driver, DashboardPageUI.DYNAMIC_SUBMENU, subMenu);
 	}
-	public ProductSearchPageObject clickToProductsSubMenu() {
-		waitForElementVisible(driver, DashboardPageUI.PRODUCTS_SUBMENU);
-		clickToElement(driver, DashboardPageUI.PRODUCTS_SUBMENU);
-		return PageGeneratorManager.getProductSearchPage(driver);
-	}
-	
 }

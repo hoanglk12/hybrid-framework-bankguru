@@ -8,7 +8,6 @@ public class PageGeneratorManager {
 	private PageGeneratorManager(){
 		
 	}
-	
 	public static LoginPageObject getLoginPage(WebDriver driver) {
 		return new LoginPageObject(driver);
 	}
@@ -17,6 +16,15 @@ public class PageGeneratorManager {
 	}
 	public static ProductSearchPageObject getProductSearchPage(WebDriver driver) {
 		return new ProductSearchPageObject(driver);
+	}
+	public static ProductDetailsPageObject getProductDetailsPage(WebDriver driver) {
+		return new ProductDetailsPageObject(driver);
+	}
+	public static CustomersPageObject getCustomersPage(WebDriver driver) {
+		return new CustomersPageObject(driver);
+	}
+	public static CustomerEditPageObject getCustomerEditPage(WebDriver driver) {
+		return new CustomerEditPageObject(driver);
 	}
 
 }

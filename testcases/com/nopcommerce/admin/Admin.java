@@ -8,9 +8,12 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
+import pageObjects.admin.nopCommerce.CustomerEditPageObject;
+import pageObjects.admin.nopCommerce.CustomersPageObject;
 import pageObjects.admin.nopCommerce.DashboardPageObject;
 import pageObjects.admin.nopCommerce.LoginPageObject;
 import pageObjects.admin.nopCommerce.PageGeneratorManager;
+import pageObjects.admin.nopCommerce.ProductDetailsPageObject;
 import pageObjects.admin.nopCommerce.ProductSearchPageObject;
 
 public class Admin extends BaseTest {
@@ -39,11 +42,12 @@ public class Admin extends BaseTest {
 	}
 	@Test
 	public void Admin_01_Search_With_Product_Name() {
-		dashboardPage.clickToCatalogMenuByJs();
-		productSearchPage = dashboardPage.clickToProductsSubMenu();
+		dashboardPage.openMenuSubMenuByName("Catalog", "Products");
+		productSearchPage = PageGeneratorManager.getProductSearchPage(driver);
 		productSearchPage.sleepInSecond(1);
 		productSearchPage.enterToTextboxByName(driver, productName, "SearchProductName");
 		productSearchPage.clickToSearchButton();
+		productSearchPage.sleepInSecond(1);
 		
 		Assert.assertTrue(productSearchPage.isRowValueDisplayed(productName,sku,price,stockQuantity));
 		Assert.assertEquals(productSearchPage.getTotalImageProduct(), 1);
@@ -96,7 +100,31 @@ public class Admin extends BaseTest {
 		
 		Assert.assertTrue(productSearchPage.isNoDataMsgDisplayed());
 	}
-	
+	@Test
+	public void Admin_06_Go_Directly_To_SKU() {
+		productSearchPage.refreshCurrentPage(driver);
+		productSearchPage.sleepInSecond(1);
+		productSearchPage.enterToTextboxByName(driver, sku, "GoDirectlyToSku");
+		productSearchPage.clickToButtonByIdAttribute(driver, "go-to-product-by-sku");
+		productDetailsPage = PageGeneratorManager.getProductDetailsPage(driver);
+		productDetailsPage.openExpandIconByCardTitle(driver, "class","Product info");
+		
+		Assert.assertTrue(productDetailsPage.getAttributeValueFromTextboxByName(driver, "value", "Name").equals(productName));
+	}
+	@Test
+	public void Admin_07_Create_New_Customer() {
+		productDetailsPage.refreshCurrentPage(driver);
+		dashboardPage = productDetailsPage.openDashboardMenu("Dashboard");
+		dashboardPage.sleepInSecond(2);
+		dashboardPage.openMenuSubMenuByName("Customers", "Customers");
+		customersPage = PageGeneratorManager.getCustomersPage(driver);
+		customersPage.sleepInSecond(1);
+		customersPage.closeDefaultItemOfCustomerRoles();
+		customersPage.clickToButtonLinkByName("Add new");
+		customersPage.sleepInSecond(1);
+		customerEditPage = PageGeneratorManager.getCustomerEditPage(driver);
+		customerEditPage.openExpandIconByCardTitle(driver, "class","Customer info");
+	}
 
 	
 	@AfterClass
@@ -106,5 +134,8 @@ public class Admin extends BaseTest {
 
 	LoginPageObject loginPage;
 	DashboardPageObject dashboardPage;
+	CustomersPageObject customersPage;
+	CustomerEditPageObject customerEditPage;
 	ProductSearchPageObject productSearchPage;
+	ProductDetailsPageObject productDetailsPage;
 }

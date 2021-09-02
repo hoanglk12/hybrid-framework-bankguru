@@ -16,6 +16,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageUIs.admin.nopCommerce.AdminBasePageUI;
+import pageUIs.admin.nopCommerce.ProductDetailsPageUI;
 import pageUIs.user.nopCommerce.BasePageUI;
 
 public class BasePage {
@@ -260,6 +262,10 @@ public class BasePage {
 		jsExecutor = (JavascriptExecutor)driver;
 		jsExecutor.executeScript("arguments[0].click();", getElement(driver, locator));
 	}
+	public void clickToElementByJS(WebDriver driver, String locator, String...params) {
+		jsExecutor = (JavascriptExecutor)driver;
+		jsExecutor.executeScript("arguments[0].click();", getElement(driver, getDynamicLocator(locator, params)));
+	}
 	public void scrollToElement(WebDriver driver, String locator) {
 		jsExecutor = (JavascriptExecutor)driver;
 		jsExecutor.executeScript("arguments[0].scrollIntoView(true);", getElement(driver, locator));
@@ -391,6 +397,25 @@ public class BasePage {
 	public String getAttributeValueFromTextboxByName(WebDriver driver, String attributeValue, String textboxName) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, textboxName);
 		return getAttributeValue(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, attributeValue, textboxName);
+	}
+	public void clickToButtonByIdAttribute(WebDriver driver, String idValue) {
+		waitForElementClickable(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT, idValue);
+		clickToElement(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT, idValue);
+	}
+	public void openExpandIconByCardTitle(WebDriver driver, String attribute, String cardTitle) {
+		waitForElementClickable(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, cardTitle);
+		if (getAttributeValue(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, attribute, cardTitle).contains("fa-plus")) {
+			clickToElement(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, cardTitle);
+		}
+	}
+	public void uploadMultipleFiles(WebDriver driver, String...fileNames) {
+		String filePath = GlobalConstants.UPLOAD_FOLDER_PATH;
+		String fullFileName = "";
+		for (String file : fileNames) {
+			fullFileName = fullFileName + filePath + file + "\n";
+		}
+		fullFileName = fullFileName.trim();
+		getElement(driver, AdminBasePageUI.UPLOAD_FIE_BUTTON).sendKeys(fullFileName);
 	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 
