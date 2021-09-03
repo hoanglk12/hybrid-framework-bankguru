@@ -3,6 +3,7 @@ package pageObjects.admin.nopCommerce;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
+import pageUIs.admin.nopCommerce.CustomerEditPageUI;
 import pageUIs.admin.nopCommerce.CustomersPageUI;
 
 public class CustomersPageObject extends BasePage {
@@ -16,12 +17,11 @@ public class CustomersPageObject extends BasePage {
 		waitForElementClickable(driver, CustomersPageUI.DYNAMIC_BUTTON_LINK, buttonName);
 		clickToElement(driver, CustomersPageUI.DYNAMIC_BUTTON_LINK, buttonName);
 	}
-
-	public void closeDefaultItemOfCustomerRoles() {
-		waitForElementVisible(driver, CustomersPageUI.CLOSE_ICON_CUSTOMER_ROLES_ITEM);
-		if (isElementDisplayed(driver, CustomersPageUI.CLOSE_ICON_CUSTOMER_ROLES_ITEM)) {
-			clickToElementByJS(driver, CustomersPageUI.CLOSE_ICON_CUSTOMER_ROLES_ITEM);
-		}
+	public void enterItemInCustomerRolesDropdown(WebDriver driver, String expectedText) {
+		enterOnElementInCustomDropdown(driver, CustomerEditPageUI.CUSTOMER_ROLES_PARENT_LOCATOR, expectedText);
 	}
+
+	
+	
 
 }

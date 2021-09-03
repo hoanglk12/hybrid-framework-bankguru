@@ -11,8 +11,7 @@ public class CustomerEditPageUI {
 	public static final String NO_DATA_MSG = "//tr[@class='odd']/td[text()='No data available in table']";
 	public static final String PRODUCT_IMG = "//table[@id='products-grid']//img";
 	public static final String DYNAMIC_PRODUCT_CHECKBOX = "//td[text()='%s']/preceding-sibling::td[contains(@class,'text-center')]/input[@name='checkbox_products']";
-	
-	//ul[@id='SelectedCustomerRoleIds_taglist']/parent::div[@role='listbox']
-	//ul[@data-role='staticlist' and @aria-hidden='false']//li[text()='Guests']
-	//li[@role='option']/span[not(@title) and text()='Guests']
+	public static final String CUSTOMER_ROLES_PARENT_LOCATOR = "//ul[@id='SelectedCustomerRoleIds_taglist']/following-sibling::input";
+	public static final String CUSTOMER_ROLES_CHILD_LOCATOR = "//ul[@data-role='staticlist' and @aria-hidden='false']//li";
+	public static final String CUSTOMER_ROLES_ITEM_SELECTED = "//li[@role='option']/span[not(@title)]";
 }

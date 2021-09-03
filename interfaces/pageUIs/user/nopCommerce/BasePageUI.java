@@ -12,4 +12,6 @@ public class BasePageUI {
 	public static final String COMPANY_TEXTBOX = "//input[@id='Company']";
 	public static final String DYNAMIC_LOCATOR_FOOTER = "//div[@class='footer']//a[text()='%s']";
 	public static final String DYNAMIC_TEXTBOX_INPUT_LOCATOR = "//input[@id='%s']";
+	public static final String DYNAMIC_DROPDOWN_BY_NAME = "//select[@name='%s']";
+	public static final String DYNAMIC_TEXTAREA_BY_ID = "//textarea[@id='%s']";
 }

@@ -17,14 +17,11 @@ public class ProductSearchPageObject extends BasePage {
 		clickToElement(driver, ProductSearchPageUI.SEARCH_PRODUCT_BUTTON);
 		
 	}
-	public boolean isRowValueDisplayed(String productName, String sku, String price, String stockQuantity) {
-		waitForElementVisible(driver, ProductSearchPageUI.DYNAMIC_ROW_VALUE, productName, sku, price, stockQuantity);
-		return isElementDisplayed(driver, ProductSearchPageUI.DYNAMIC_ROW_VALUE, productName, sku, price, stockQuantity);
-	}
+
 	
-	public void selectItemInDropdownByName(String textExpected, String dropdownName) {
-		waitForElementVisible(driver, ProductSearchPageUI.DYNAMIC_ADMIN_SEARCH_DROPDOWN, dropdownName);
-		selectItemInDropdown(driver, ProductSearchPageUI.DYNAMIC_ADMIN_SEARCH_DROPDOWN, textExpected, dropdownName);
+	public void selectItemInDropdownByAttributeId(String textExpected, String idValueDropdown) {
+		waitForElementVisible(driver, ProductSearchPageUI.DYNAMIC_ADMIN_SEARCH_DROPDOWN, idValueDropdown);
+		selectItemInDropdown(driver, ProductSearchPageUI.DYNAMIC_ADMIN_SEARCH_DROPDOWN, textExpected, idValueDropdown);
 	}
 	public boolean isNoDataMsgDisplayed() {
 		waitForElementVisible(driver, ProductSearchPageUI.NO_DATA_MSG);

@@ -18,7 +18,9 @@ import pageObjects.admin.nopCommerce.ProductSearchPageObject;
 
 public class Admin extends BaseTest {
 	WebDriver driver;
-	String email, password, productName, sku, price, stockQuantity;
+	String email, password, productName, sku, price, stockQuantity,
+	customerEmail, customerPassword, customerFirstName, customerLastName,
+	customerDOB, customerCompanyName, customerRoles, customerAdminComment;
 	
 	@Parameters({ "browser", "urlAdmin" })
 	@BeforeClass
@@ -30,6 +32,14 @@ public class Admin extends BaseTest {
 		sku = "LE_IC_600";
 		price = "500";
 		stockQuantity = "10000";
+		customerEmail = "automationfc_" + generateEmail();
+		customerPassword = "123456";
+		customerFirstName = "Automation";
+		customerLastName = "FC";
+		customerDOB = "1/1/2000";
+		customerCompanyName = customerFirstName + " " + customerLastName;
+		customerRoles = "Guests";
+		customerAdminComment = "Add new Customer (Guests)";
 	}
 	@Test
 	public void Admin_00_Login_To_Admin_Page() {
@@ -49,7 +59,7 @@ public class Admin extends BaseTest {
 		productSearchPage.clickToSearchButton();
 		productSearchPage.sleepInSecond(1);
 		
-		Assert.assertTrue(productSearchPage.isRowValueDisplayed(productName,sku,price,stockQuantity));
+		Assert.assertTrue(productSearchPage.isRowValueDisplayed(driver, productName,sku,price,stockQuantity));
 		Assert.assertEquals(productSearchPage.getTotalImageProduct(), 1);
 	}
 	@Test
@@ -57,7 +67,7 @@ public class Admin extends BaseTest {
 		productSearchPage.refreshCurrentPage(driver);
 		productSearchPage.sleepInSecond(1);
 		productSearchPage.enterToTextboxByName(driver, productName, "SearchProductName");
-		productSearchPage.selectItemInDropdownByName("Computers","SearchCategoryId");
+		productSearchPage.selectItemInDropdownByAttributeId("Computers","SearchCategoryId");
 		productSearchPage.clickToSearchButton();
 		
 		Assert.assertTrue(productSearchPage.isNoDataMsgDisplayed());
@@ -68,12 +78,12 @@ public class Admin extends BaseTest {
 		productSearchPage.refreshCurrentPage(driver);
 		productSearchPage.sleepInSecond(1);
 		productSearchPage.enterToTextboxByName(driver, productName, "SearchProductName");
-		productSearchPage.selectItemInDropdownByName("Computers","SearchCategoryId");
+		productSearchPage.selectItemInDropdownByAttributeId("Computers","SearchCategoryId");
 		productSearchPage.checkToCheckboxOrRadioByName(driver, "SearchIncludeSubCategories");
 		productSearchPage.clickToSearchButton();
 		productSearchPage.sleepInSecond(1);
 		
-		Assert.assertTrue(productSearchPage.isRowValueDisplayed(productName,sku,price,stockQuantity));
+		Assert.assertTrue(productSearchPage.isRowValueDisplayed(driver, productName,sku,price,stockQuantity));
 		Assert.assertEquals(productSearchPage.getTotalImageProduct(), 1);
 	}
 	@Test
@@ -81,11 +91,11 @@ public class Admin extends BaseTest {
 		productSearchPage.refreshCurrentPage(driver);
 		productSearchPage.sleepInSecond(1);
 		productSearchPage.enterToTextboxByName(driver, productName, "SearchProductName");
-		productSearchPage.selectItemInDropdownByName("Computers >> Desktops","SearchCategoryId");
+		productSearchPage.selectItemInDropdownByAttributeId("Computers >> Desktops","SearchCategoryId");
 		productSearchPage.clickToSearchButton();
 		productSearchPage.sleepInSecond(1);
 		
-		Assert.assertTrue(productSearchPage.isRowValueDisplayed(productName,sku,price,stockQuantity));
+		Assert.assertTrue(productSearchPage.isRowValueDisplayed(driver, productName,sku,price,stockQuantity));
 		Assert.assertEquals(productSearchPage.getTotalImageProduct(), 1);
 	}
 	@Test
@@ -93,8 +103,8 @@ public class Admin extends BaseTest {
 		productSearchPage.refreshCurrentPage(driver);
 		productSearchPage.sleepInSecond(1);
 		productSearchPage.enterToTextboxByName(driver, productName, "SearchProductName");
-		productSearchPage.selectItemInDropdownByName("All","SearchCategoryId");
-		productSearchPage.selectItemInDropdownByName("Apple","SearchManufacturerId");
+		productSearchPage.selectItemInDropdownByAttributeId("All","SearchCategoryId");
+		productSearchPage.selectItemInDropdownByAttributeId("Apple","SearchManufacturerId");
 		productSearchPage.clickToSearchButton();
 		productSearchPage.sleepInSecond(1);
 		
@@ -119,14 +129,56 @@ public class Admin extends BaseTest {
 		dashboardPage.openMenuSubMenuByName("Customers", "Customers");
 		customersPage = PageGeneratorManager.getCustomersPage(driver);
 		customersPage.sleepInSecond(1);
-		customersPage.closeDefaultItemOfCustomerRoles();
 		customersPage.clickToButtonLinkByName("Add new");
 		customersPage.sleepInSecond(1);
 		customerEditPage = PageGeneratorManager.getCustomerEditPage(driver);
 		customerEditPage.openExpandIconByCardTitle(driver, "class","Customer info");
+		customerEditPage.closeDefaultItemOfCustomerRoles(driver);
+		customerEditPage.enterToTextboxByName(driver, customerEmail, "Email");
+		customerEditPage.enterToTextboxByName(driver, customerPassword, "Password");
+		customerEditPage.enterToTextboxByName(driver, customerFirstName, "FirstName");
+		customerEditPage.enterToTextboxByName(driver, customerLastName, "LastName");
+		customerEditPage.checkToCheckboxOrRadioByName(driver, "Gender_Male");
+		customerEditPage.enterToTextboxByName(driver, customerDOB, "DateOfBirth");
+		customerEditPage.enterToTextboxByName(driver, customerCompanyName, "Company");
+		customerEditPage.checkToCheckboxOrRadioByName(driver, "IsTaxExempt");
+		customerEditPage.enterItemInCustomerRolesDropdown(driver, customerRoles);
+		customerEditPage.checkToCheckboxOrRadioByName(driver, "Active");
+		customerEditPage.enterToTextAreaByAttributeId(driver, customerAdminComment, "AdminComment");
+		customerEditPage.clickToSaveAndContinueEditButton();
+		customerEditPage.sleepInSecond(1);
+		
+		Assert.assertTrue(customerEditPage.isAddedSuccessMsgDisplayed("The new customer has been added successfully."));
+		
+		customerEditPage.clickToButtonLinkByName(driver, "back to customer list");
+		customersPage = PageGeneratorManager.getCustomersPage(driver);
+		customersPage.closeDefaultItemOfCustomerRoles(driver);
+		customersPage.enterItemInCustomerRolesDropdown(driver, customerRoles);
+		customersPage.clickToButtonByIdAttribute(driver, "search-customers");
+		
+		Assert.assertTrue(customersPage.isRowValueDisplayed(driver, "Guest", "Automation FC", customerRoles, customerCompanyName));
+	}
+	
+	@Test
+	public void Admin_08_Search_Customer_With_Email() {
+		customersPage.refreshCurrentPage(driver);
+		customersPage.enterToTextboxByName(driver, customerEmail, "SearchEmail");
+		customersPage.closeDefaultItemOfCustomerRoles(driver);
+		customersPage.enterItemInCustomerRolesDropdown(driver, customerRoles);
+		customersPage.clickToButtonByIdAttribute(driver, "search-customers");
+		
+		Assert.assertTrue(customersPage.isRowValueDisplayed(driver, "Guest", "Automation FC", customerRoles, customerCompanyName));
+		Assert.assertEquals(customersPage.getTotalCheckbox(driver, "customers-grid" ,"checkbox_customers"),1);
 		
 	}
-
+	@Test
+	public void Admin_09_Search_Customer_With_FirstName_LastName() {
+		
+	}
+	@Test
+	public void Admin_10_Search_Customer_With_Company() {
+		
+	}
 	
 	@AfterClass
 	public void closeBrowser() {

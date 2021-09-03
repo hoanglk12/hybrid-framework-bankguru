@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pageUIs.admin.nopCommerce.AdminBasePageUI;
+import pageUIs.admin.nopCommerce.CustomersPageUI;
 import pageUIs.admin.nopCommerce.ProductDetailsPageUI;
 import pageUIs.user.nopCommerce.BasePageUI;
 
@@ -155,6 +156,11 @@ public class BasePage {
 		}
 
 	}
+	public void enterOnElementInCustomDropdown(WebDriver driver, String locator, String expectedItem) {
+		sendkeyToElement(driver, locator, expectedItem);
+		sleepInSecond(1);
+		getElement(driver, locator).sendKeys(Keys.ENTER);
+	}
 	public String getAttributeValue(WebDriver driver, String locator, String attribute) {
 		return getElement(driver, locator).getAttribute(attribute);
 	}
@@ -175,6 +181,9 @@ public class BasePage {
 	}
 	public int getElementSize(WebDriver driver, String locator) {
 		return getElements(driver, locator).size();
+	}
+	public int getElementSize(WebDriver driver, String locator, String...params) {
+		return getElements(driver, getDynamicLocator(locator, params)).size();
 	}
 	
 	public void checkToCheckboxOrRadio(WebDriver driver, String locator) {
@@ -371,6 +380,10 @@ public class BasePage {
 		explicitWait = new WebDriverWait(driver, longTimeOut);
 		explicitWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getByXpath(locator)));
 	}
+	public void waitForAllElementVisible(WebDriver driver, String locator, String...params) {
+		explicitWait = new WebDriverWait(driver, longTimeOut);
+		explicitWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getByXpath(getDynamicLocator(locator, params))));
+	}
 	public void waitForElementInvisible(WebDriver driver, String locator) {
 		explicitWait = new WebDriverWait(driver, shortTimeOut);
 		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(getByXpath(locator)));
@@ -428,6 +441,14 @@ public class BasePage {
 			clickToElement(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, cardTitle);
 		}
 	}
+	public void selectItemInDropdownByAttributeName(WebDriver driver, String textExpected, String nameValueDropdown) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_DROPDOWN_BY_NAME, nameValueDropdown);
+		selectItemInDropdown(driver, BasePageUI.DYNAMIC_DROPDOWN_BY_NAME, textExpected, nameValueDropdown);
+	}
+	public void enterToTextAreaByAttributeId(WebDriver driver, String value, String nameValueTextArea) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTAREA_BY_ID, nameValueTextArea);
+		sendkeyToElement(driver, BasePageUI.DYNAMIC_TEXTAREA_BY_ID, value, nameValueTextArea);
+	}
 	public void uploadMultipleFiles(WebDriver driver, String...fileNames) {
 		String filePath = GlobalConstants.UPLOAD_FOLDER_PATH;
 		String fullFileName = "";
@@ -436,6 +457,24 @@ public class BasePage {
 		}
 		fullFileName = fullFileName.trim();
 		getElement(driver, AdminBasePageUI.UPLOAD_FILE_BUTTON).sendKeys(fullFileName);
+	}
+	public void closeDefaultItemOfCustomerRoles(WebDriver driver) {
+		waitForElementVisible(driver, CustomersPageUI.CLOSE_ICON_CUSTOMER_ROLES_ITEM);
+		if (isElementDisplayed(driver, CustomersPageUI.CLOSE_ICON_CUSTOMER_ROLES_ITEM)) {
+			clickToElementByJS(driver, CustomersPageUI.CLOSE_ICON_CUSTOMER_ROLES_ITEM);
+		}
+	}
+	public void clickToButtonLinkByName(WebDriver driver, String buttonName) {
+		waitForElementClickable(driver, CustomersPageUI.DYNAMIC_BUTTON_LINK, buttonName);
+		clickToElement(driver, CustomersPageUI.DYNAMIC_BUTTON_LINK, buttonName);
+	}
+	public boolean isRowValueDisplayed(WebDriver driver, String firstRow, String secondRow, String thirdRow, String fourthRow) {
+		waitForElementVisible(driver, AdminBasePageUI.DYNAMIC_ROW_VALUE, firstRow, secondRow, thirdRow, fourthRow);
+		return isElementDisplayed(driver, AdminBasePageUI.DYNAMIC_ROW_VALUE, firstRow, secondRow, thirdRow, fourthRow);
+	}
+	public int getTotalCheckbox(WebDriver driver, String tableId, String checkboxName) {
+		waitForAllElementVisible(driver, AdminBasePageUI.DYNAMIC_CHECKBOX_TABLE_BY_NAME, tableId, checkboxName);
+		return getElementSize(driver, AdminBasePageUI.DYNAMIC_CHECKBOX_TABLE_BY_NAME, tableId, checkboxName);
 	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 
