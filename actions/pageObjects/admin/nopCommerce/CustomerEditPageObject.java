@@ -18,7 +18,11 @@ public class CustomerEditPageObject extends BasePage {
 		waitForElementClickable(driver, AdminBasePageUI.SAVE_AND_CONTINUE_EDIT_BUTTON);
 		clickToElement(driver, AdminBasePageUI.SAVE_AND_CONTINUE_EDIT_BUTTON);
 	}
-	public boolean isAddedSuccessMsgDisplayed(String messageContent) {
+	public void clickToSaveButton() {
+		waitForElementClickable(driver, AdminBasePageUI.SAVE_BUTTON);
+		clickToElement(driver, AdminBasePageUI.SAVE_BUTTON);
+	}
+	public boolean isAddedEditedSuccessMsgDisplayed(String messageContent) {
 		waitForElementVisible(driver, AdminBasePageUI.DYNAMIC_MESSAGE_SUCCESS_CREATE_UPDATE, messageContent);
 		return isElementDisplayed(driver, AdminBasePageUI.DYNAMIC_MESSAGE_SUCCESS_CREATE_UPDATE, messageContent);
 	}

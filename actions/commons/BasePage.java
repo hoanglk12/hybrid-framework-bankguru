@@ -185,7 +185,6 @@ public class BasePage {
 	public int getElementSize(WebDriver driver, String locator, String...params) {
 		return getElements(driver, getDynamicLocator(locator, params)).size();
 	}
-	
 	public void checkToCheckboxOrRadio(WebDriver driver, String locator) {
 		if(!getElement(driver, locator).isSelected()) {
 			getElement(driver, locator).click();
@@ -196,7 +195,6 @@ public class BasePage {
 			getElement(driver, getDynamicLocator(locator, params)).click();
 		}
 	}
-	
 	public void uncheckToCheckbox(WebDriver driver, String locator) {
 		if(getElement(driver, locator).isSelected()) {
 			getElement(driver, locator).click();
@@ -302,6 +300,10 @@ public class BasePage {
 	public void sendkeyToElementByJS(WebDriver driver, String locator, String value) {
 		jsExecutor = (JavascriptExecutor)driver;
 		jsExecutor.executeScript("arguments[0].setAttribute('value', '" + value + "')",  getElement(driver, locator));
+	}
+	public void sendkeyToElementByJS(WebDriver driver, String locator, String value, String...params) {
+		jsExecutor = (JavascriptExecutor)driver;
+		jsExecutor.executeScript("arguments[0].setAttribute('value', '" + value + "')",  getElement(driver, getDynamicLocator(locator, params)));
 	}
 	public void removeAttributeInDOM(WebDriver driver, String locator, String attributeRemove) {
 		jsExecutor = (JavascriptExecutor)driver;
@@ -423,9 +425,13 @@ public class BasePage {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, textboxName);
 		sendkeyToElement(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, value, textboxName);
 	}
+	public void enterToTextboxByNameJs(WebDriver driver, String value, String textboxName) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, textboxName);
+		sendkeyToElementByJS(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, value, textboxName);
+	}
 	public void checkToCheckboxOrRadioByName(WebDriver driver, String checboxAndRadioName) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, checboxAndRadioName);
-		clickToElement(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, checboxAndRadioName);
+		checkToCheckboxOrRadio(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, checboxAndRadioName);
 	}
 	public String getAttributeValueFromTextboxByName(WebDriver driver, String attributeValue, String textboxName) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, textboxName);
@@ -441,6 +447,12 @@ public class BasePage {
 			clickToElement(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, cardTitle);
 		}
 	}
+	public void openExpandIconSearchForm(WebDriver driver, String attribute) {
+		waitForElementClickable(driver, AdminBasePageUI.EXPAND_ICON_SEARCH_FORM);
+		if (getAttributeValue(driver, AdminBasePageUI.EXPAND_ICON_SEARCH_FORM, attribute).contains("fa-angle-down")) {
+			clickToElement(driver, AdminBasePageUI.EXPAND_ICON_SEARCH_FORM);
+		}
+	}
 	public void selectItemInDropdownByAttributeName(WebDriver driver, String textExpected, String nameValueDropdown) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_DROPDOWN_BY_NAME, nameValueDropdown);
 		selectItemInDropdown(driver, BasePageUI.DYNAMIC_DROPDOWN_BY_NAME, textExpected, nameValueDropdown);
@@ -448,6 +460,10 @@ public class BasePage {
 	public void enterToTextAreaByAttributeId(WebDriver driver, String value, String nameValueTextArea) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTAREA_BY_ID, nameValueTextArea);
 		sendkeyToElement(driver, BasePageUI.DYNAMIC_TEXTAREA_BY_ID, value, nameValueTextArea);
+	}
+	public void clickToEditButtonByRow(WebDriver driver, String email, String name, String customerRoles, String companyName) {
+		waitForElementClickable(driver, AdminBasePageUI.DYNAMIC_EDIT_BUTTON_BY_ROW_VALUE, email, name, customerRoles, companyName);
+		clickToElement(driver, AdminBasePageUI.DYNAMIC_EDIT_BUTTON_BY_ROW_VALUE, email, name, customerRoles, companyName);
 	}
 	public void uploadMultipleFiles(WebDriver driver, String...fileNames) {
 		String filePath = GlobalConstants.UPLOAD_FOLDER_PATH;
@@ -472,9 +488,9 @@ public class BasePage {
 		waitForElementVisible(driver, AdminBasePageUI.DYNAMIC_ROW_VALUE, firstRow, secondRow, thirdRow, fourthRow);
 		return isElementDisplayed(driver, AdminBasePageUI.DYNAMIC_ROW_VALUE, firstRow, secondRow, thirdRow, fourthRow);
 	}
-	public int getTotalCheckbox(WebDriver driver, String tableId, String checkboxName) {
-		waitForAllElementVisible(driver, AdminBasePageUI.DYNAMIC_CHECKBOX_TABLE_BY_NAME, tableId, checkboxName);
-		return getElementSize(driver, AdminBasePageUI.DYNAMIC_CHECKBOX_TABLE_BY_NAME, tableId, checkboxName);
+	public int getTotalEditButton(WebDriver driver) {
+		waitForAllElementVisible(driver, AdminBasePageUI.EDIT_BUTTON);
+		return getElementSize(driver, AdminBasePageUI.EDIT_BUTTON);
 	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 

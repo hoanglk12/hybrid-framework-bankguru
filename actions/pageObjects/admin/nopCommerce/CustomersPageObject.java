@@ -20,8 +20,4 @@ public class CustomersPageObject extends BasePage {
 	public void enterItemInCustomerRolesDropdown(WebDriver driver, String expectedText) {
 		enterOnElementInCustomDropdown(driver, CustomerEditPageUI.CUSTOMER_ROLES_PARENT_LOCATOR, expectedText);
 	}
-
-	
-	
-
 }
