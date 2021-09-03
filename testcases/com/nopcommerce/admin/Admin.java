@@ -1,7 +1,6 @@
 package com.nopcommerce.admin;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -56,7 +55,7 @@ public class Admin extends BaseTest {
 		loginPage.enterToTextboxByName(driver, password, "Password");
 		dashboardPage = loginPage.clickToLoginButton();
 		
-		Assert.assertTrue(dashboardPage.isDashBoardHeaderDisplayed());
+		verifyTrue(dashboardPage.isDashBoardHeaderDisplayed());
 	}
 	@Test
 	public void Admin_01_Search_With_Product_Name() {
@@ -68,8 +67,8 @@ public class Admin extends BaseTest {
 		productSearchPage.clickToSearchButton();
 		productSearchPage.sleepInSecond(1);
 		
-		Assert.assertTrue(productSearchPage.isRowValueDisplayed(driver, productName,sku,price,stockQuantity));
-		Assert.assertEquals(productSearchPage.getTotalEditButton(driver), 1);
+		verifyTrue(productSearchPage.isRowValueDisplayed(driver, productName,sku,price,stockQuantity));
+		verifyEquals(productSearchPage.getTotalEditButton(driver), 1);
 	}
 	@Test
 	public void Admin_02_Search_With_Product_Name_Parent_Category_Unchecked() {
@@ -80,7 +79,7 @@ public class Admin extends BaseTest {
 		productSearchPage.selectItemInDropdownByAttributeId("Computers","SearchCategoryId");
 		productSearchPage.clickToSearchButton();
 		
-		Assert.assertTrue(productSearchPage.isNoDataMsgDisplayed());
+		verifyTrue(productSearchPage.isNoDataMsgDisplayed());
 		
 	}
 	@Test
@@ -94,8 +93,8 @@ public class Admin extends BaseTest {
 		productSearchPage.clickToSearchButton();
 		productSearchPage.sleepInSecond(1);
 		
-		Assert.assertTrue(productSearchPage.isRowValueDisplayed(driver, productName,sku,price,stockQuantity));
-		Assert.assertEquals(productSearchPage.getTotalEditButton(driver), 1);
+		verifyTrue(productSearchPage.isRowValueDisplayed(driver, productName,sku,price,stockQuantity));
+		verifyEquals(productSearchPage.getTotalEditButton(driver), 1);
 	}
 	@Test
 	public void Admin_04_Search_With_Product_Name_Child_Category() {
@@ -107,8 +106,8 @@ public class Admin extends BaseTest {
 		productSearchPage.clickToSearchButton();
 		productSearchPage.sleepInSecond(1);
 		
-		Assert.assertTrue(productSearchPage.isRowValueDisplayed(driver, productName,sku,price,stockQuantity));
-		Assert.assertEquals(productSearchPage.getTotalEditButton(driver), 1);
+		verifyTrue(productSearchPage.isRowValueDisplayed(driver, productName,sku,price,stockQuantity));
+		verifyEquals(productSearchPage.getTotalEditButton(driver), 1);
 	}
 	@Test
 	public void Admin_05_Search_With_Product_Name_Child_Category() {
@@ -121,7 +120,7 @@ public class Admin extends BaseTest {
 		productSearchPage.clickToSearchButton();
 		productSearchPage.sleepInSecond(1);
 		
-		Assert.assertTrue(productSearchPage.isNoDataMsgDisplayed());
+		verifyTrue(productSearchPage.isNoDataMsgDisplayed());
 	}
 	@Test
 	public void Admin_06_Go_Directly_To_SKU() {
@@ -134,7 +133,7 @@ public class Admin extends BaseTest {
 		productSearchPage.sleepInSecond(1);
 		productDetailsPage.openExpandIconByCardTitle(driver, "class","Product info");
 		
-		Assert.assertTrue(productDetailsPage.getAttributeValueFromTextboxByName(driver, "value", "Name").equals(productName));
+		verifyTrue(productDetailsPage.getAttributeValueFromTextboxByName(driver, "value", "Name").equals(productName));
 	}
 	@Test
 	public void Admin_07_Create_New_Customer() {
@@ -164,7 +163,7 @@ public class Admin extends BaseTest {
 		customerEditPage.clickToSaveAndContinueEditButton();
 		customerEditPage.sleepInSecond(1);
 		
-		Assert.assertTrue(customerEditPage.isAddedEditedSuccessMsgDisplayed("The new customer has been added successfully."));
+		verifyTrue(customerEditPage.isAddedEditedSuccessMsgDisplayed("The new customer has been added successfully."));
 		
 		customerEditPage.clickToButtonLinkByName(driver, "back to customer list");
 		customersPage = PageGeneratorManager.getCustomersPage(driver);
@@ -172,7 +171,7 @@ public class Admin extends BaseTest {
 		customersPage.enterItemInCustomerRolesDropdown(driver, customerRoles);
 		customersPage.clickToButtonByIdAttribute(driver, "search-customers");
 		
-		Assert.assertTrue(customersPage.isRowValueDisplayed(driver, "Guest", "Automation FC", customerRoles, customerCompanyName));
+		verifyTrue(customersPage.isRowValueDisplayed(driver, "Guest", "Automation FC", customerRoles, customerCompanyName));
 	}
 	@Test
 	public void Admin_08_Search_Customer_With_Email() {
@@ -184,8 +183,8 @@ public class Admin extends BaseTest {
 		customersPage.clickToButtonByIdAttribute(driver, "search-customers");
 		customersPage.sleepInSecond(1);
 		
-		Assert.assertTrue(customersPage.isRowValueDisplayed(driver, "Guest", "Automation FC", customerRoles, customerCompanyName));
-		Assert.assertEquals(customersPage.getTotalEditButton(driver),1);
+		verifyTrue(customersPage.isRowValueDisplayed(driver, "Guest", "Automation FC", customerRoles, customerCompanyName));
+		verifyEquals(customersPage.getTotalEditButton(driver),1);
 		
 	}
 	@Test
@@ -199,8 +198,8 @@ public class Admin extends BaseTest {
 		customersPage.clickToButtonByIdAttribute(driver, "search-customers");
 		customersPage.sleepInSecond(3);
 		
-		Assert.assertTrue(customersPage.isRowValueDisplayed(driver, "Guest", "Automation FC", customerRoles, customerCompanyName));
-		Assert.assertEquals(customersPage.getTotalEditButton(driver),1);
+		verifyTrue(customersPage.isRowValueDisplayed(driver, "Guest", "Automation FC", customerRoles, customerCompanyName));
+		verifyEquals(customersPage.getTotalEditButton(driver),1);
 	}
 	@Test
 	public void Admin_10_Search_Customer_With_Company() {
@@ -212,8 +211,8 @@ public class Admin extends BaseTest {
 		customersPage.clickToButtonByIdAttribute(driver, "search-customers");
 		customersPage.sleepInSecond(3);
 		
-		Assert.assertTrue(customersPage.isRowValueDisplayed(driver, "Guest", "Automation FC", customerRoles, customerCompanyName));
-		Assert.assertEquals(customersPage.getTotalEditButton(driver),1);
+		verifyTrue(customersPage.isRowValueDisplayed(driver, "Guest", "Automation FC", customerRoles, customerCompanyName));
+		verifyEquals(customersPage.getTotalEditButton(driver),1);
 		
 	}
 	@Test
@@ -231,8 +230,8 @@ public class Admin extends BaseTest {
 		customersPage.clickToButtonByIdAttribute(driver, "search-customers");
 		customersPage.sleepInSecond(1);
 		
-		Assert.assertTrue(customersPage.isRowValueDisplayed(driver, "Guest", "Automation FC", customerRoles, customerCompanyName));
-		Assert.assertEquals(customersPage.getTotalEditButton(driver),1);
+		verifyTrue(customersPage.isRowValueDisplayed(driver, "Guest", "Automation FC", customerRoles, customerCompanyName));
+		verifyEquals(customersPage.getTotalEditButton(driver),1);
 		
 	}
 	@Test
@@ -263,7 +262,7 @@ public class Admin extends BaseTest {
 		customerEditPage.clickToSaveButton();
 		customerEditPage.sleepInSecond(1);
 		
-		Assert.assertTrue(customerEditPage.isAddedEditedSuccessMsgDisplayed("The customer has been updated successfully."));
+		verifyTrue(customerEditPage.isAddedEditedSuccessMsgDisplayed("The customer has been updated successfully."));
 		
 		customersPage = PageGeneratorManager.getCustomersPage(driver);
 		customersPage.refreshCurrentPage(driver);
@@ -279,8 +278,8 @@ public class Admin extends BaseTest {
 		customersPage.clickToButtonByIdAttribute(driver, "search-customers");
 		customersPage.sleepInSecond(1);
 		
-		Assert.assertTrue(customersPage.isRowValueDisplayed(driver, "Guest", customerEditFirstName + " " + customerEditLastName, customerRoles, customerEditCompanyName));
-		Assert.assertEquals(customersPage.getTotalEditButton(driver),1);
+		verifyTrue(customersPage.isRowValueDisplayed(driver, "Guest", customerEditFirstName + " " + customerEditLastName, customerRoles, customerEditCompanyName));
+		verifyEquals(customersPage.getTotalEditButton(driver),1);
 	}
 	
 	@AfterClass

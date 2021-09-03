@@ -207,7 +207,7 @@ public class BasePage {
 			return false;
 		}
 	}
-	public boolean isElementUndispleyed(WebDriver driver, String locator) {
+	public boolean isElementUndisplayed(WebDriver driver, String locator) {
 		overrideGlobalTimeOut(driver, shortTimeOut);
 		List<WebElement> elements = getElements(driver, locator);
 		overrideGlobalTimeOut(driver, longTimeOut);

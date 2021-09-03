@@ -45,11 +45,11 @@ public class Register_Account extends BaseTest {
 		registerPage.clickToRegisterButton();
 		registerPage.sleepInSecond(1);
 
-		Assert.assertEquals(registerPage.getEmptyFirstNameErrorMsg(), "First name is required.");
-		Assert.assertEquals(registerPage.getEmptyLastNameErrorMsg(), "Last name is required.");
-		Assert.assertEquals(registerPage.getEmptyEmailErrorMsg(), "Email is required.");
-		Assert.assertEquals(registerPage.getEmptyPasswordErrorMsg(), "Password is required.");
-		Assert.assertEquals(registerPage.getEmptyConfirmPasswordErrorMsg(), "Password is required.");
+		verifyEquals(registerPage.getEmptyFirstNameErrorMsg(), "First name is required.");
+		verifyEquals(registerPage.getEmptyLastNameErrorMsg(), "Last name is required.");
+		verifyEquals(registerPage.getEmptyEmailErrorMsg(), "Email is required.");
+		verifyEquals(registerPage.getEmptyPasswordErrorMsg(), "Password is required.");
+		verifyEquals(registerPage.getEmptyConfirmPasswordErrorMsg(), "Password is required.");
 
 	}
 
@@ -64,7 +64,7 @@ public class Register_Account extends BaseTest {
 		registerPage.clickToRegisterButton();
 		registerPage.sleepInSecond(1);
 
-		Assert.assertEquals(registerPage.getInvalidEmailErrorMsg(), "Wrong email");
+		verifyEquals(registerPage.getInvalidEmailErrorMsg(), "Wrong email");
 
 	}
 
@@ -79,7 +79,7 @@ public class Register_Account extends BaseTest {
 		registerPage.clickToRegisterButton();
 		registerPage.sleepInSecond(1);
 
-		Assert.assertEquals(registerPage.getEmailExistErrorMsg(), "The specified email already exists");
+		verifyEquals(registerPage.getEmailExistErrorMsg(), "The specified email already exists");
 	}
 
 	@Test
@@ -93,7 +93,7 @@ public class Register_Account extends BaseTest {
 		registerPage.clickToRegisterButton();
 		registerPage.sleepInSecond(1);
 
-		Assert.assertTrue(registerPage.isPasswordLessThanSixErrorMsgDisplayed());
+		verifyTrue(registerPage.isPasswordLessThanSixErrorMsgDisplayed());
 	}
 
 	@Test
@@ -107,7 +107,7 @@ public class Register_Account extends BaseTest {
 		registerPage.clickToRegisterButton();
 		registerPage.sleepInSecond(1);
 
-		Assert.assertEquals(registerPage.getPassNotMatchConfirmPassErrorMsg(), "The password and confirmation password do not match.");
+		verifyEquals(registerPage.getPassNotMatchConfirmPassErrorMsg(), "The password and confirmation password do not match.");
 	}
 
 	@Test
@@ -120,7 +120,7 @@ public class Register_Account extends BaseTest {
 		registerPage.enterToConfirmPasswordTextbox(confirmPassword);
 		registerPage.clickToRegisterButton();
 
-		Assert.assertTrue(registerPage.isSuccessMessageDisplayed());
+		verifyTrue(registerPage.isSuccessMessageDisplayed());
 
 	}
 
