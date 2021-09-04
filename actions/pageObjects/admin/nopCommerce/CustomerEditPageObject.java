@@ -26,5 +26,18 @@ public class CustomerEditPageObject extends BasePage {
 		waitForElementVisible(driver, AdminBasePageUI.DYNAMIC_MESSAGE_SUCCESS_CREATE_UPDATE, messageContent);
 		return isElementDisplayed(driver, AdminBasePageUI.DYNAMIC_MESSAGE_SUCCESS_CREATE_UPDATE, messageContent);
 	}
+	public boolean isAddressInfoDisplayed(String firstName, String lastName, String email, String phone, String fax, String company, String address1, String address2, String city, String zip, String country) {
+		waitForElementVisible(driver, CustomerEditPageUI.DYNAMIC_ROW_CUSTOMER_ADDRESS, firstName, lastName, email, phone, fax, company, address1, address2, city, zip, country);
+		return isElementDisplayed(driver, CustomerEditPageUI.DYNAMIC_ROW_CUSTOMER_ADDRESS, firstName, lastName, email, phone, fax, company, address1, address2, city, zip, country);
+	}
+	public void acceptToDeleteAddressAlert() {
+		waitForAlertPresence(driver);
+		acceptAlert(driver);
+	}
+	public boolean isAddressDeleteMsgDisplayed() {
+		waitForElementVisible(driver, CustomerEditPageUI.NO_DATA_ADDRESS_MSG);
+		return isElementDisplayed(driver, CustomerEditPageUI.NO_DATA_ADDRESS_MSG);
+	}
+	
 	
 }

@@ -34,7 +34,28 @@
 			<param name="ConversionPattern" value="[%-5p] [%d] %m%n" />
 		</layout>
 	</appender>
-
+	
+	<category name="com.nopcommerce.register">
+		<priority value="all" />
+		<appender-ref ref="console" />
+		<appender-ref ref="logfile" />
+		<appender-ref ref="file" />
+		<appender-ref ref="reportng" />
+	</category>
+	<category name="com.nopcommerce.login">
+		<priority value="all" />
+		<appender-ref ref="console" />
+		<appender-ref ref="logfile" />
+		<appender-ref ref="file" />
+		<appender-ref ref="reportng" />
+	</category>
+	<category name="com.nopcommerce.myaccount">
+		<priority value="all" />
+		<appender-ref ref="console" />
+		<appender-ref ref="logfile" />
+		<appender-ref ref="file" />
+		<appender-ref ref="reportng" />
+	</category>
 	<category name="com.nopcommerce.admin">
 		<priority value="all" />
 		<appender-ref ref="console" />

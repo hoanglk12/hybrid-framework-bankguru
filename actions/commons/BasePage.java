@@ -484,6 +484,10 @@ public class BasePage {
 		waitForElementClickable(driver, CustomersPageUI.DYNAMIC_BUTTON_LINK, buttonName);
 		clickToElement(driver, CustomersPageUI.DYNAMIC_BUTTON_LINK, buttonName);
 	}
+	public void clickToButtonByText(WebDriver driver, String buttonText) {
+		waitForElementClickable(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT_BY_TEXT, buttonText);
+		clickToElement(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT_BY_TEXT, buttonText);
+	}
 	public boolean isRowValueDisplayed(WebDriver driver, String firstRow, String secondRow, String thirdRow, String fourthRow) {
 		waitForElementVisible(driver, AdminBasePageUI.DYNAMIC_ROW_VALUE, firstRow, secondRow, thirdRow, fourthRow);
 		return isElementDisplayed(driver, AdminBasePageUI.DYNAMIC_ROW_VALUE, firstRow, secondRow, thirdRow, fourthRow);
@@ -491,6 +495,10 @@ public class BasePage {
 	public int getTotalEditButton(WebDriver driver) {
 		waitForAllElementVisible(driver, AdminBasePageUI.EDIT_BUTTON);
 		return getElementSize(driver, AdminBasePageUI.EDIT_BUTTON);
+	}
+	public void clickToButtonByTextByJs(WebDriver driver, String buttonName) {
+		waitForElementClickable(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT_BY_TEXT, buttonName);
+		clickToElementByJS(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT_BY_TEXT, buttonName);
 	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 

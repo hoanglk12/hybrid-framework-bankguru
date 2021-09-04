@@ -1,5 +1,6 @@
 package com.nopcommerce.admin;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -17,11 +18,16 @@ import pageObjects.admin.nopCommerce.ProductSearchPageObject;
 
 public class Admin extends BaseTest {
 	WebDriver driver;
+	Alert alert;
 	String email, password, productName, sku, price, stockQuantity,
 	customerEmail, customerPassword, customerFirstName, customerLastName,
 	customerDOB, customerCompanyName, customerRoles, customerAdminComment,
 	customerEditEmail, customerEditFirstName, customerEditLastName, customerEditDOB,
-	customerEditCompanyName, customerEditAdminComment;
+	customerEditCompanyName, customerEditAdminComment, customerAddressCountry, customerAddressState,
+	customerAddressCity, customerAddressAddress1, customerAddressAddress2, customerAddressZip,
+	customerAddressPhone, customerAddressFax, customerEditAddressCountry, customerEditAddressState,
+	customerEditAddressCity, customerEditAddressAddress1, customerEditAddressAddress2, customerEditAddressZip,
+	customerEditAddressPhone, customerEditAddressFax;
 	
 	@Parameters({ "browser", "urlAdmin" })
 	@BeforeClass
@@ -48,6 +54,22 @@ public class Admin extends BaseTest {
 		customerEditDOB = "2/2/2000";
 		customerEditCompanyName = "Edit" + " " + customerCompanyName;
 		customerEditAdminComment = "Edit" + " " + customerAdminComment;
+		customerAddressCountry = "Viet Nam";
+		customerAddressState = "Other";
+		customerAddressCity = "Ho Chi Minh";
+		customerAddressAddress1 = "743 Le Loi";
+		customerAddressAddress2 = "453 Le Lai";
+		customerAddressZip = "650000";
+		customerAddressPhone = "0987654555";
+		customerAddressFax = "+84987654555";
+		customerEditAddressCountry = "United States";
+		customerEditAddressState = "California";
+		customerEditAddressCity = "Albany";
+		customerEditAddressAddress1 = "123 PO Box";
+		customerEditAddressAddress2 = "356 Los Blancos";
+		customerEditAddressZip = "986589";
+		customerEditAddressPhone = "0987654666";
+		customerEditAddressFax = "+441619998888";
 	}
 	@Test
 	public void Admin_00_Login_To_Admin_Page() {
@@ -159,7 +181,7 @@ public class Admin extends BaseTest {
 		verifyTrue(productSearchPage.isRowValueDisplayed(driver, productName,sku,price,stockQuantity));
 	}
 	@Test
-	public void Admin_05_Search_With_Product_Name_Child_Category() {
+	public void Admin_05_Search_With_Product_Name_Manufacturer() {
 		log.info("Admin_05 - Step 1: Refresh Product Search Page");
 		productSearchPage.refreshCurrentPage(driver);
 		productSearchPage.sleepInSecond(1);
@@ -364,56 +386,255 @@ public class Admin extends BaseTest {
 		log.info("Admin_13 - Step 2: Input data to textbox Email with " + customerEditEmail);
 		customersPage.enterToTextboxByName(driver, customerEditEmail, "SearchEmail");
 		
-		log.info("Admin_13 - Step 3: Refresh Customers Page");
+		log.info("Admin_13 - Step 3: Input data to textbox FirstName with " + customerEditFirstName);
 		customersPage.enterToTextboxByName(driver, customerEditFirstName, "SearchFirstName");
 		
-		log.info("Admin_13 - Step 4: Refresh Customers Page");
+		log.info("Admin_13 - Step 4: Input data to textbox LastName with " + customerEditLastName);
 		customersPage.enterToTextboxByName(driver, customerEditLastName, "SearchLastName");
 		
-		log.info("Admin_13 - Step 5: Refresh Customers Page");
+		log.info("Admin_13 - Step 5: Select from dropdown Month with '2'");
 		customersPage.selectItemInDropdownByAttributeName(driver,"2","SearchMonthOfBirth");
 		
-		log.info("Admin_13 - Step 6: Refresh Customers Page");
+		log.info("Admin_13 - Step 6: Select from dropdown Day with '2'");
 		customersPage.selectItemInDropdownByAttributeName(driver,"2","SearchDayOfBirth");
 		
-		log.info("Admin_13 - Step 7: Refresh Customers Page");
+		log.info("Admin_13 - Step 7: Input data to textbox LastName with " + customerEditCompanyName);
 		customersPage.enterToTextboxByName(driver, customerEditCompanyName, "SearchCompany");
 		
-		log.info("Admin_13 - Step 8: Refresh Customers Page");
+		log.info("Admin_13 - Step 8: Close default 'Registered' role of dropdown 'Customer Roles'");
 		customersPage.closeDefaultItemOfCustomerRoles(driver);
 		
-		log.info("Admin_13 - Step 9: Refresh Customers Page");
+		log.info("Admin_13 - Step 9:  Select from dropdown Customer Roles with data " + customerRoles);
 		customersPage.enterItemInCustomerRolesDropdown(driver, customerRoles);
 		
-		log.info("Admin_13 - Step 10: Refresh Customers Page");
+		log.info("Admin_13 - Step 10: Click to Search button");
 		customersPage.clickToButtonByIdAttribute(driver, "search-customers");
 		customersPage.sleepInSecond(1);
 		
 		log.info("Admin_13 - Step 11: Click to Edit button on table data");
+		customersPage.clickToEditButtonByRow(driver, "Guest", customerEditFirstName + " " + customerEditLastName, customerRoles, customerEditCompanyName);
 		
 		log.info("Admin_13 - Step 12: Navigate to Customer Edit Page");
+		customerEditPage = PageGeneratorManager.getCustomerEditPage(driver);
 		
 		log.info("Admin_13 - Step 13: Click to expand icon on Addresses");
+		customerEditPage.openExpandIconByCardTitle(driver, "class","Addresses");
 		
 		log.info("Admin_13 - Step 14: Click to 'Add new address' button");
+		customerEditPage.clickToButtonByText(driver, "Add new address");
+		customerEditPage.sleepInSecond(3);
 		
-		log.info("Admin_13 - Step 15: Navigate to Address Page");
+		log.info("Admin_13 - Step 15: Input data to First name textbox");
+		customerEditPage.enterToTextboxByName(driver, customerFirstName, "Address_FirstName");
 		
-		log.info("Admin_13 - Step 16: Navigate to Address Page");
-		log.info("Admin_13 - Step 17: Navigate to Address Page");
-		log.info("Admin_13 - Step 18: Navigate to Address Page");
-		log.info("Admin_13 - Step 19: Navigate to Address Page");
-		log.info("Admin_13 - Step 20: Navigate to Address Page");
-		log.info("Admin_13 - Step 21: Navigate to Address Page");
-		log.info("Admin_13 - Step 22: Navigate to Address Page");
-		log.info("Admin_13 - Step 23: Navigate to Address Page");
-		log.info("Admin_13 - Step 24: Navigate to Address Page");
-		log.info("Admin_13 - Step 25: Navigate to Address Page");
-		log.info("Admin_13 - Step 26: Navigate to Address Page");
-		log.info("Admin_13 - Step 27: Navigate to Address Page");
-		log.info("Admin_13 - Step 28: Navigate to Address Page");
+		log.info("Admin_13 - Step 16: Input data to Last name textbox");
+		customerEditPage.enterToTextboxByName(driver, customerLastName, "Address_LastName");
+		
+		log.info("Admin_13 - Step 17: Input data to Email textbox");
+		customerEditPage.enterToTextboxByName(driver, customerEmail, "Address_Email");
+		
+		log.info("Admin_13 - Step 18: Input data to Company textbox");
+		customerEditPage.enterToTextboxByName(driver, customerCompanyName, "Address_Company");
+		
+		log.info("Admin_13 - Step 19: Select from Country dropdown with data " + customerAddressCountry);
+		customerEditPage.selectItemInDropdownByAttributeName(driver, customerAddressCountry, "Address.CountryId");
+		
+		log.info("Admin_13 - Step 20: Select from State/province dropdown with data " + customerAddressState);
+		customerEditPage.selectItemInDropdownByAttributeName(driver, customerAddressState, "Address.StateProvinceId");
+
+		log.info("Admin_13 - Step 21: Input to City textbox with data " + customerAddressCity);
+		customerEditPage.enterToTextboxByName(driver, customerAddressCity, "Address_City");
+		
+		log.info("Admin_13 - Step 22: Input to Address1 textbox with data " + customerAddressAddress1);
+		customerEditPage.enterToTextboxByName(driver, customerAddressAddress1, "Address_Address1");
+		
+		log.info("Admin_13 - Step 23: Input to Address2 textbox with data " + customerAddressAddress2);
+		customerEditPage.enterToTextboxByName(driver, customerAddressAddress2, "Address_Address2");
+		
+		log.info("Admin_13 - Step 24: Input Zip/postal code textbox with data " + customerAddressZip);
+		customerEditPage.enterToTextboxByName(driver, customerAddressZip, "Address_ZipPostalCode");
+		
+		log.info("Admin_13 - Step 25: Input to Phone number textbox with data " + customerAddressPhone);
+		customerEditPage.enterToTextboxByName(driver, customerAddressPhone, "Address_PhoneNumber");
+		
+		log.info("Admin_13 - Step 26: Input to Fax number textbox with data " + customerAddressPhone);
+		customerEditPage.enterToTextboxByName(driver, customerAddressFax, "Address_FaxNumber");
+		
+		log.info("Admin_13 - Step 27: Click to Save button");
+		customerEditPage.clickToButtonByText(driver, "Save");
+		
+		log.info("Admin_13 - Step 28: Verify address added success message is displayed");
+		verifyTrue(customerEditPage.isAddedEditedSuccessMsgDisplayed("The new address has been added successfully."));
+		
+		log.info("Admin_13 - Step 29: Click to 'back to customer details'");
+		customerEditPage.clickToButtonLinkByName(driver, "back to customer details");
+		customerEditPage.sleepInSecond(2);
+		
+		log.info("Admin_13 - Step 30: Click to expand icon on Addresses");
+		customerEditPage.openExpandIconByCardTitle(driver, "class","Addresses");
+		customerEditPage.sleepInSecond(1);
+		customerEditPage.scrollToBottomPage(driver);
+		
+		log.info("Admin_13 - Step 31: Verify address displayed in Addresses");
+		verifyTrue(customerEditPage.isAddressInfoDisplayed(customerFirstName,customerLastName,customerEmail, customerAddressPhone, customerAddressFax, customerCompanyName, customerAddressAddress1, customerAddressAddress2, customerAddressCity + ",", customerAddressZip, customerAddressCountry));
 	}
-	
+	@Test
+	public void Admin_14_Edit_Address() {
+		log.info("Admin_14 - Step 1: Click to 'back to customer list'");
+		customerEditPage.clickToButtonLinkByName(driver, "back to customer list");
+		customerEditPage.sleepInSecond(1);
+		
+		log.info("Admin_14 - Step 2: Input data to textbox Email with " + customerEditEmail);
+		customersPage.enterToTextboxByName(driver, customerEditEmail, "SearchEmail");
+		
+		log.info("Admin_14 - Step 3: Input data to textbox FirstName with " + customerEditFirstName);
+		customersPage.enterToTextboxByName(driver, customerEditFirstName, "SearchFirstName");
+		
+		log.info("Admin_14 - Step 4: Input data to textbox LastName with " + customerEditLastName);
+		customersPage.enterToTextboxByName(driver, customerEditLastName, "SearchLastName");
+		
+		log.info("Admin_14 - Step 5: Select from dropdown Month with '2'");
+		customersPage.selectItemInDropdownByAttributeName(driver,"2","SearchMonthOfBirth");
+		
+		log.info("Admin_14 - Step 6: Select from dropdown Day with '2'");
+		customersPage.selectItemInDropdownByAttributeName(driver,"2","SearchDayOfBirth");
+		
+		log.info("Admin_14 - Step 7: Input data to textbox LastName with " + customerEditCompanyName);
+		customersPage.enterToTextboxByName(driver, customerEditCompanyName, "SearchCompany");
+		
+		log.info("Admin_14 - Step 8: Close default 'Registered' role of dropdown 'Customer Roles'");
+		customersPage.closeDefaultItemOfCustomerRoles(driver);
+		
+		log.info("Admin_14 - Step 9:  Select from dropdown Customer Roles with data " + customerRoles);
+		customersPage.enterItemInCustomerRolesDropdown(driver, customerRoles);
+		
+		log.info("Admin_14 - Step 10: Click to Search button");
+		customersPage.clickToButtonByIdAttribute(driver, "search-customers");
+		customersPage.sleepInSecond(1);
+		
+		log.info("Admin_14 - Step 11: Click to Edit button on table data");
+		customersPage.clickToEditButtonByRow(driver, "Guest", customerEditFirstName + " " + customerEditLastName, customerRoles, customerEditCompanyName);
+		
+		log.info("Admin_14 - Step 12: Navigate to Customer Edit Page");
+		customerEditPage = PageGeneratorManager.getCustomerEditPage(driver);
+		
+		log.info("Admin_14 - Step 13: Click to expand icon on Addresses");
+		customerEditPage.openExpandIconByCardTitle(driver, "class","Addresses");
+		
+		log.info("Admin_14 - Step 14: Click Edit button link on Addresses table data");
+		customerEditPage.clickToButtonLinkByName(driver, "Edit");
+		customerEditPage.sleepInSecond(2);
+		
+		log.info("Admin_14 - Step 15: Input data to First name textbox");
+		customerEditPage.enterToTextboxByName(driver, customerEditFirstName, "Address_FirstName");
+		
+		log.info("Admin_14 - Step 16: Input data to Last name textbox");
+		customerEditPage.enterToTextboxByName(driver, customerEditLastName, "Address_LastName");
+		
+		log.info("Admin_14 - Step 17: Input data to Email textbox");
+		customerEditPage.enterToTextboxByName(driver, customerEmail, "Address_Email");
+		
+		log.info("Admin_14 - Step 18: Input data to Company textbox");
+		customerEditPage.enterToTextboxByName(driver, customerEditCompanyName, "Address_Company");
+		
+		log.info("Admin_14 - Step 19: Select from Country dropdown with data " + customerAddressCountry);
+		customerEditPage.selectItemInDropdownByAttributeName(driver, customerEditAddressCountry, "Address.CountryId");
+		
+		log.info("Admin_14 - Step 20: Select from State/province dropdown with data " + customerAddressState);
+		customerEditPage.selectItemInDropdownByAttributeName(driver, customerEditAddressState, "Address.StateProvinceId");
+
+		log.info("Admin_14 - Step 21: Input to City textbox with data " + customerAddressCity);
+		customerEditPage.enterToTextboxByName(driver, customerEditAddressCity, "Address_City");
+		
+		log.info("Admin_14 - Step 22: Input to Address1 textbox with data " + customerAddressAddress1);
+		customerEditPage.enterToTextboxByName(driver, customerEditAddressAddress1, "Address_Address1");
+		
+		log.info("Admin_14 - Step 23: Input to Address2 textbox with data " + customerAddressAddress2);
+		customerEditPage.enterToTextboxByName(driver, customerEditAddressAddress2, "Address_Address2");
+		
+		log.info("Admin_14 - Step 24: Input Zip/postal code textbox with data " + customerAddressZip);
+		customerEditPage.enterToTextboxByName(driver, customerEditAddressZip, "Address_ZipPostalCode");
+		
+		log.info("Admin_14 - Step 25: Input to Phone number textbox with data " + customerAddressPhone);
+		customerEditPage.enterToTextboxByName(driver, customerEditAddressPhone, "Address_PhoneNumber");
+		
+		log.info("Admin_14 - Step 26: Input to Fax number textbox with data " + customerAddressPhone);
+		customerEditPage.enterToTextboxByName(driver, customerEditAddressFax, "Address_FaxNumber");
+		
+		log.info("Admin_14 - Step 27: Click to Save button");
+		customerEditPage.clickToSaveButton();
+		customerEditPage.sleepInSecond(1);
+		
+		log.info("Admin_14 - Step 28: Verify address added success message is displayed");
+		verifyTrue(customerEditPage.isAddedEditedSuccessMsgDisplayed("The address has been updated successfully."));
+		
+		log.info("Admin_14 - Step 29: Click to 'back to customer details'");
+		customerEditPage.clickToButtonLinkByName(driver, "back to customer details");
+		customerEditPage.sleepInSecond(2);
+		
+		log.info("Admin_14 - Step 30: Click to expand icon on Addresses");
+		customerEditPage.openExpandIconByCardTitle(driver, "class","Addresses");
+		customerEditPage.sleepInSecond(1);
+		
+		
+		log.info("Admin_14 - Step 31: Verify address displayed in Addresses");
+		verifyTrue(customerEditPage.isAddressInfoDisplayed(customerEditFirstName, customerEditLastName, customerEmail, customerEditAddressPhone, customerEditAddressFax, customerEditCompanyName, customerEditAddressAddress1, customerEditAddressAddress2, customerEditAddressCity + "," + customerEditAddressState + ",", customerEditAddressZip, customerEditAddressCountry));
+		
+	}
+	@Test
+	public void Admin_15_Delete_Address() {
+		log.info("Admin_15 - Step 1: Click to 'back to customer list'");
+		customerEditPage.clickToButtonLinkByName(driver, "back to customer list");
+		customerEditPage.sleepInSecond(1);
+		
+		log.info("Admin_15 - Step 2: Input data to textbox Email with " + customerEditEmail);
+		customersPage.enterToTextboxByName(driver, customerEditEmail, "SearchEmail");
+		
+		log.info("Admin_15 - Step 3: Input data to textbox FirstName with " + customerEditFirstName);
+		customersPage.enterToTextboxByName(driver, customerEditFirstName, "SearchFirstName");
+		
+		log.info("Admin_15 - Step 4: Input data to textbox LastName with " + customerEditLastName);
+		customersPage.enterToTextboxByName(driver, customerEditLastName, "SearchLastName");
+		
+		log.info("Admin_15 - Step 5: Select from dropdown Month with '2'");
+		customersPage.selectItemInDropdownByAttributeName(driver,"2","SearchMonthOfBirth");
+		
+		log.info("Admin_15 - Step 6: Select from dropdown Day with '2'");
+		customersPage.selectItemInDropdownByAttributeName(driver,"2","SearchDayOfBirth");
+		
+		log.info("Admin_15 - Step 7: Input data to textbox LastName with " + customerEditCompanyName);
+		customersPage.enterToTextboxByName(driver, customerEditCompanyName, "SearchCompany");
+		
+		log.info("Admin_15 - Step 8: Close default 'Registered' role of dropdown 'Customer Roles'");
+		customersPage.closeDefaultItemOfCustomerRoles(driver);
+		
+		log.info("Admin_15 - Step 9:  Select from dropdown Customer Roles with data " + customerRoles);
+		customersPage.enterItemInCustomerRolesDropdown(driver, customerRoles);
+		
+		log.info("Admin_15 - Step 10: Click to Search button");
+		customersPage.clickToButtonByIdAttribute(driver, "search-customers");
+		customersPage.sleepInSecond(1);
+		
+		log.info("Admin_15 - Step 11: Click to Edit button on table data");
+		customersPage.clickToEditButtonByRow(driver, "Guest", customerEditFirstName + " " + customerEditLastName, customerRoles, customerEditCompanyName);
+		
+		log.info("Admin_15 - Step 12: Navigate to Customer Edit Page");
+		customerEditPage = PageGeneratorManager.getCustomerEditPage(driver);
+		
+		log.info("Admin_15 - Step 13: Click to expand icon on Addresses");
+		customerEditPage.openExpandIconByCardTitle(driver, "class","Addresses");
+		
+		log.info("Admin_15 - Step 14: Click Edit button link on Addresses table data");
+		customerEditPage.clickToButtonLinkByName(driver, "Delete");
+		customerEditPage.sleepInSecond(1);
+		
+		log.info("Admin_15 - Step 15: Accept alert");
+		customerEditPage.acceptToDeleteAddressAlert();
+		
+		log.info("Admin_15 - Step 16: Verify address displayed in Addresses");
+		verifyTrue(customerEditPage.isAddressDeleteMsgDisplayed());
+		
+	}
 	@AfterClass
 	public void closeBrowser() {
 		log.info("Post-Condition - Close browser");

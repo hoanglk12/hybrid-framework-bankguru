@@ -14,4 +14,6 @@ public class CustomerEditPageUI {
 	public static final String CUSTOMER_ROLES_PARENT_LOCATOR = "//ul[@id='SelectedCustomerRoleIds_taglist']/following-sibling::input";
 	public static final String CUSTOMER_ROLES_CHILD_LOCATOR = "//ul[@data-role='staticlist' and @aria-hidden='false']//li";
 	public static final String CUSTOMER_ROLES_ITEM_SELECTED = "//li[@role='option']/span[not(@title)]";
+	public static final String DYNAMIC_ROW_CUSTOMER_ADDRESS = "//td[text()='%s']/following-sibling::td[text()='%s']/following-sibling::td[text()='%s']/following-sibling::td[text()='%s']/following-sibling::td[text()='%s']/following-sibling::td/div[normalize-space(.) = '%s%s%s%s%s%s']";
+	public static final String NO_DATA_ADDRESS_MSG = "//table[@id='customer-addresses-grid']//tr[@class='odd']/td[text()='No data available in table']";
 }
