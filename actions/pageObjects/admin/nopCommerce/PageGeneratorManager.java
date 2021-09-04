@@ -26,5 +26,8 @@ public class PageGeneratorManager {
 	public static CustomerEditPageObject getCustomerEditPage(WebDriver driver) {
 		return new CustomerEditPageObject(driver);
 	}
+	public static AddressPageObject getAddressPage(WebDriver driver) {
+		return new AddressPageObject(driver);
+	}
 
 }

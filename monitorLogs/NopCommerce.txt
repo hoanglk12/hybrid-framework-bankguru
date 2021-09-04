@@ -1,0 +1,66 @@
+[INFO ] [2021-09-04 10:52:01,518] Pre-Condition - Open browser 'firefox' with url: 'https://admin-demo.nopcommerce.com/login?ReturnUrl=/admin/'
+[INFO ] [2021-09-04 10:52:10,250] Admin_00 - Step 1: Open 'Admin Nopcommerce' page
+[INFO ] [2021-09-04 10:52:10,253] Admin_00 - Step 2: Input data to Email textbox admin@yourstore.com
+[INFO ] [2021-09-04 10:52:10,487] Admin_00 - Step 3: Input data to Password textbox admin
+[INFO ] [2021-09-04 10:52:10,605] Admin_00 - Step 4: Verify Dashboard Header Text is displayed
+[INFO ] [2021-09-04 10:52:13,493]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:52:13,500] Admin_01 - Step 1: At Dashboard Page, click to menu 'Catalog' and submenu 'Products'
+[INFO ] [2021-09-04 10:52:16,955] Admin_01 - Step 2: Input 'Lenovo IdeaCentre 600 All-in-One PC' to textbox Product Name
+[INFO ] [2021-09-04 10:52:17,125] Admin_01 - Step 3: Click to Seach button
+[INFO ] [2021-09-04 10:52:18,513] Admin_01 - Step 4: Verify only 1 item displayed
+[INFO ] [2021-09-04 10:52:18,770]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:52:18,770] Admin_01 - Step 5: Verify data is displayed with 'Lenovo IdeaCentre 600 All-in-One PC','LE_IC_600','500','10000'
+[INFO ] [2021-09-04 10:52:18,847]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:52:18,851] Admin_02 - Step 1: Refresh Product Search Page
+[INFO ] [2021-09-04 10:52:21,613] Admin_02 - Step 2: Input 'Lenovo IdeaCentre 600 All-in-One PC' to textbox Product Name
+[INFO ] [2021-09-04 10:52:21,766] Admin_02 - Step 3: Select 'Computers' from Dropdown Category
+[INFO ] [2021-09-04 10:52:22,127] Admin_02 - Step 4: Click to Seach button
+[INFO ] [2021-09-04 10:52:22,398] Admin_02 - Step 5: Verify No Data message is displayed
+[INFO ] [2021-09-04 10:52:23,604]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:52:23,606] Admin_03 - Step 1: Refresh Product Search Page
+[INFO ] [2021-09-04 10:52:26,849] Admin_03 - Step 2: Input 'Lenovo IdeaCentre 600 All-in-One PC' to textbox Product Name
+[INFO ] [2021-09-04 10:52:26,995] Admin_03 - Step 3: Select 'Computers' from Dropdown Category
+[INFO ] [2021-09-04 10:52:27,335] Admin_03 - Step 4: Check to checkbox Sub Categories
+[INFO ] [2021-09-04 10:52:27,631] Admin_03 - Step 5: Click to Seach button
+[INFO ] [2021-09-04 10:52:29,018] Admin_03 - Step 6: Verify only 1 item displayed
+[INFO ] [2021-09-04 10:52:29,069]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:52:29,069] Admin_03 - Step 7: Verify data is displayed with 'Lenovo IdeaCentre 600 All-in-One PC','LE_IC_600','500','10000'
+[INFO ] [2021-09-04 10:52:29,158]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:52:29,161] Admin_04 - Step 1: Refresh Product Search Page
+[INFO ] [2021-09-04 10:52:31,894] Admin_04 - Step 2: Input 'Lenovo IdeaCentre 600 All-in-One PC' to textbox Product Name
+[INFO ] [2021-09-04 10:52:32,043] Admin_04 - Step 3: Select 'Computers >> Desktops' from Dropdown Category
+[INFO ] [2021-09-04 10:52:32,382] Admin_04 - Step 4: Click to Seach button
+[INFO ] [2021-09-04 10:52:33,747] Admin_04 - Step 5: Verify only 1 item displayed
+[INFO ] [2021-09-04 10:52:33,812]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:52:33,812] Admin_03 - Step 6: Verify data is displayed with 'Lenovo IdeaCentre 600 All-in-One PC','LE_IC_600','500','10000'
+[INFO ] [2021-09-04 10:52:33,899]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:52:33,902] Admin_05 - Step 1: Refresh Product Search Page
+[INFO ] [2021-09-04 10:52:36,689] Admin_05 - Step 2: Input 'Lenovo IdeaCentre 600 All-in-One PC' to textbox Product Name
+[INFO ] [2021-09-04 10:52:36,843] Admin_05 - Step 3: Select 'All' from Dropdown Category
+[INFO ] [2021-09-04 10:52:36,939] Admin_05 - Step 4: Select 'Apple' from Dropdown Manufacturer
+[INFO ] [2021-09-04 10:52:37,278] Admin_05 - Step 5: Click to Seach button
+[INFO ] [2021-09-04 10:52:38,574] Admin_05 - Step 6: Verify No Data message is displayed
+[INFO ] [2021-09-04 10:52:38,760]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:52:38,765] Admin_06 - Step 1: Refresh Product Search Page
+[INFO ] [2021-09-04 10:52:41,630] Admin_06 - Step 2: Input data to 'GoDirectlyToSku' textbox LE_IC_600
+[INFO ] [2021-09-04 10:52:41,772] Admin_06 - Step 3: Click to button 'Go'
+[INFO ] [2021-09-04 10:52:47,095] Admin_06 - Step 4: Navigate to Product Details page
+[INFO ] [2021-09-04 10:52:48,108] Admin_06 - Step 5: Click to expand icon at 'Product info'
+[INFO ] [2021-09-04 10:52:57,806] Admin_06 - Step 6: Verify data is displayed with 'Lenovo IdeaCentre 600 All-in-One PC'
+[INFO ] [2021-09-04 10:52:57,888]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:52:57,892] Admin_07 - Step 1: Refresh Product Details Page
+[INFO ] [2021-09-04 10:53:00,293] Admin_07 - Step 2: Navigate to Dashboard Page
+[INFO ] [2021-09-04 10:53:17,649]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:53:20,560]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:53:26,217]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:53:26,283]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:53:33,350]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:53:33,415]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:53:40,991]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:53:41,045]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:53:47,108]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:53:47,169]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:53:58,036]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:54:03,937]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:54:03,989]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-09-04 10:54:03,991] Post-Condition - Close browser
