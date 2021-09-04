@@ -482,10 +482,16 @@ public class BasePage {
 	}
 	public void clickToButtonLinkByName(WebDriver driver, String buttonName) {
 		waitForElementClickable(driver, CustomersPageUI.DYNAMIC_BUTTON_LINK, buttonName);
+		if (driver.toString().contains("firefox")) {
+			clickToElementByJS(driver, CustomersPageUI.DYNAMIC_BUTTON_LINK, buttonName);
+		}
 		clickToElement(driver, CustomersPageUI.DYNAMIC_BUTTON_LINK, buttonName);
 	}
 	public void clickToButtonByText(WebDriver driver, String buttonText) {
 		waitForElementClickable(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT_BY_TEXT, buttonText);
+		if (driver.toString().contains("firefox")) {
+			clickToElementByJS(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT_BY_TEXT, buttonText);
+		}
 		clickToElement(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT_BY_TEXT, buttonText);
 	}
 	public boolean isRowValueDisplayed(WebDriver driver, String firstRow, String secondRow, String thirdRow, String fourthRow) {

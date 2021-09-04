@@ -1,5 +1,6 @@
 package pageObjects.admin.nopCommerce;
 
+
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
@@ -8,6 +9,7 @@ import pageUIs.admin.nopCommerce.CustomerEditPageUI;
 
 public class CustomerEditPageObject extends BasePage {
 	WebDriver driver;
+	
 	public CustomerEditPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -37,6 +39,10 @@ public class CustomerEditPageObject extends BasePage {
 	public boolean isAddressDeleteMsgDisplayed() {
 		waitForElementVisible(driver, CustomerEditPageUI.NO_DATA_ADDRESS_MSG);
 		return isElementDisplayed(driver, CustomerEditPageUI.NO_DATA_ADDRESS_MSG);
+	}
+	public void clickToDeleteButton() {
+		waitForElementClickable(driver, AdminBasePageUI.DELETE_BUTTON_TABLE_DATA);
+		clickToElement(driver, AdminBasePageUI.DELETE_BUTTON_TABLE_DATA);
 	}
 	
 	

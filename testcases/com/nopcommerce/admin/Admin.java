@@ -422,7 +422,7 @@ public class Admin extends BaseTest {
 		
 		log.info("Admin_13 - Step 14: Click to 'Add new address' button");
 		customerEditPage.clickToButtonByText(driver, "Add new address");
-		customerEditPage.sleepInSecond(3);
+		customerEditPage.sleepInSecond(2);
 		
 		log.info("Admin_13 - Step 15: Input data to First name textbox");
 		customerEditPage.enterToTextboxByName(driver, customerFirstName, "Address_FirstName");
@@ -625,13 +625,13 @@ public class Admin extends BaseTest {
 		customerEditPage.openExpandIconByCardTitle(driver, "class","Addresses");
 		
 		log.info("Admin_15 - Step 14: Click Edit button link on Addresses table data");
-		customerEditPage.clickToButtonLinkByName(driver, "Delete");
+		customerEditPage.clickToDeleteButton();
 		customerEditPage.sleepInSecond(1);
 		
 		log.info("Admin_15 - Step 15: Accept alert");
 		customerEditPage.acceptToDeleteAddressAlert();
 		
-		log.info("Admin_15 - Step 16: Verify address displayed in Addresses");
+		log.info("Admin_15 - Step 16: Verify delete address message displayed in Addresses");
 		verifyTrue(customerEditPage.isAddressDeleteMsgDisplayed());
 		
 	}
