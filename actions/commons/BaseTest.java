@@ -131,7 +131,6 @@ public class BaseTest {
 	
 	@BeforeTest
 	public void deleteAllFilesInReportNGScreenshot() {
-		log.info("---------- START delete file in folder ----------");
 		try {
 			String workingDir = System.getProperty("user.dir");
 			String pathFolderDownload = workingDir + "\\ReportNGScreenshots";
@@ -145,11 +144,11 @@ public class BaseTest {
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
 		}
-		log.info("---------- END delete file in folder ----------");
 	}
 
 	private WebDriver driver;
 	public WebDriver getDriver() {
 		return this.driver;
 	}
+
 }

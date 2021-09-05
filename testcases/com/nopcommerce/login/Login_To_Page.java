@@ -21,6 +21,7 @@ public class Login_To_Page extends BaseTest {
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String urlNopCommerce) {
+		log.info("Pre-Condition - Open browser '" + browserName + "' with url: '" + urlNopCommerce + "'");
 		driver = getBrowser(browserName, urlNopCommerce);
 		firstName = "Cristiano";
 		lastName = "Ronaldo";
@@ -31,15 +32,26 @@ public class Login_To_Page extends BaseTest {
 
 	@Test
 	public void Login_01_Empty_Data() {
+		log.info("Login_01 - Step 1: open Home Page");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		homePageUrl = homePage.getCurrentPageUrl(driver);
+		
+		log.info("Login_01 - Step 2: Verify Slider is displayed");
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
 		
+		log.info("Login_01 - Step 3: Click 'Login' link >>> Navigate to 'Login' Page");
 		loginPage = homePage.clickToLoginLink();
+		
+		log.info("Login_01 - Step 4: Leave blank in Email textbox");
 		loginPage.enterToEmailTextbox("");
+		
+		log.info("Login_01 - Step 5: Leave blank in Password textbox");
 		loginPage.enterToPasswordTextbox("");
+		
+		log.info("Login_01 - Step 6: Click to Login button");
 		loginPage.clickToLoginButton();
-
+		
+		log.info("Login_01 - Step 7: Verify error msg 'Please enter your email' is displayed");
 		Assert.assertEquals(loginPage.getEmailErrorMessage(), "Please enter your email");
 	}
 

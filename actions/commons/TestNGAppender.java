@@ -5,10 +5,11 @@ import org.apache.log4j.spi.LoggingEvent;
 import org.testng.Reporter;
 
 public class TestNGAppender extends AppenderSkeleton {
-
+	
 	@Override
 	protected void append(LoggingEvent event) {
 		Reporter.log(getLayout().format(event) + "<br>");
+		
 	}
 
 	@Override
@@ -26,7 +27,7 @@ public class TestNGAppender extends AppenderSkeleton {
 	 * @param logMessage
 	 */
 	public void info(String logMessage) {
-		Reporter.log(logMessage) ;
+		Reporter.log(logMessage);
 	}
 
 }

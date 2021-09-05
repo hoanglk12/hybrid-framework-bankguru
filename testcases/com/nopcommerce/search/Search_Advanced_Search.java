@@ -14,7 +14,7 @@ import pageObjects.user.nopCommerce.SearchPageObject;
 public class Search_Advanced_Search extends BaseTest {
 	WebDriver driver;
 	String emptyErrorMsg, noDataErrorMsg, lenovoIdeaTitle, lenovoThinkpadTitle, macbookFoundMsg;
-	@Parameters({ "browser", "url" })
+	@Parameters({"browser", "url"})
 	@BeforeClass
 	public void initBrowser(String browserName, String urlNopCommerce) {
 		log.info("Pre-Condition - Open browser '" + browserName + "' with url: '" + urlNopCommerce + "'");
@@ -33,11 +33,29 @@ public class Search_Advanced_Search extends BaseTest {
 		searchPage = PageGeneratorManager.getSearchPage(driver);
 		
 		log.info("Search_Advanced_Search_01 - Step 2: Leave blank at Search keyword textbox");
+		searchPage.enterToTextboxByName(driver, "", "q");
 		
 		log.info("Search_Advanced_Search_01 - Step 3: Click to Search button");
+		searchPage.clickToSearchButton();
 		
 		log.info("Search_Advanced_Search_01 - Step 4: Verify error message '" + emptyErrorMsg + "'" + "is displayed");
+		verifyEquals(searchPage.getTextErrorMsgSearchPage("warning"), emptyErrorMsg);
 		
+	}
+	@Test
+	public void Search_Advanced_Search_02_Search_With_Data_Exist() {
+		log.info("Search_Advanced_Search_01 - Step 1: Open Search link at footer >>> Navigate to Search Page");
+		homePage.openPageFooterByName(driver, "Search");
+		searchPage = PageGeneratorManager.getSearchPage(driver);
+
+		log.info("Search_Advanced_Search_01 - Step 2: Enter 'Macbook Pro 2050' at Search keyword textbox");
+		searchPage.enterToTextboxByName(driver, "Macbook Pro 2050", "q");
+
+		log.info("Search_Advanced_Search_01 - Step 3: Click to Search button");
+		searchPage.clickToSearchButton();
+
+		log.info("Search_Advanced_Search_01 - Step 4: Verify error message '" + noDataErrorMsg + "'" + "is displayed");
+		verifyEquals(searchPage.getTextErrorMsgSearchPage("no-result"), noDataErrorMsg);
 		
 	}
 	

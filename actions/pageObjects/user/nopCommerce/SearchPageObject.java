@@ -38,5 +38,10 @@ public class SearchPageObject extends BasePage {
 		waitForElementVisible(driver, MyAccountPageUI.REVIEW_TEXT_TEXTAREA);
 		sendkeyToElement(driver, MyAccountPageUI.REVIEW_TEXT_TEXTAREA, reviewText);
 	}
+
+	public String getTextErrorMsgSearchPage(String messageType) {
+		waitForElementVisible(driver, SearchPageUI.DYNAMIC_ERROR_MESSAGE_SEARCH, messageType);
+		return getTextElement(driver, SearchPageUI.DYNAMIC_ERROR_MESSAGE_SEARCH, messageType);
+	}
 	
 }

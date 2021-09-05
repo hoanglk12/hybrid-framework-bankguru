@@ -4,7 +4,7 @@
 		<listener class-name="commons.MethodListener"/>
 		<listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
-         <listener class-name="reportConfig.ReportNGListener"/>
+        <listener class-name="reportConfig.ReportNGListener"/>
 	</listeners>
 	<parameter name="url" value="https://demo.nopcommerce.com/"/>
 	<parameter name="urlAdmin" value="https://admin-demo.nopcommerce.com/login?ReturnUrl=/admin/"/>
@@ -12,10 +12,11 @@
 	<test name="Run on Firefox">
 		<parameter name="browser" value="firefox"/>
 		<classes>
-			<!--<class name="com.nopcommerce.register.Register_Account" />
-			<class name="com.nopcommerce.login.Login_To_Page" />
-			<class name="com.nopcommerce.myaccount.My_Account" />-->
-			<class name="com.nopcommerce.admin.Admin" />
+			<!--<class name="com.nopcommerce.register.Register_Account" />-->
+			<!--<class name="com.nopcommerce.login.Login_To_Page" />-->
+			<!--<class name="com.nopcommerce.myaccount.My_Account" />-->
+			<class name="com.nopcommerce.search.Search_Advanced_Search" />
+			<!--<class name="com.nopcommerce.admin.Admin" />-->
 		</classes>
 	</test>
 	
@@ -25,6 +26,7 @@
 			<class name="com.nopcommerce.register.Register_Account" />
 			<class name="com.nopcommerce.login.Login_To_Page" />
 			<class name="com.nopcommerce.myaccount.My_Account" />
+			<class name="com.nopcommerce.search.Search_Advanced_Search" />
 			<class name="com.nopcommerce.admin.Admin" />
 		</classes>
 	</test>-->
@@ -34,6 +36,7 @@
 		<classes>
 			<class name="com.nopcommerce.register.Register_Account" />
 			<class name="com.nopcommerce.login.Login_To_Page" />
+			<class name="com.nopcommerce.search.Search_Advanced_Search" />
 			<class name="com.nopcommerce.myaccount.My_Account" />
 		</classes>
 	</test>-->
