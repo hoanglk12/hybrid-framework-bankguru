@@ -1,6 +1,5 @@
 package com.nopcommerce.admin;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -18,7 +17,6 @@ import pageObjects.admin.nopCommerce.ProductSearchPageObject;
 
 public class Admin extends BaseTest {
 	WebDriver driver;
-	Alert alert;
 	String email, password, productName, sku, price, stockQuantity,
 	customerEmail, customerPassword, customerFirstName, customerLastName,
 	customerDOB, customerCompanyName, customerRoles, customerAdminComment,
