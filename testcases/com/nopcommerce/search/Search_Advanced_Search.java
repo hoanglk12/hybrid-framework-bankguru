@@ -40,25 +40,43 @@ public class Search_Advanced_Search extends BaseTest {
 		
 		log.info("Search_Advanced_Search_01 - Step 4: Verify error message '" + emptyErrorMsg + "'" + "is displayed");
 		verifyEquals(searchPage.getTextErrorMsgSearchPage("warning"), emptyErrorMsg);
-		
 	}
 	@Test
 	public void Search_Advanced_Search_02_Search_With_Data_Exist() {
-		log.info("Search_Advanced_Search_01 - Step 1: Open Search link at footer >>> Navigate to Search Page");
-		homePage.openPageFooterByName(driver, "Search");
-		searchPage = PageGeneratorManager.getSearchPage(driver);
-
-		log.info("Search_Advanced_Search_01 - Step 2: Enter 'Macbook Pro 2050' at Search keyword textbox");
+		log.info("Search_Advanced_Search_02 - Step 1: Enter 'Macbook Pro 2050' at Search keyword textbox");
 		searchPage.enterToTextboxByName(driver, "Macbook Pro 2050", "q");
 
-		log.info("Search_Advanced_Search_01 - Step 3: Click to Search button");
+		log.info("Search_Advanced_Search_02 - Step 2: Click to Search button");
 		searchPage.clickToSearchButton();
 
-		log.info("Search_Advanced_Search_01 - Step 4: Verify error message '" + noDataErrorMsg + "'" + "is displayed");
+		log.info("Search_Advanced_Search_02 - Step 3: Verify error message '" + noDataErrorMsg + "'" + " is displayed");
 		verifyEquals(searchPage.getTextErrorMsgSearchPage("no-result"), noDataErrorMsg);
-		
 	}
-	
+	@Test
+	public void Search_Advanced_Search_03_Search_With_Product_Name_Relatively() {
+		log.info("Search_Advanced_Search_03 - Step 1: Enter 'Lenovo' at Search keyword textbox");
+		searchPage.enterToTextboxByName(driver, "Lenovo", "q");
+		
+		log.info("Search_Advanced_Search_03 - Step 2: Click to Search button");
+		searchPage.clickToSearchButton();
+		
+		log.info("Search_Advanced_Search_03 - Step 3: Verify 2 products '" + lenovoIdeaTitle + "'" + "," + "'" + lenovoThinkpadTitle + "'" + " are displayed");
+		verifyTrue(searchPage.getListProductTitles().contains(lenovoIdeaTitle));
+		verifyTrue(searchPage.getListProductTitles().contains(lenovoThinkpadTitle));
+		verifyEquals(searchPage.getListProductTitles().size(), 2);
+	}
+	@Test
+	public void Search_Advanced_Search_04_Search_With_Product_Name_Precisely() {
+		log.info("Search_Advanced_Search_04 - Step 1: Enter 'Think' at Search keyword textbox");
+		searchPage.enterToTextboxByName(driver, "ThinkPad X1 Carbon", "q");
+
+		log.info("Search_Advanced_Search_04 - Step 2: Click to Search button");
+		searchPage.clickToSearchButton();
+
+		log.info("Search_Advanced_Search_04 - Step 3: Verify 2 products '" + lenovoIdeaTitle + "'" + "," + "'" + lenovoThinkpadTitle + "'" + " are displayed");
+		verifyTrue(searchPage.getListProductTitles().contains(lenovoThinkpadTitle));
+		verifyEquals(searchPage.getListProductTitles().size(), 1);
+	}
 	@AfterClass
 	public void closeBrowser() {
 		log.info("Post-Condition - Close browser");

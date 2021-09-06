@@ -1,5 +1,8 @@
 package pageObjects.user.nopCommerce;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
@@ -42,6 +45,10 @@ public class SearchPageObject extends BasePage {
 	public String getTextErrorMsgSearchPage(String messageType) {
 		waitForElementVisible(driver, SearchPageUI.DYNAMIC_ERROR_MESSAGE_SEARCH, messageType);
 		return getTextElement(driver, SearchPageUI.DYNAMIC_ERROR_MESSAGE_SEARCH, messageType);
+	}
+
+	public List<String> getListProductTitles() {
+		return getElements(driver, SearchPageUI.PRODUCT_TITLE_LINK).stream().map(title->title.getText()).collect(Collectors.toList());
 	}
 	
 }
