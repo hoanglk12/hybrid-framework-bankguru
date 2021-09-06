@@ -69,7 +69,7 @@ public class BaseTest {
 		return driver;
 	}
 
-	public String generateEmail() {
+	public static String generateEmail() {
 		Random rand = new Random();
 		return rand.nextInt(99999) + "@mail.com";
 	}

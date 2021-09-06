@@ -1,7 +1,5 @@
 package com.liveguru.login;
 
-import java.util.Random;
-
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -99,10 +97,7 @@ public class Login_01_Register_And_Login_By_PageObject extends BaseTest {
 		driver.quit();
 	}
 
-	public String generateEmail() {
-		Random rand = new Random();
-		return "cr7_" + rand.nextInt(99999) + "@mail.com";
-	}
+
 
 	HomePageObject homePage;
 	LoginPageObject loginPage;

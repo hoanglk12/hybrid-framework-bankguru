@@ -7,6 +7,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.nopcommerce.register.Register_Account;
+
 import commons.BaseTest;
 import pageObjects.user.nopCommerce.AddressesPageObject;
 import pageObjects.user.nopCommerce.HomePageObject;
@@ -19,11 +21,11 @@ import pageObjects.user.nopCommerce.SearchPageObject;
 public class My_Account extends BaseTest {
 	WebDriver driver;
 	String email, password, firstName, lastName , confirmPassword, 
-	editFirstName, editLastName, editFullName, editEmail, newPassword, newConfirmPassword,
+	editFirstName, editLastName, editFullName,  newConfirmPassword,
 	dayItem, monthItem, yearItem, editCompanyName, addressFirstName, addressLastName, addressFullName,
 	addressEmail, addressCompany, addressCountry, addressState, addressCity, addressAddress1, addressAddress2, 
 	addressPostCode, addressPhone, addressFax;
-	
+	public static String newPassword, editEmail;
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String urlNopCommerce) {
@@ -54,30 +56,15 @@ public class My_Account extends BaseTest {
 		addressFax = "0987654321";
 	}
 	@Test
-	public void My_Account_00_0_Register_With_All_Info_Correct() {
+	public void My_Account_00_Login_To_Page() {
 		homePage = PageGeneratorManager.getHomePage(driver);
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
 		
-		registerPage = homePage.clickToRegisterLink();
-		registerPage.clickToGenderMaleRadioButton();
-		registerPage.enterToTextboxByName(driver, firstName, "FirstName");
-		registerPage.enterToTextboxByName(driver, lastName, "LastName");
-		registerPage.enterToTextboxByName(driver, email, "Email");
-		registerPage.enterToTextboxByName(driver, password, "Password");
-		registerPage.enterToTextboxByName(driver, confirmPassword, "ConfirmPassword");
-		registerPage.clickToRegisterButton();
-		Assert.assertTrue(registerPage.isSuccessMessageDisplayed());
-		homePage = registerPage.clickToLogoutLink();
-	}
-
-	@Test
-	public void My_Account_00_1_Correct_Email_Password() {
-		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
 		loginPage = homePage.clickToLoginLink();
-		loginPage.enterToTextboxByName(driver, email, "Email");
-		loginPage.enterToTextboxByName(driver, password, "Password");
+		loginPage.enterToTextboxByName(driver, Register_Account.email, "Email");
+		loginPage.enterToTextboxByName(driver, Register_Account.password, "Password");
 		homePage = loginPage.clickToLoginButton();
-		homePage.sleepInSecond(1);
+
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
 	}
 
@@ -161,7 +148,6 @@ public class My_Account extends BaseTest {
 		
 		Assert.assertEquals(myAccountPage.getTextReviewTitle(), "Worth money");
 		Assert.assertEquals(myAccountPage.getTextReviewText(), "Excellent product");
-		
 	}
 
 	

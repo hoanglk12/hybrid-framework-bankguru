@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import commons.BasePage;
 import pageUIs.user.nopCommerce.BasePageUI;
 import pageUIs.user.nopCommerce.MyAccountPageUI;
+import pageUIs.user.nopCommerce.RegisterPageUI;
 
 public class MyAccountPageObject extends BasePage {
 	WebDriver driver;
@@ -106,6 +107,12 @@ public class MyAccountPageObject extends BasePage {
 	public String getTextReviewText() {
 		waitForElementVisible(driver, MyAccountPageUI.REVIEW_TEXT);
 		return getTextElement(driver, MyAccountPageUI.REVIEW_TEXT);
+	}
+	public void clickToLogoutLink() {
+		waitForElementClickable(driver, RegisterPageUI.LOGOUT_LINK);
+		clickToElement(driver, RegisterPageUI.LOGOUT_LINK);
+		
+		
 	}
 	
 }

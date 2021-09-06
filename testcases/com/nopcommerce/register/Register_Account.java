@@ -17,17 +17,36 @@ public class Register_Account extends BaseTest {
 	WebDriver driver;
 	String firstName, lastName, confirmPassword;
 
-	public String email = "cr7_" + generateEmail();
-	public String password = "123456";
-
+	public static String email, password, homePageUrl;
+	
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String urlNopCommerce) {
 		driver = getBrowser(browserName, urlNopCommerce);
-		email = generateEmail();
+		email = "cr7_" + generateEmail();
+		password = "123456";		
+		confirmPassword = password;
 		firstName = "Cristiano";
 		lastName = "Ronaldo";
-		confirmPassword = password;
+		
+	}
+	@Test
+	public void Register_00_All_Info_Correct() {
+		homePage = PageGeneratorManager.getHomePage(driver);
+		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
+		homePageUrl = homePage.getCurrentPageUrl(driver);
+		registerPage = homePage.clickToRegisterLink();
+		
+		registerPage.clickToGenderMaleRadioButton();
+		registerPage.enterToFirstnameTextbox(firstName);
+		registerPage.enterToLastnameTextbox(lastName);
+		registerPage.enterToEmailTextbox(email);
+		registerPage.enterToPasswordTextbox(password);
+		registerPage.enterToConfirmPasswordTextbox(confirmPassword);
+		registerPage.clickToRegisterButton();
+
+		verifyTrue(registerPage.isSuccessMessageDisplayed());
+		homePage =  registerPage.clickToLogoutLink();
 	}
 
 	@Test
@@ -73,7 +92,7 @@ public class Register_Account extends BaseTest {
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
 		registerPage.enterToLastnameTextbox(lastName);
-		registerPage.enterToEmailTextbox("hy@mail.com");
+		registerPage.enterToEmailTextbox(email);
 		registerPage.enterToPasswordTextbox(password);
 		registerPage.enterToConfirmPasswordTextbox(confirmPassword);
 		registerPage.clickToRegisterButton();
@@ -110,19 +129,7 @@ public class Register_Account extends BaseTest {
 		verifyEquals(registerPage.getPassNotMatchConfirmPassErrorMsg(), "The password and confirmation password do not match.");
 	}
 
-	@Test
-	public void Register_06_All_Info_Correct() {
-		registerPage.clickToGenderMaleRadioButton();
-		registerPage.enterToFirstnameTextbox(firstName);
-		registerPage.enterToLastnameTextbox(lastName);
-		registerPage.enterToEmailTextbox(email);
-		registerPage.enterToPasswordTextbox(password);
-		registerPage.enterToConfirmPasswordTextbox(confirmPassword);
-		registerPage.clickToRegisterButton();
 
-		verifyTrue(registerPage.isSuccessMessageDisplayed());
-
-	}
 
 	@Parameters("browser")
 	@AfterClass(alwaysRun = true)

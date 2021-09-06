@@ -6,8 +6,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.nopcommerce.myaccount.My_Account;
+
 import commons.BaseTest;
 import pageObjects.user.nopCommerce.HomePageObject;
+import pageObjects.user.nopCommerce.LoginPageObject;
 import pageObjects.user.nopCommerce.PageGeneratorManager;
 import pageObjects.user.nopCommerce.SearchPageObject;
 
@@ -25,6 +28,18 @@ public class Search_Advanced_Search extends BaseTest {
 		lenovoIdeaTitle = "Lenovo IdeaCentre 600 All-in-One PC";
 		lenovoThinkpadTitle = "Lenovo Thinkpad X1 Carbon Laptop";
 		macbookFoundMsg = "Apple MacBook Pro 13-inch";
+		
+	}
+
+	@Test
+	public void Search_Advanced_Search_00_Login_To_Page() {
+		loginPage = homePage.clickToLoginLink();
+		loginPage.enterToEmailTextbox(My_Account.editEmail);
+		loginPage.enterToPasswordTextbox(My_Account.newPassword);
+		homePage = loginPage.clickToLoginButton();
+		loginPage.sleepInSecond(1);
+		verifyTrue(homePage.isSliderHomePageDisplayed());
+		
 	}
 	@Test
 	public void Search_Advanced_Search_01_Search_With_Empty_Data() {
@@ -86,5 +101,6 @@ public class Search_Advanced_Search extends BaseTest {
 	}
 
 	HomePageObject homePage;
+	LoginPageObject loginPage;
 	SearchPageObject searchPage;
 }

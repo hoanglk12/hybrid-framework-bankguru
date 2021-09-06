@@ -7,6 +7,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.nopcommerce.register.Register_Account;
+
 import commons.BaseTest;
 import pageObjects.user.nopCommerce.HomePageObject;
 import pageObjects.user.nopCommerce.LoginPageObject;
@@ -15,9 +17,10 @@ import pageObjects.user.nopCommerce.RegisterPageObject;
 
 public class Login_To_Page extends BaseTest {
 	WebDriver driver;
-	String email, password, firstName, lastName, confirmPassword;
+	//public static String email, password;
+	String email,firstName, lastName, password ,confirmPassword;
 	String homePageUrl;
-
+	
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String urlNopCommerce) {
@@ -92,34 +95,16 @@ public class Login_To_Page extends BaseTest {
 		Assert.assertTrue(loginPage.isUnregEmailEmptyWrongPassErrorMsgDisplayed());
 	}
 
-	@Test
-	public void Login_05_Register_With_All_Info_Correct() {
-
-		loginPage.openPageUrl(driver, homePageUrl);
-		homePage = PageGeneratorManager.getHomePage(driver);
-		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
-		
-		registerPage = homePage.clickToRegisterLink();
-		registerPage.clickToGenderMaleRadioButton();
-		registerPage.enterToFirstnameTextbox(firstName);
-		registerPage.enterToLastnameTextbox(lastName);
-		registerPage.enterToEmailTextbox(email);
-		registerPage.enterToPasswordTextbox(password);
-		registerPage.enterToConfirmPasswordTextbox(confirmPassword);
-		registerPage.clickToRegisterButton();
-		Assert.assertTrue(registerPage.isSuccessMessageDisplayed());
-		homePage = registerPage.clickToLogoutLink();
-	}
 
 	@Test
 	public void Login_06_Correct_Email_Password() {
-		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
-		loginPage = homePage.clickToLoginLink();
-		loginPage.enterToEmailTextbox(email);
-		loginPage.enterToPasswordTextbox(password);
+		
+		loginPage.enterToEmailTextbox(Register_Account.email);
+		loginPage.enterToPasswordTextbox(Register_Account.password);
 		homePage = loginPage.clickToLoginButton();
 		loginPage.sleepInSecond(1);
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
+		
 	}
 
 	@Parameters("browser")
