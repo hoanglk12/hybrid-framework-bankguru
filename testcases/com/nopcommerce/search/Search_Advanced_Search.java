@@ -73,14 +73,16 @@ public class Search_Advanced_Search extends BaseTest {
 		log.info("Search_Advanced_Search_04 - Step 2: Click to Search button");
 		searchPage.clickToSearchButton();
 
-		log.info("Search_Advanced_Search_04 - Step 3: Verify 2 products '" + lenovoIdeaTitle + "'" + "," + "'" + lenovoThinkpadTitle + "'" + " are displayed");
+		log.info("Search_Advanced_Search_04 - Step 3: Verify only 1 product '" + lenovoThinkpadTitle + " is displayed");
 		verifyTrue(searchPage.getListProductTitles().contains(lenovoThinkpadTitle));
 		verifyEquals(searchPage.getListProductTitles().size(), 1);
 	}
-	@AfterClass
-	public void closeBrowser() {
-		log.info("Post-Condition - Close browser");
-		driver.quit();
+	
+	@Parameters("browser")
+	@AfterClass(alwaysRun = true)
+	public void closeBrowser(String browserName) {
+		log.info("Post-Condition - Close browser '" + browserName + "'");
+		closeBrowserAndDriver();
 	}
 
 	HomePageObject homePage;

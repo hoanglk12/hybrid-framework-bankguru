@@ -165,9 +165,11 @@ public class My_Account extends BaseTest {
 	}
 
 	
-	@AfterClass
-	public void closeBrowser() {
-		driver.quit();
+	@Parameters("browser")
+	@AfterClass(alwaysRun = true)
+	public void closeBrowser(String browserName) {
+		log.info("Post-Condition - Close browser '" + browserName + "'");
+		closeBrowserAndDriver();
 	}
 
 	HomePageObject homePage;

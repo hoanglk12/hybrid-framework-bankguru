@@ -20,14 +20,14 @@
 		</classes>
 	</test>
 	
-	<!--<test name="Run on Chrome">
+	<test name="Run on Chrome">
 		<parameter name="browser" value="chrome"/>
 		<classes>
-			<class name="com.nopcommerce.register.Register_Account" />
-			<class name="com.nopcommerce.login.Login_To_Page" />
-			<class name="com.nopcommerce.myaccount.My_Account" />
+			<!--<class name="com.nopcommerce.register.Register_Account" />-->
+			<!--<class name="com.nopcommerce.login.Login_To_Page" />-->
+			<!--<class name="com.nopcommerce.myaccount.My_Account" />-->
 			<class name="com.nopcommerce.search.Search_Advanced_Search" />
-			<class name="com.nopcommerce.admin.Admin" />
+			<!--<class name="com.nopcommerce.admin.Admin" />-->
 		</classes>
 	</test>-->
 	

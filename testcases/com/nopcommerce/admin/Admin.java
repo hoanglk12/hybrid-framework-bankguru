@@ -633,10 +633,12 @@ public class Admin extends BaseTest {
 		verifyTrue(customerEditPage.isAddressDeleteMsgDisplayed());
 		
 	}
-	@AfterClass
-	public void closeBrowser() {
-		log.info("Post-Condition - Close browser");
-		driver.quit();
+	
+	@Parameters("browser")
+	@AfterClass(alwaysRun = true)
+	public void closeBrowser(String browserName) {
+		log.info("Post-Condition - Close browser '" + browserName + "'");
+		closeBrowserAndDriver();
 	}
 
 	LoginPageObject loginPage;
