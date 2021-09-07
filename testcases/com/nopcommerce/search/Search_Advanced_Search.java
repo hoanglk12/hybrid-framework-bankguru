@@ -16,7 +16,7 @@ import pageObjects.user.nopCommerce.SearchPageObject;
 
 public class Search_Advanced_Search extends BaseTest {
 	WebDriver driver;
-	String emptyErrorMsg, noDataErrorMsg, lenovoIdeaTitle, lenovoThinkpadTitle, macbookFoundMsg;
+	String emptyErrorMsg, noDataErrorMsg, lenovoIdeaTitle, lenovoThinkpadTitle, macbookTitle;
 	@Parameters({"browser", "url"})
 	@BeforeClass
 	public void initBrowser(String browserName, String urlNopCommerce) {
@@ -27,7 +27,7 @@ public class Search_Advanced_Search extends BaseTest {
 		noDataErrorMsg = "No products were found that matched your criteria.";
 		lenovoIdeaTitle = "Lenovo IdeaCentre 600 All-in-One PC";
 		lenovoThinkpadTitle = "Lenovo Thinkpad X1 Carbon Laptop";
-		macbookFoundMsg = "Apple MacBook Pro 13-inch";
+		macbookTitle = "Apple MacBook Pro 13-inch";
 		
 	}
 
@@ -82,14 +82,56 @@ public class Search_Advanced_Search extends BaseTest {
 	}
 	@Test
 	public void Search_Advanced_Search_04_Search_With_Product_Name_Precisely() {
-		log.info("Search_Advanced_Search_04 - Step 1: Enter 'Think' at Search keyword textbox");
+		log.info("Search_Advanced_Search_04 - Step 1: Enter 'ThinkPad X1 Carbon' at Search keyword textbox");
 		searchPage.enterToTextboxByName(driver, "ThinkPad X1 Carbon", "q");
-
+		
 		log.info("Search_Advanced_Search_04 - Step 2: Click to Search button");
 		searchPage.clickToSearchButton();
-
+		
 		log.info("Search_Advanced_Search_04 - Step 3: Verify only 1 product '" + lenovoThinkpadTitle + " is displayed");
 		verifyTrue(searchPage.getListProductTitles().contains(lenovoThinkpadTitle));
+		verifyEquals(searchPage.getListProductTitles().size(), 1);
+	}
+	@Test
+	public void Search_Advanced_Search_05_Advanced_Search_With_Parent_Categories() {
+		log.info("Search_Advanced_Search_05 - Step 1: Enter 'Apple Macbook Pro' at Search keyword textbox");
+		searchPage.enterToTextboxByName(driver, "Apple MacBook Pro", "q");
+		
+		log.info("Search_Advanced_Search_05 - Step 2: Check to checkbox 'Advanced search'");
+		searchPage.checkToCheckboxOrRadioByName(driver, "advs");
+		
+		log.info("Search_Advanced_Search_05 - Step 3: Select 'Computers' from dropdown 'Category'");
+		searchPage.selectItemInDropdownByAttributeName(driver, "Computers", "cid");
+		
+		log.info("Search_Advanced_Search_05 - Step 4: Uncheck to checkbox 'Automatically search sub categories'");
+		searchPage.uncheckToCheckboxByName(driver, "isc");
+		
+		log.info("Search_Advanced_Search_05 - Step 5: Click to Search button");
+		searchPage.clickToSearchButton();
+		
+		log.info("Search_Advanced_Search_05 - Step 6: Verify error message '" + noDataErrorMsg + "'" + " is displayed");
+		verifyEquals(searchPage.getTextErrorMsgSearchPage("no-result"), noDataErrorMsg);
+	}
+	
+	@Test
+	public void Search_Advanced_Search_06_Advanced_Search_With_Sub_Categories() {
+		log.info("Search_Advanced_Search_06 - Step 1: Enter 'Apple Macbook Pro' at Search keyword textbox");
+		searchPage.enterToTextboxByName(driver, "Apple MacBook Pro", "q");
+		
+		log.info("Search_Advanced_Search_06 - Step 2: Check to checkbox 'Advanced search'");
+		searchPage.checkToCheckboxOrRadioByName(driver, "advs");
+		
+		log.info("Search_Advanced_Search_06 - Step 3: Select 'Computers' from dropdown 'Category'");
+		searchPage.selectItemInDropdownByAttributeName(driver, "Computers", "cid");
+		
+		log.info("Search_Advanced_Search_06 - Step 4: Uncheck to checkbox 'Automatically search sub categories'");
+		searchPage.checkToCheckboxOrRadioByName(driver, "isc");
+
+		log.info("Search_Advanced_Search_06 - Step 5: Click to Search button");
+		searchPage.clickToSearchButton();
+
+		log.info("Search_Advanced_Search_06 - Step 6: Verify only 1 product '" + macbookTitle + " is displayed");
+		verifyTrue(searchPage.getListProductTitles().contains(macbookTitle));
 		verifyEquals(searchPage.getListProductTitles().size(), 1);
 	}
 	

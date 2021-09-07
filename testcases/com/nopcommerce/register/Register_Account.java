@@ -24,6 +24,7 @@ public class Register_Account extends BaseTest {
 	@Parameters({ "browser", "url" })
 	@BeforeClass
 	public void initBrowser(String browserName, String urlNopCommerce) {
+		log.info("Pre-Condition - Open browser '" + browserName + "' with url: '" + urlNopCommerce + "'");
 		driver = getBrowser(browserName, urlNopCommerce);
 		email = "cr7_" + generateEmail();
 		password = "123456";		
@@ -34,38 +35,73 @@ public class Register_Account extends BaseTest {
 	}
 	@Test
 	public void Register_00_All_Info_Correct() {
+		log.info(" Register_00 - Step 1: Verify Home Page Slider is displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
-		homePageUrl = homePage.getCurrentPageUrl(driver);
+		
+		log.info(" Register_00 - Step 2: Click to Register link");
 		registerPage = homePage.clickToRegisterLink();
 		
+		log.info(" Register_00 - Step 3: Check to Gender Male radio button");
 		registerPage.clickToGenderMaleRadioButton();
+		
+		log.info(" Register_00 - Step 4: Enter to First Name textbox with data '" + firstName + "'");
 		registerPage.enterToFirstnameTextbox(firstName);
+		
+		log.info(" Register_00 - Step 5: Enter to Last Name textbox with data '" + lastName + "'");
 		registerPage.enterToLastnameTextbox(lastName);
+		
+		log.info(" Register_00 - Step 6: Enter to Email textbox with data '" + email + "'");
 		registerPage.enterToEmailTextbox(email);
+		
+		log.info(" Register_00 - Step 7: Enter to Password textbox with data '" + password + "'");
 		registerPage.enterToPasswordTextbox(password);
+		
+		log.info(" Register_00 - Step 8: Enter to Password textbox with data '" + confirmPassword + "'");
 		registerPage.enterToConfirmPasswordTextbox(confirmPassword);
+		
+		log.info(" Register_00 - Step 9: Click To Register Button");
 		registerPage.clickToRegisterButton();
-
+		
+		log.info(" Register_00 - Step 10: Verify Success Message is displayed with content 'Your registration completed'");
 		verifyTrue(registerPage.isSuccessMessageDisplayed());
+		
+		log.info(" Register_00 - Step 11: Click To Logout Link");
 		homePage =  registerPage.clickToLogoutLink();
 	}
 
 	@Test
 	public void Register_01_Empty_Data() {
+		log.info(" Register_01 - Step 1: Verify Home Page Slider is displayed");
 		homePage = PageGeneratorManager.getHomePage(driver);
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
+		
+		log.info(" Register_01 - Step 2: Click to Register link");
 		registerPage = homePage.clickToRegisterLink();
 		
+		log.info(" Register_01 - Step 3: Check to Gender Male radio button");
 		registerPage.clickToGenderMaleRadioButton();
+		
+		log.info(" Register_01 - Step 4: Enter to First Name textbox with blank data");
 		registerPage.enterToFirstnameTextbox("");
+		
+		log.info(" Register_01 - Step 5: Enter to Last Name textbox with blank data");
 		registerPage.enterToLastnameTextbox("");
+		
+		log.info(" Register_01 - Step 6: Enter to Email textbox with blank data");
 		registerPage.enterToEmailTextbox("");
+		
+		log.info(" Register_01 - Step 6: Enter to Password textbox with blank data");
 		registerPage.enterToPasswordTextbox("");
+		
+		log.info(" Register_01 - Step 7: Enter to Confirm Password textbox with blank data");
 		registerPage.enterToConfirmPasswordTextbox("");
+		
+		log.info(" Register_01 - Step 8: Click To Register Button");
 		registerPage.clickToRegisterButton();
 		registerPage.sleepInSecond(1);
-
+		
+		log.info(" Register_01 - Step 10: Verify error messages displayed on 5 texboxes");
 		verifyEquals(registerPage.getEmptyFirstNameErrorMsg(), "First name is required.");
 		verifyEquals(registerPage.getEmptyLastNameErrorMsg(), "Last name is required.");
 		verifyEquals(registerPage.getEmptyEmailErrorMsg(), "Email is required.");
@@ -76,15 +112,29 @@ public class Register_Account extends BaseTest {
 
 	@Test
 	public void Register_02_Invalid_Email() {
+		log.info(" Register_02 - Step 1: Check to Gender Male radio button");
 		registerPage.clickToGenderMaleRadioButton();
+		
+		log.info(" Register_02 - Step 2: Enter to First Name textbox with data '" + firstName + "'");
 		registerPage.enterToFirstnameTextbox(firstName);
+		
+		log.info(" Register_02 - Step 3: Enter to Last Name textbox with data '" + lastName + "'");
 		registerPage.enterToLastnameTextbox(lastName);
+		
+		log.info(" Register_02 - Step 4: Enter to Email textbox with data '12@nn'");
 		registerPage.enterToEmailTextbox("12@nn");
+		
+		log.info(" Register_02 - Step 5: Enter to Password textbox with data '" + password + "'");
 		registerPage.enterToPasswordTextbox(password);
+		
+		log.info(" Register_02 - Step 6: Enter to Confirm Password textbox with data '" + confirmPassword + "'");
 		registerPage.enterToConfirmPasswordTextbox(confirmPassword);
+		
+		log.info(" Register_02 - Step 7: Click To Register Button");
 		registerPage.clickToRegisterButton();
 		registerPage.sleepInSecond(1);
-
+		
+		log.info(" Register_02 - Step 8: Verify error message is displayed with content 'Your registration completed'");
 		verifyEquals(registerPage.getInvalidEmailErrorMsg(), "Wrong email");
 
 	}
@@ -130,8 +180,6 @@ public class Register_Account extends BaseTest {
 
 		verifyEquals(registerPage.getPassNotMatchConfirmPassErrorMsg(), "The password and confirmation password do not match.");
 	}
-
-
 
 	@Parameters("browser")
 	@AfterClass(alwaysRun = true)

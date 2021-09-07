@@ -210,6 +210,11 @@ public class BasePage {
 			getElement(driver, locator).click();
 		}
 	}
+	public void uncheckToCheckbox(WebDriver driver, String locator, String...params) {
+		if(getElement(driver, getDynamicLocator(locator, params)).isSelected()) {
+			getElement(driver, getDynamicLocator(locator, params)).click();
+		}
+	}
 	public boolean isElementDisplayed(WebDriver driver, String locator) {
 		try {
 			return getElement(driver, locator).isDisplayed();
@@ -442,6 +447,10 @@ public class BasePage {
 	public void checkToCheckboxOrRadioByName(WebDriver driver, String checboxAndRadioName) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, checboxAndRadioName);
 		checkToCheckboxOrRadio(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, checboxAndRadioName);
+	}
+	public void uncheckToCheckboxByName(WebDriver driver, String checboxName) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, checboxName);
+		uncheckToCheckbox(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, checboxName);
 	}
 	public String getAttributeValueFromTextboxByName(WebDriver driver, String attributeValue, String textboxName) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, textboxName);
