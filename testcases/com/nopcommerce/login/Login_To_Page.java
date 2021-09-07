@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.nopcommerce.register.Register_Account;
+import com.nopcommerce.common.Common_Login;
 
 import commons.BaseTest;
 import pageObjects.user.nopCommerce.HomePageObject;
@@ -17,8 +17,7 @@ import pageObjects.user.nopCommerce.RegisterPageObject;
 
 public class Login_To_Page extends BaseTest {
 	WebDriver driver;
-	//public static String email, password;
-	String email,firstName, lastName, password ,confirmPassword;
+	String email, password ,confirmPassword;
 	String homePageUrl;
 	
 	@Parameters({ "browser", "url" })
@@ -26,12 +25,12 @@ public class Login_To_Page extends BaseTest {
 	public void initBrowser(String browserName, String urlNopCommerce) {
 		log.info("Pre-Condition - Open browser '" + browserName + "' with url: '" + urlNopCommerce + "'");
 		driver = getBrowser(browserName, urlNopCommerce);
-		firstName = "Cristiano";
-		lastName = "Ronaldo";
 		email = "cr7_" + generateEmail();
 		password = "123456";
 		confirmPassword = password;
 	}
+	
+	
 
 	@Test
 	public void Login_01_Empty_Data() {
@@ -95,17 +94,22 @@ public class Login_To_Page extends BaseTest {
 		Assert.assertTrue(loginPage.isUnregEmailEmptyWrongPassErrorMsgDisplayed());
 	}
 
-
 	@Test
 	public void Login_06_Correct_Email_Password() {
+		log.info("Login_01 - Step 1: open Home Page");
+		homePage = PageGeneratorManager.getHomePage(driver);
+		loginPage = homePage.clickToLoginLink();
 		
-		loginPage.enterToEmailTextbox(Register_Account.email);
-		loginPage.enterToPasswordTextbox(Register_Account.password);
+		loginPage.enterToEmailTextbox(Common_Login.email);
+		loginPage.enterToPasswordTextbox(Common_Login.password);
 		homePage = loginPage.clickToLoginButton();
 		loginPage.sleepInSecond(1);
+		
+		
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
 		
 	}
+	
 
 	@Parameters("browser")
 	@AfterClass(alwaysRun = true)

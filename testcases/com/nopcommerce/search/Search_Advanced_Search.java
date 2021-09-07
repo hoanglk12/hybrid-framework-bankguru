@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.nopcommerce.myaccount.My_Account;
+import com.nopcommerce.register.Register_Account;
 
 import commons.BaseTest;
 import pageObjects.user.nopCommerce.HomePageObject;
@@ -34,8 +34,8 @@ public class Search_Advanced_Search extends BaseTest {
 	@Test
 	public void Search_Advanced_Search_00_Login_To_Page() {
 		loginPage = homePage.clickToLoginLink();
-		loginPage.enterToEmailTextbox(My_Account.editEmail);
-		loginPage.enterToPasswordTextbox(My_Account.newPassword);
+		loginPage.enterToEmailTextbox(Register_Account.email);
+		loginPage.enterToPasswordTextbox(Register_Account.password);
 		homePage = loginPage.clickToLoginButton();
 		loginPage.sleepInSecond(1);
 		verifyTrue(homePage.isSliderHomePageDisplayed());

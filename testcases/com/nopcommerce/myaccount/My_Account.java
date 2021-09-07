@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.nopcommerce.register.Register_Account;
+import com.nopcommerce.common.Common_Login;
 
 import commons.BaseTest;
 import pageObjects.user.nopCommerce.AddressesPageObject;
@@ -61,11 +61,12 @@ public class My_Account extends BaseTest {
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
 		
 		loginPage = homePage.clickToLoginLink();
-		loginPage.enterToTextboxByName(driver, Register_Account.email, "Email");
-		loginPage.enterToTextboxByName(driver, Register_Account.password, "Password");
-		homePage = loginPage.clickToLoginButton();
 
-		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
+		loginPage.setAllCookies(driver, Common_Login.loginPageCookie);
+		loginPage.refreshCurrentPage(driver);
+		loginPage.handleUnexpectedAlert(driver);
+		loginPage.sleepInSecond(3);
+
 	}
 
 	@Test

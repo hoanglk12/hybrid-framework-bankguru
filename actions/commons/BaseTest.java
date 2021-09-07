@@ -203,9 +203,20 @@ public class BaseTest {
 		}
 
 	}
-
+	protected void closeDriverInstance() {
+	
+			try {
+				if (driver != null) {
+					driver.manage().deleteAllCookies();
+					driver.quit();
+				}
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+		
+	}
 	private WebDriver driver;
-
 	public WebDriver getDriver() {
 		return this.driver;
 	}

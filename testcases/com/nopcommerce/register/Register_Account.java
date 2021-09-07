@@ -7,6 +7,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.nopcommerce.common.Common_Login;
+
 import commons.BaseTest;
 import pageObjects.user.nopCommerce.HomePageObject;
 import pageObjects.user.nopCommerce.LoginPageObject;
@@ -92,7 +94,7 @@ public class Register_Account extends BaseTest {
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.enterToFirstnameTextbox(firstName);
 		registerPage.enterToLastnameTextbox(lastName);
-		registerPage.enterToEmailTextbox(email);
+		registerPage.enterToEmailTextbox(Common_Login.email);
 		registerPage.enterToPasswordTextbox(password);
 		registerPage.enterToConfirmPasswordTextbox(confirmPassword);
 		registerPage.clickToRegisterButton();
