@@ -1,11 +1,9 @@
 package pageObjects.user.nopCommerce;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
+import pageUIs.user.nopCommerce.BasePageUI;
 import pageUIs.user.nopCommerce.MyAccountPageUI;
 import pageUIs.user.nopCommerce.SearchPageUI;
 
@@ -21,8 +19,8 @@ public class SearchPageObject extends BasePage {
 	}
 
 	public void clickToProductTitleLink() {
-		waitForElementClickable(driver, SearchPageUI.PRODUCT_TITLE_LINK);
-		clickToElement(driver, SearchPageUI.PRODUCT_TITLE_LINK);
+		waitForElementClickable(driver, BasePageUI.PRODUCT_TITLE_LINK);
+		clickToElement(driver, BasePageUI.PRODUCT_TITLE_LINK);
 		
 	}
 
@@ -47,8 +45,6 @@ public class SearchPageObject extends BasePage {
 		return getTextElement(driver, SearchPageUI.DYNAMIC_ERROR_MESSAGE_SEARCH, messageType);
 	}
 
-	public List<String> getListProductTitles() {
-		return getElements(driver, SearchPageUI.PRODUCT_TITLE_LINK).stream().map(title->title.getText()).collect(Collectors.toList());
-	}
+	
 	
 }

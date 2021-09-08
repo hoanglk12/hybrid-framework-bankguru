@@ -14,4 +14,8 @@ public class BasePageUI {
 	public static final String DYNAMIC_TEXTBOX_INPUT_LOCATOR = "//input[@id='%s']";
 	public static final String DYNAMIC_DROPDOWN_BY_NAME = "//select[@name='%s']";
 	public static final String DYNAMIC_TEXTAREA_BY_ID = "//textarea[@id='%s']";
+	public static final String DYNAMIC_CHECKBOX_RADIO_BY_TEXT = "//label[text()='%s']/preceding-sibling::input";
+	public static final String DYNAMIC_MENU_BY_TEXT = "//ul[contains(@class,'notmobile')]//a[contains(text(),'%s')]";
+	public static final String DYNAMIC_SUBMENU_BY_TEXT = "//ul[contains(@class,'notmobile')]//ul[contains(@class,'sublist')]//a[contains(text(),'%s')]";
+	public static final String PRODUCT_TITLE_LINK = "//h2[@class='product-title']/a";
 }

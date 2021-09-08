@@ -76,9 +76,9 @@ public class Search_Advanced_Search extends BaseTest {
 		searchPage.clickToSearchButton();
 		
 		log.info("Search_Advanced_Search_03 - Step 3: Verify 2 products '" + lenovoIdeaTitle + "'" + "," + "'" + lenovoThinkpadTitle + "'" + " are displayed");
-		verifyTrue(searchPage.getListProductTitles().contains(lenovoIdeaTitle));
-		verifyTrue(searchPage.getListProductTitles().contains(lenovoThinkpadTitle));
-		verifyEquals(searchPage.getListProductTitles().size(), 2);
+		verifyTrue(searchPage.getListProductTitles(driver).contains(lenovoIdeaTitle));
+		verifyTrue(searchPage.getListProductTitles(driver).contains(lenovoThinkpadTitle));
+		verifyEquals(searchPage.getListProductTitles(driver).size(), 2);
 	}
 	@Test
 	public void Search_Advanced_Search_04_Search_With_Product_Name_Precisely() {
@@ -89,8 +89,8 @@ public class Search_Advanced_Search extends BaseTest {
 		searchPage.clickToSearchButton();
 		
 		log.info("Search_Advanced_Search_04 - Step 3: Verify only 1 product '" + lenovoThinkpadTitle + " is displayed");
-		verifyTrue(searchPage.getListProductTitles().contains(lenovoThinkpadTitle));
-		verifyEquals(searchPage.getListProductTitles().size(), 1);
+		verifyTrue(searchPage.getListProductTitles(driver).contains(lenovoThinkpadTitle));
+		verifyEquals(searchPage.getListProductTitles(driver).size(), 1);
 	}
 	@Test
 	public void Search_Advanced_Search_05_Advanced_Search_With_Parent_Categories() {
@@ -124,15 +124,62 @@ public class Search_Advanced_Search extends BaseTest {
 		log.info("Search_Advanced_Search_06 - Step 3: Select 'Computers' from dropdown 'Category'");
 		searchPage.selectItemInDropdownByAttributeName(driver, "Computers", "cid");
 		
-		log.info("Search_Advanced_Search_06 - Step 4: Uncheck to checkbox 'Automatically search sub categories'");
+		log.info("Search_Advanced_Search_06 - Step 4: Check to checkbox 'Automatically search sub categories'");
 		searchPage.checkToCheckboxOrRadioByName(driver, "isc");
-
+		
 		log.info("Search_Advanced_Search_06 - Step 5: Click to Search button");
 		searchPage.clickToSearchButton();
-
+		
 		log.info("Search_Advanced_Search_06 - Step 6: Verify only 1 product '" + macbookTitle + " is displayed");
-		verifyTrue(searchPage.getListProductTitles().contains(macbookTitle));
-		verifyEquals(searchPage.getListProductTitles().size(), 1);
+		verifyTrue(searchPage.getListProductTitles(driver).contains(macbookTitle));
+		verifyEquals(searchPage.getListProductTitles(driver).size(), 1);
+	}
+	@Test
+	public void Search_Advanced_Search_07_Advanced_Search_With_Incorrect_Manufacturer() {
+		log.info("Search_Advanced_Search_07 - Step 1: Enter 'Apple Macbook Pro' at Search keyword textbox");
+		searchPage.enterToTextboxByName(driver, "Apple MacBook Pro", "q");
+		
+		log.info("Search_Advanced_Search_07 - Step 2: Check to checkbox 'Advanced search'");
+		searchPage.checkToCheckboxOrRadioByName(driver, "advs");
+		
+		log.info("Search_Advanced_Search_07 - Step 3: Select 'Computers' from dropdown 'Category'");
+		searchPage.selectItemInDropdownByAttributeName(driver, "Computers", "cid");
+		
+		log.info("Search_Advanced_Search_07 - Step 4: Check to checkbox 'Automatically search sub categories'");
+		searchPage.checkToCheckboxOrRadioByName(driver, "isc");
+		
+		log.info("Search_Advanced_Search_07 - Step 5: Select 'HP' from dropdown 'Manufacturer'");
+		searchPage.selectItemInDropdownByAttributeName(driver, "HP", "mid");
+		
+		log.info("Search_Advanced_Search_07 - Step 6: Click to Search button");
+		searchPage.clickToSearchButton();
+		
+		log.info("Search_Advanced_Search_07 - Step 7: Verify error message '" + noDataErrorMsg + "'" + " is displayed");
+		verifyEquals(searchPage.getTextErrorMsgSearchPage("no-result"), noDataErrorMsg);
+	}
+	@Test
+	public void Search_Advanced_Search_08_Advanced_Search_With_Correct_Manufacturer() {
+		log.info("Search_Advanced_Search_08 - Step 1: Enter 'Apple Macbook Pro' at Search keyword textbox");
+		searchPage.enterToTextboxByName(driver, "Apple MacBook Pro", "q");
+		
+		log.info("Search_Advanced_Search_08 - Step 2: Check to checkbox 'Advanced search'");
+		searchPage.checkToCheckboxOrRadioByName(driver, "advs");
+		
+		log.info("Search_Advanced_Search_08 - Step 3: Select 'Computers' from dropdown 'Category'");
+		searchPage.selectItemInDropdownByAttributeName(driver, "Computers", "cid");
+		
+		log.info("Search_Advanced_Search_08 - Step 4: Check to checkbox 'Automatically search sub categories'");
+		searchPage.checkToCheckboxOrRadioByName(driver, "isc");
+		
+		log.info("Search_Advanced_Search_08 - Step 5: Select 'Apple' from dropdown 'Manufacturer'");
+		searchPage.selectItemInDropdownByAttributeName(driver, "Apple", "mid");
+
+		log.info("Search_Advanced_Search_08 - Step 6: Click to Search button");
+		searchPage.clickToSearchButton();
+
+		log.info("Search_Advanced_Search_08 - Step 7: Verify only 1 product '" + macbookTitle + " is displayed");
+		verifyTrue(searchPage.getListProductTitles(driver).contains(macbookTitle));
+		verifyEquals(searchPage.getListProductTitles(driver).size(), 1);
 	}
 	
 	@Parameters("browser")

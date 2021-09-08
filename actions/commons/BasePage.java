@@ -3,6 +3,7 @@ package commons;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -259,6 +260,10 @@ public class BasePage {
 	public void hoverToElement(WebDriver driver, String locator) {
 		action = new Actions(driver);
 		action.moveToElement(getElement(driver, locator)).perform();
+	}
+	public void hoverToElement(WebDriver driver, String locator, String...params) {
+		action = new Actions(driver);
+		action.moveToElement(getElement(driver, getDynamicLocator(locator, params))).perform();
 	}
 	public void rightClickToElement(WebDriver driver, String locator) {
 		action = new Actions(driver);
@@ -524,6 +529,44 @@ public class BasePage {
 	public void clickToButtonByTextByJs(WebDriver driver, String buttonName) {
 		waitForElementClickable(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT_BY_TEXT, buttonName);
 		clickToElementByJS(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT_BY_TEXT, buttonName);
+	}
+	public void hoverToMenuByText(WebDriver driver, String menuText) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_MENU_BY_TEXT, menuText);
+		hoverToElement(driver, BasePageUI.DYNAMIC_MENU_BY_TEXT, menuText);
+		sleepInSecond(2);
+	}
+	public void clickToSubMenuByText(WebDriver driver, String subMenuText) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_SUBMENU_BY_TEXT, subMenuText);
+		clickToElement(driver, BasePageUI.DYNAMIC_SUBMENU_BY_TEXT, subMenuText);
+	}
+	public List<String> getListProductTitles(WebDriver driver) {
+		return getElements(driver, BasePageUI.PRODUCT_TITLE_LINK).stream().map(title->title.getText()).collect(Collectors.toList());
+	}
+
+	public boolean isListSortedByOrder(WebDriver driver, List<String> arrayList) {
+		boolean isSortedByOrder = true;
+		for (int i = 0; i < arrayList.size()-1; i++) {
+			if (arrayList.get(i + 1).compareToIgnoreCase(arrayList.get(i)) < 0) {
+				isSortedByOrder = false;
+				break;
+			}
+			isSortedByOrder = true;
+		}
+		return isSortedByOrder;
+
+	}
+	public boolean isListSortedByReverseOrder(WebDriver driver, List<String> arrayList) {
+		boolean isSortedByReverseOrder = true;
+		for (int i = 0; i < arrayList.size()-1; i++) {
+			if (arrayList.get(i + 1).compareToIgnoreCase(arrayList.get(i)) > 0) {
+				isSortedByReverseOrder = false;
+				break;
+			}
+			isSortedByReverseOrder = true;
+
+		}
+		return isSortedByReverseOrder;
+
 	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 

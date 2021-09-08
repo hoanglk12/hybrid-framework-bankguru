@@ -7,6 +7,7 @@ import pageUIs.user.nopCommerce.HomePageUI;
 
 public class HomePageObject extends BasePage{
 	private WebDriver driver;
+	
 	public HomePageObject(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -24,5 +25,12 @@ public class HomePageObject extends BasePage{
 		clickToElement(driver, HomePageUI.LOGIN_LINK);
 		return PageGeneratorManager.getLoginPage(driver);
 	}
+	public boolean isProductTitlesSortedAlphabeticalOrder() {
+		return isListSortedByOrder(driver, getListProductTitles(driver));
+	}
+	public boolean isProductTitlesSortedReverseAlphabeticalOrder() {
+		return isListSortedByReverseOrder(driver, getListProductTitles(driver));
+	}
+
 	
 }
