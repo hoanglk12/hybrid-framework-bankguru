@@ -30,7 +30,7 @@
 			<!--<class name="com.nopcommerce.login.Login_To_Page" />-->
 			<!--<class name="com.nopcommerce.myaccount.My_Account" />-->
 			<!--<class name="com.nopcommerce.search.Search_Advanced_Search" />-->
-			<!--<class name="com.nopcommerce.sort.Sort_Display_Paging" />-->
+			<class name="com.nopcommerce.sort.Sort_Display_Paging" />
 			<!--<class name="com.nopcommerce.admin.Admin" />-->
 		</classes>
 	</test>

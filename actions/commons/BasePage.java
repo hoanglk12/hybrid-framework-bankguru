@@ -24,6 +24,7 @@ import pageUIs.admin.nopCommerce.CustomersPageUI;
 import pageUIs.admin.nopCommerce.ProductDetailsPageUI;
 import pageUIs.bankGuru.BankGuruBasePageUI;
 import pageUIs.user.nopCommerce.BasePageUI;
+import pageUIs.user.nopCommerce.HomePageUI;
 
 public class BasePage {
 	
@@ -127,6 +128,11 @@ public class BasePage {
 	}
 	public void clickToElement(WebDriver driver, String locator, String...params) {
 		getElement(driver, getDynamicLocator(locator, params)).click();
+	}
+	public void clickToElementByAction(WebDriver driver, String locator, String...params) {
+		WebElement element = getElement(driver, getDynamicLocator(locator, params));
+		action = new Actions(driver);
+		action.click(element).perform();
 	}
 	public void sendkeyToElement(WebDriver driver, String locator, String value) {
 		getElement(driver, locator).clear();
@@ -294,6 +300,10 @@ public class BasePage {
 		jsExecutor = (JavascriptExecutor)driver;
 		jsExecutor.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 	}
+	public void scrollToTopPage(WebDriver driver) {
+		jsExecutor = (JavascriptExecutor)driver;
+		jsExecutor.executeScript("window.scrollBy(0,0)");
+	}
 	public void navigateToUrlByJS(WebDriver driver, String url) {
 		jsExecutor = (JavascriptExecutor)driver;
 		jsExecutor.executeScript("window.location = '" + url + "'");
@@ -317,6 +327,10 @@ public class BasePage {
 	public void scrollToElement(WebDriver driver, String locator) {
 		jsExecutor = (JavascriptExecutor)driver;
 		jsExecutor.executeScript("arguments[0].scrollIntoView(true);", getElement(driver, locator));
+	}
+	public void scrollToElement(WebDriver driver, String locator, String...params) {
+		jsExecutor = (JavascriptExecutor)driver;
+		jsExecutor.executeScript("arguments[0].scrollIntoView(true);", getElement(driver, getDynamicLocator(locator, params)));
 	}
 	public void sendkeyToElementByJS(WebDriver driver, String locator, String value) {
 		jsExecutor = (JavascriptExecutor)driver;
@@ -537,9 +551,14 @@ public class BasePage {
 	}
 	public void hoverToMenuByText(WebDriver driver, String menuText) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_MENU_BY_TEXT, menuText);
+		if (driver.toString().contains("firefox")) {
+			scrollToElement(driver,BasePageUI.DYNAMIC_MENU_BY_TEXT, menuText);
+			hoverToElement(driver, BasePageUI.DYNAMIC_MENU_BY_TEXT, menuText);
+		}
 		hoverToElement(driver, BasePageUI.DYNAMIC_MENU_BY_TEXT, menuText);
-		sleepInSecond(2);
+		
 	}
+	
 	public void clickToSubMenuByText(WebDriver driver, String subMenuText) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_SUBMENU_BY_TEXT, subMenuText);
 		clickToElement(driver, BasePageUI.DYNAMIC_SUBMENU_BY_TEXT, subMenuText);
@@ -550,7 +569,7 @@ public class BasePage {
 	public List<String> getListProductPrices(WebDriver driver) {
 		return getElements(driver, BasePageUI.PRODUCT_PRICES).stream().map(title->title.getText()).collect(Collectors.toList());
 	}
-
+	
 	public boolean isListSortedByOrder(WebDriver driver, List<String> arrayList) {
 		boolean isSortedByOrder = true;
 		for (int i = 0; i < arrayList.size()-1; i++) {
@@ -583,6 +602,10 @@ public class BasePage {
 	public void enterToTextBoxByTextTagAndName(WebDriver driver, String value, String text, String tagType, String nameAttribute) {
 		waitForElementVisible(driver, BankGuruBasePageUI.DYNAMIC_TEXTBOX_TEXTAREA, text, tagType, nameAttribute);
 		sendkeyToElement(driver, BankGuruBasePageUI.DYNAMIC_TEXTBOX_TEXTAREA, value, text, tagType, nameAttribute);;
+	}
+	public void clickToPaginationLinkByText(WebDriver driver, String textPage) {
+		waitForElementVisible(driver, HomePageUI.PAGINATION_LINK_BY_TEXT, textPage);
+		clickToElement(driver, HomePageUI.PAGINATION_LINK_BY_TEXT, textPage);
 	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 

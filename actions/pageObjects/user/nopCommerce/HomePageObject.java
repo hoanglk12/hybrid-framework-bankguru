@@ -40,5 +40,12 @@ public class HomePageObject extends BasePage{
 	public boolean isProductSizeLessOrEqualThan(int number) {
 		return getListProductTitles(driver).size() <= number ? true : false;
 	}
+	public boolean isPaginationExist() {
+		return isElementUndisplayed(driver, HomePageUI.PAGINATION) ? false : true;
+	}
+	public boolean isNextOrPreviousIconDisplayed(String iconName) {
+		return isElementDisplayed(driver, HomePageUI.PAGINATION_LINK_BY_TEXT, iconName);
+	}
 	
+
 }

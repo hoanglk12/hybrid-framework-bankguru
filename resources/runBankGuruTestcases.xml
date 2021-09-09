@@ -7,9 +7,23 @@
 		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
 		<listener class-name="reportConfig.ReportNGListener" />
 	</listeners>
-	<parameter name="urlBankGuru" value="https://demo.guru99.com/v4/" />
+	<parameter name="urlBankGuru" value="http://demo.guru99.com/v4/" />
 	<test name="Run on Firefox">
 		<parameter name="browser" value="firefox" />
+		<classes>
+			<class name="com.bankguru.login.Login_01_Register_And_Login" />
+			<class name="com.bankguru.customer.New_Customer" />
+		</classes>
+	</test> 
+	<test name="Run on Chrome">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.bankguru.login.Login_01_Register_And_Login" />
+			<class name="com.bankguru.customer.New_Customer" />
+		</classes>
+	</test> 
+	<test name="Run on Edge Chromium">
+		<parameter name="browser" value="edge_chromium" />
 		<classes>
 			<class name="com.bankguru.login.Login_01_Register_And_Login" />
 			<class name="com.bankguru.customer.New_Customer" />

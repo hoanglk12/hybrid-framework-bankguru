@@ -84,9 +84,57 @@ public class Sort_Display_Paging extends BaseTest {
 		log.info("Sort_Display_Paging_05 - Step 2: Select option '3' in dropdown 'Display'");
 		homePage.selectItemInDropdownByAttributeName(driver, "3", "products-pagesize");
 		homePage.sleepInSecond(2);
-		
-		log.info("Sort_Display_Paging_05 - Step 3: Verify <= 3 products are displayed with page 1");
+
+		log.info("Sort_Display_Paging_05 - Step 4: Verify <= 3 products are displayed in page 1");
 		verifyTrue(homePage.isProductSizeLessOrEqualThan(3));
+		
+		log.info("Sort_Display_Paging_05 - Step 5: Verify Pagination exist and Next icon is displayed when in page 1");
+		verifyTrue(homePage.isPaginationExist());
+		verifyTrue(homePage.isNextOrPreviousIconDisplayed("Next"));
+		
+		log.info("Sort_Display_Paging_05 - Step 6: Click To Page 2");
+		homePage.clickToPaginationLinkByText(driver, "2");
+		homePage.sleepInSecond(1);
+		
+		log.info("Sort_Display_Paging_05 - Step 7: Verify <= 3 products are displayed in page 2");
+		verifyTrue(homePage.isProductSizeLessOrEqualThan(3));
+		
+		log.info("Sort_Display_Paging_05 - Step 8: Verify Pagination exist and Previous icon is displayed when in page 1");
+		verifyTrue(homePage.isPaginationExist());
+		verifyTrue(homePage.isNextOrPreviousIconDisplayed("Previous"));
+	}
+	@Test
+	public void Sort_Display_Paging_06_Display_Six_Products_Per_Page() {
+		log.info("Sort_Display_Paging_06 - Step 1: Click on menu 'Computers' >>> submenu 'Notebooks'");
+		homePage.hoverToMenuByText(driver, "Computers");
+		homePage.clickToSubMenuByText(driver, "Notebooks");
+		
+		log.info("Sort_Display_Paging_06 - Step 2: Select option '6' in dropdown 'Display'");
+		homePage.selectItemInDropdownByAttributeName(driver, "6", "products-pagesize");
+		homePage.sleepInSecond(2);
+	
+	
+		log.info("Sort_Display_Paging_06 - Step 3: Verify <= 6 products are displayed");
+		verifyTrue(homePage.isProductSizeLessOrEqualThan(6));
+		
+		log.info("Sort_Display_Paging_06 - Step 4: Verify Pagination NOT exist");
+		verifyFalse(homePage.isPaginationExist());
+	}
+	@Test
+	public void Sort_Display_Paging_07_Display_Nine_Products_Per_Page() {
+		log.info("Sort_Display_Paging_06 - Step 1: Click on menu 'Computers' >>> submenu 'Notebooks'");
+		homePage.hoverToMenuByText(driver, "Computers");
+		homePage.clickToSubMenuByText(driver, "Notebooks");
+		
+		log.info("Sort_Display_Paging_07 - Step 2: Select option '9' in dropdown 'Display'");
+		homePage.selectItemInDropdownByAttributeName(driver, "9", "products-pagesize");
+		homePage.sleepInSecond(2);
+		
+		log.info("Sort_Display_Paging_07 - Step 3: Verify <= 9 products are displayed");
+		verifyTrue(homePage.isProductSizeLessOrEqualThan(9));
+		
+		log.info("Sort_Display_Paging_07 - Step 4: Verify Pagination NOT exist");
+		verifyFalse(homePage.isPaginationExist());
 	}
 	
 	@Parameters("browser")
