@@ -75,6 +75,7 @@ public class Login_To_Page extends BaseTest {
 
 	@Test
 	public void Login_03_Unregisted_Email() {
+		log.info("Login_03 - Step 1: Enter to Email textbox with data 'lucifer@hgmail.com'");
 		loginPage.enterToEmailTextbox("lucifer@hgmail.com");
 		loginPage.enterToPasswordTextbox(password);
 		loginPage.clickToLoginButton();

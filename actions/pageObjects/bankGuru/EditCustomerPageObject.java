@@ -4,11 +4,10 @@ import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
 
-public class LoginPageObject extends BasePage{
+public class EditCustomerPageObject extends BasePage {
 	protected WebDriver driver;
-	public LoginPageObject(WebDriver driver) {
+	public EditCustomerPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
-	
-	
+
 }

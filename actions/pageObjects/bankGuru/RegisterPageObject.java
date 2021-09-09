@@ -1,5 +1,22 @@
 package pageObjects.bankGuru;
 
-public class RegisterPageObject {
+import org.openqa.selenium.WebDriver;
+
+import commons.BasePage;
+import pageUIs.bankGuru.RegisterPageUI;
+
+public class RegisterPageObject extends BasePage {
+	protected WebDriver driver;
+	public RegisterPageObject(WebDriver driver) {
+		this.driver = driver;
+	}
+	public String getTextUserID() {
+		return getTextElement(driver, RegisterPageUI.USER_ID_TEXT);
+		
+	}
+	public String getTextPassword() {
+		return getTextElement(driver, RegisterPageUI.PASSWORD_TEXT);
+		
+	}
 
 }

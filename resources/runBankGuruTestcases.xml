@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Bank Guru" parallel="false">
-  <test name="Run on Firefox" >
-    <classes>
-      <class name="com.bankguru.login.Login_01_Register_And_Login"/>
-      <class name="com.bankguru.login.Login_01_Register_And_Login_By_Initial_Object"/>
-       <class name="com.bankguru.login.Login_01_Register_And_Login_By_Inheritance"/>
-    </classes>
-  </test> <!-- Test -->
-</suite> <!-- Suite -->
+	<listeners>
+		<listener class-name="commons.MethodListener" />
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+		<listener class-name="reportConfig.ReportNGListener" />
+	</listeners>
+	<parameter name="urlBankGuru" value="https://demo.guru99.com/v4/" />
+	<test name="Run on Firefox">
+		<parameter name="browser" value="firefox" />
+		<classes>
+			<class name="com.bankguru.login.Login_01_Register_And_Login" />
+			<class name="com.bankguru.customer.New_Customer" />
+		</classes>
+	</test> 
+</suite> 

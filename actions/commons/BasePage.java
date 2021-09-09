@@ -22,6 +22,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageUIs.admin.nopCommerce.AdminBasePageUI;
 import pageUIs.admin.nopCommerce.CustomersPageUI;
 import pageUIs.admin.nopCommerce.ProductDetailsPageUI;
+import pageUIs.bankGuru.BankGuruBasePageUI;
 import pageUIs.user.nopCommerce.BasePageUI;
 
 public class BasePage {
@@ -465,6 +466,10 @@ public class BasePage {
 		waitForElementClickable(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT, idValue);
 		clickToElement(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT, idValue);
 	}
+	public void clickToButtonByNameAttribute(WebDriver driver, String nameValue) {
+		waitForElementClickable(driver, BankGuruBasePageUI.DYNAMIC_BUTTON_BY_NAME, nameValue);
+		clickToElement(driver, BankGuruBasePageUI.DYNAMIC_BUTTON_BY_NAME, nameValue);
+	}
 	public void openExpandIconByCardTitle(WebDriver driver, String attribute, String cardTitle) {
 		waitForElementClickable(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, cardTitle);
 		if (getAttributeValue(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, attribute, cardTitle).contains("fa-plus")) {
@@ -570,6 +575,14 @@ public class BasePage {
 		}
 		return isSortedByReverseOrder;
 
+	}
+	public void clickToLinkText(WebDriver driver, String textLink) {
+		waitForElementClickable(driver, BankGuruBasePageUI.DYNAMIC_LINK_BY_TEXT, textLink);
+		clickToElement(driver, BankGuruBasePageUI.DYNAMIC_LINK_BY_TEXT, textLink);
+	}
+	public void enterToTextBoxByTextTagAndName(WebDriver driver, String value, String text, String tagType, String nameAttribute) {
+		waitForElementVisible(driver, BankGuruBasePageUI.DYNAMIC_TEXTBOX_TEXTAREA, text, tagType, nameAttribute);
+		sendkeyToElement(driver, BankGuruBasePageUI.DYNAMIC_TEXTBOX_TEXTAREA, value, text, tagType, nameAttribute);;
 	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 

@@ -85,7 +85,7 @@ public class Sort_Display_Paging extends BaseTest {
 		homePage.selectItemInDropdownByAttributeName(driver, "3", "products-pagesize");
 		homePage.sleepInSecond(2);
 		
-		log.info("Sort_Display_Paging_05 - Step 3: Verify 3 products are displayed with page 1");
+		log.info("Sort_Display_Paging_05 - Step 3: Verify <= 3 products are displayed with page 1");
 		verifyTrue(homePage.isProductSizeLessOrEqualThan(3));
 	}
 	
