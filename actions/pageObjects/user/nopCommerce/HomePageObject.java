@@ -31,6 +31,14 @@ public class HomePageObject extends BasePage{
 	public boolean isProductTitlesSortedReverseAlphabeticalOrder() {
 		return isListSortedByReverseOrder(driver, getListProductTitles(driver));
 	}
-
+	public boolean isProductPricesIncreasing() {
+		return isListSortedByOrder(driver, getListProductPrices(driver));
+	}
+	public boolean isProductPricesDecreasing() {
+		return isListSortedByReverseOrder(driver, getListProductPrices(driver));
+	}
+	public boolean isProductSizeLessOrEqualThan(int number) {
+		return getListProductTitles(driver).size() <= number ? true : false;
+	}
 	
 }

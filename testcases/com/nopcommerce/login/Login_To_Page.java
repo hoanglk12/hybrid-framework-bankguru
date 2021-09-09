@@ -59,9 +59,16 @@ public class Login_To_Page extends BaseTest {
 
 	@Test
 	public void Login_02_Invalid_Email() {
+		log.info("Login_02 - Step 1: Enter to Email textbox with data '123@'");
 		loginPage.enterToEmailTextbox("123@");
+		
+		log.info("Login_02 - Step 2: Enter to Email textbox with data with data '" + password + "'");
 		loginPage.enterToPasswordTextbox(password);
+		
+		log.info("Login_02 - Step 3: Click to Login button");
 		loginPage.clickToLoginButton();
+		
+		log.info("Login_02 - Step 4: Verify error msg 'Wrong email' is displayed");
 		Assert.assertEquals(loginPage.getEmailErrorMessage(), "Wrong email");
 
 	}

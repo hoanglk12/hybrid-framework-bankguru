@@ -57,7 +57,7 @@ public class Register_Account extends BaseTest {
 		log.info(" Register_00 - Step 7: Enter to Password textbox with data '" + password + "'");
 		registerPage.enterToPasswordTextbox(password);
 		
-		log.info(" Register_00 - Step 8: Enter to Password textbox with data '" + confirmPassword + "'");
+		log.info(" Register_00 - Step 8: Enter to Confirm Password textbox with data '" + confirmPassword + "'");
 		registerPage.enterToConfirmPasswordTextbox(confirmPassword);
 		
 		log.info(" Register_00 - Step 9: Click To Register Button");
@@ -101,7 +101,7 @@ public class Register_Account extends BaseTest {
 		registerPage.clickToRegisterButton();
 		registerPage.sleepInSecond(1);
 		
-		log.info(" Register_01 - Step 10: Verify error messages displayed on 5 texboxes");
+		log.info(" Register_01 - Step 9: Verify error messages displayed on 5 texboxes");
 		verifyEquals(registerPage.getEmptyFirstNameErrorMsg(), "First name is required.");
 		verifyEquals(registerPage.getEmptyLastNameErrorMsg(), "Last name is required.");
 		verifyEquals(registerPage.getEmptyEmailErrorMsg(), "Email is required.");
@@ -134,50 +134,92 @@ public class Register_Account extends BaseTest {
 		registerPage.clickToRegisterButton();
 		registerPage.sleepInSecond(1);
 		
-		log.info(" Register_02 - Step 8: Verify error message is displayed with content 'Your registration completed'");
+		log.info(" Register_02 - Step 8: Verify error message is displayed with content 'Wrong email'");
 		verifyEquals(registerPage.getInvalidEmailErrorMsg(), "Wrong email");
 
 	}
 
 	@Test
 	public void Register_03_Email_Exist() {
+		log.info(" Register_03 - Step 1: Check to Gender Male radio button");
 		registerPage.clickToGenderMaleRadioButton();
+		
+		log.info(" Register_03 - Step 2: Enter to First Name textbox with data '" + firstName + "'");
 		registerPage.enterToFirstnameTextbox(firstName);
+		
+		log.info(" Register_03 - Step 3: Enter to Last Name textbox with data '" + lastName + "'");
 		registerPage.enterToLastnameTextbox(lastName);
+		
+		log.info(" Register_03 - Step 4: Enter to Email textbox with data '" + Common_Login.email + "'");
 		registerPage.enterToEmailTextbox(Common_Login.email);
+		
+		log.info(" Register_03 - Step 5: Enter to Password textbox with data '" + password + "'");
 		registerPage.enterToPasswordTextbox(password);
+		
+		log.info(" Register_03 - Step 6: Enter to Password textbox with data '" + confirmPassword + "'");
 		registerPage.enterToConfirmPasswordTextbox(confirmPassword);
+		
+		log.info(" Register_03 - Step 7: Click To Register Button");
 		registerPage.clickToRegisterButton();
 		registerPage.sleepInSecond(1);
-
+		
+		log.info(" Register_03 - Step 8: Verify error message is displayed with content 'The specified email already exists'");
 		verifyEquals(registerPage.getEmailExistErrorMsg(), "The specified email already exists");
 	}
 
 	@Test
 	public void Register_04_Password_Less_Than_Six_Characters() {
+		log.info(" Register_04 - Step 1: Check to Gender Male radio button");
 		registerPage.clickToGenderMaleRadioButton();
+		
+		log.info(" Register_04 - Step 2: Enter to First Name textbox with data '" + firstName + "'");
 		registerPage.enterToFirstnameTextbox(firstName);
+		
+		log.info(" Register_04 - Step 3: Enter to Last Name textbox with data '" + lastName + "'");
 		registerPage.enterToLastnameTextbox(lastName);
+		
+		log.info(" Register_04 - Step 4: Enter to Email textbox with data 'hp95@mail.com'");
 		registerPage.enterToEmailTextbox("hp95@mail.com");
+		
+		log.info(" Register_04 - Step 5: Enter to Password textbox with data '123'");
 		registerPage.enterToPasswordTextbox("123");
+		
+		log.info(" Register_04 - Step 6: Enter to Confirm Password textbox with data '123'");
 		registerPage.enterToConfirmPasswordTextbox("123");
+		
+		log.info(" Register_04 - Step 7: Click To Register Button");
 		registerPage.clickToRegisterButton();
 		registerPage.sleepInSecond(1);
-
+		
+		log.info(" Register_04 - Step 8: Verify error message is displayed with content 'Password must meet the following rules: must have at least 6 characters'");
 		verifyTrue(registerPage.isPasswordLessThanSixErrorMsgDisplayed());
 	}
 
 	@Test
 	public void Register_05_Password_Not_Match_ConfimPassword() {
+		log.info(" Register_05 - Step 1: Check to Gender Male radio button");
 		registerPage.clickToGenderMaleRadioButton();
+		
+		log.info(" Register_05 - Step 2: Enter to First Name textbox with data '" + firstName + "'");
 		registerPage.enterToFirstnameTextbox(firstName);
+		
+		log.info(" Register_05 - Step 3: Enter to Last Name textbox with data '" + lastName + "'");
 		registerPage.enterToLastnameTextbox(lastName);
+		
+		log.info(" Register_05 - Step 4: Enter to Email textbox with data 'hp95@mail.com'");
 		registerPage.enterToEmailTextbox("hp95@mail.com");
+		
+		log.info(" Register_05 - Step 5: Enter to Password textbox with data '123457'");
 		registerPage.enterToPasswordTextbox("123456");
+		
+		log.info(" Register_05 - Step 6: Enter to Confirm Password textbox with data '123457'");
 		registerPage.enterToConfirmPasswordTextbox("123457");
+		
+		log.info(" Register_05 - Step 7: Click To Register Button");
 		registerPage.clickToRegisterButton();
 		registerPage.sleepInSecond(1);
-
+		
+		log.info(" Register_05 - Step 8: Verify error message is displayed with content 'The password and confirmation password do not match.'");
 		verifyEquals(registerPage.getPassNotMatchConfirmPassErrorMsg(), "The password and confirmation password do not match.");
 	}
 

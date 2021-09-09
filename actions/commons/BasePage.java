@@ -542,6 +542,9 @@ public class BasePage {
 	public List<String> getListProductTitles(WebDriver driver) {
 		return getElements(driver, BasePageUI.PRODUCT_TITLE_LINK).stream().map(title->title.getText()).collect(Collectors.toList());
 	}
+	public List<String> getListProductPrices(WebDriver driver) {
+		return getElements(driver, BasePageUI.PRODUCT_PRICES).stream().map(title->title.getText()).collect(Collectors.toList());
+	}
 
 	public boolean isListSortedByOrder(WebDriver driver, List<String> arrayList) {
 		boolean isSortedByOrder = true;

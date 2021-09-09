@@ -18,4 +18,5 @@ public class BasePageUI {
 	public static final String DYNAMIC_MENU_BY_TEXT = "//ul[contains(@class,'notmobile')]//a[contains(text(),'%s')]";
 	public static final String DYNAMIC_SUBMENU_BY_TEXT = "//ul[contains(@class,'notmobile')]//ul[contains(@class,'sublist')]//a[contains(text(),'%s')]";
 	public static final String PRODUCT_TITLE_LINK = "//h2[@class='product-title']/a";
+	public static final String PRODUCT_PRICES = "//div[@class='prices']/span";
 }
