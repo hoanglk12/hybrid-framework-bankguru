@@ -45,6 +45,34 @@ public class SearchPageObject extends BasePage {
 		return getTextElement(driver, SearchPageUI.DYNAMIC_ERROR_MESSAGE_SEARCH, messageType);
 	}
 
-	
-	
+	public String getTextSku() {
+		waitForElementVisible(driver, SearchPageUI.SKU_TEXT);
+		return getTextElement(driver, SearchPageUI.SKU_TEXT);
+	}
+
+	public String getTextPrice() {
+		waitForElementVisible(driver, SearchPageUI.PRODUCT_PRICE_TEXT);
+		return getTextElement(driver, SearchPageUI.PRODUCT_PRICE_TEXT);
+	}
+
+	public String getTextQuantity() {
+		waitForElementVisible(driver, SearchPageUI.QUANTITY_TEXTBOX);
+		return getTextElement(driver, SearchPageUI.QUANTITY_TEXTBOX);
+	}
+
+	public void enterToQuantityTextbox(String quantity) {
+		waitForElementVisible(driver, SearchPageUI.QUANTITY_TEXTBOX);
+		sendkeyToElement(driver, SearchPageUI.QUANTITY_TEXTBOX, quantity);
+	}
+
+	public void clickToAddToWishListButton() {
+		waitForElementVisible(driver, SearchPageUI.ADD_TO_WISHLIST_BUTTON);
+		clickToElement(driver, SearchPageUI.ADD_TO_WISHLIST_BUTTON);
+	}
+
+	public boolean isAddedToWishlishSuccessMsgDisplayed() {
+		waitForElementVisible(driver, SearchPageUI.SUCCESS_ADDED_WISHLIST_MSG);
+		return isElementDisplayed(driver, SearchPageUI.SUCCESS_ADDED_WISHLIST_MSG);
+	}
+
 }

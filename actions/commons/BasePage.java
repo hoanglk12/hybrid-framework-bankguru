@@ -607,6 +607,10 @@ public class BasePage {
 		waitForElementVisible(driver, HomePageUI.PAGINATION_LINK_BY_TEXT, textPage);
 		clickToElement(driver, HomePageUI.PAGINATION_LINK_BY_TEXT, textPage);
 	}
+	public void clickToProductTitleByText(WebDriver driver, String productTitle) {
+		waitForElementVisible(driver, BasePageUI.PRODUCT_TITLE_LINK_BY_TEXT, productTitle);
+		clickToElement(driver, BasePageUI.PRODUCT_TITLE_LINK_BY_TEXT, productTitle);
+	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 
 	private long timeOut = 30;

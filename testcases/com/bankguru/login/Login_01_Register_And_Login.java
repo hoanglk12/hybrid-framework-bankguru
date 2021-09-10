@@ -31,21 +31,6 @@ public class Login_01_Register_And_Login extends BaseTest {
 		closeDriverInstance();
 	}
 
-	//@Test
-	//public void Login_02_Login_To_System() {
-//		driver.get(loginPageUrl);
-//
-//		// Login with userID and password
-//		sendkeyToElement(driver, "//input[@name='uid']", userID);
-//		sendkeyToElement(driver, "//input[@name='password']", password);
-//		clickToElement(driver, "//input[@name='btnLogin']");
-//		
-//		
-//		// Assert
-//		Assert.assertEquals(getTextElement(driver, "//marquee[@class='heading3']"),"Welcome To Manager's Page of Guru99 Bank");
-		//closeBrowserAndDriver();
-	//}
-	
 	
 	
 	public HomePageObject homePage;

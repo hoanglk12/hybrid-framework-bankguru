@@ -17,6 +17,9 @@ public class BasePageUI {
 	public static final String DYNAMIC_CHECKBOX_RADIO_BY_TEXT = "//label[text()='%s']/preceding-sibling::input";
 	public static final String DYNAMIC_MENU_BY_TEXT = "//ul[contains(@class,'notmobile')]//a[contains(text(),'%s')]";
 	public static final String DYNAMIC_SUBMENU_BY_TEXT = "//ul[contains(@class,'notmobile')]//ul[contains(@class,'sublist')]//a[contains(text(),'%s')]";
+	public static final String PRODUCT_TITLE_LINK_BY_TEXT = "//h2[@class='product-title']/a[contains(.,'%s')]";
 	public static final String PRODUCT_TITLE_LINK = "//h2[@class='product-title']/a";
 	public static final String PRODUCT_PRICES = "//div[@class='prices']/span";
+	public static final String DYNAMIC_BUTTON_BY_PRODUCT = "//h2[contains(.,'%s')]/following-sibling::div[@class='add-info']//button[text()='%s']";
+	
 }
