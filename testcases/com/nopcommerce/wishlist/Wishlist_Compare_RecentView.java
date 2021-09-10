@@ -58,12 +58,12 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 		log.info("Wishlist_Compare_RecentView_01 - Step 6: Get text sku, price, quantity");
 		sku = searchPage.getTextSku();
 		price = searchPage.getTextPrice().substring(1);
-				
+		
 		log.info("Wishlist_Compare_RecentView_01 - Step 7: Click to button link 'Add to wishlist'");
 		searchPage.clickToAddToWishListButton();
 		
 		log.info("Wishlist_Compare_RecentView_01 - Step 8: Verify success message is displayed with content 'The product has been added to your wishlist'");
-		searchPage.isAddedToWishlishSuccessMsgDisplayed();
+		searchPage.isAddedToWishlistSuccessMsgDisplayed();
 		
 		log.info("Wishlist_Compare_RecentView_01 - Step 9: Click to 'Wishlist' at footer page");
 		searchPage.openPageFooterByName(driver, "Wishlist");
@@ -72,7 +72,25 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 		log.info("Wishlist_Compare_RecentView_01 - Step 10: Verify product title, sku, price and quantity displayed as in Search Page");
 		verifyTrue(wishListPage.isAllProductInfoDisplayed(sku, productName, price, quantity));
 		
-		log.info("Wishlist_Compare_RecentView_01 - Step 11: Verify product title, sku, price and quantity displayed as in Search Page");
+		log.info("Wishlist_Compare_RecentView_01 - Step 11: Click to Wishlist url");
+		wishListPage.clickToWishlistUrl();
+		
+		log.info("Wishlist_Compare_RecentView_01 - Step 12: Verify wishlist title is displayed");
+		verifyEquals(wishListPage.getTextHeaderWishlistUrl(), "Wishlist of " + Common_Login.firstName + " " + Common_Login.lastName);
+	}
+	@Test
+	public void Wishlist_Compare_RecentView_02_Add_To_Cart_From_Wishlist() {
+		log.info("Wishlist_Compare_RecentView_01 - Step 1: Click to 'Wishlist (1)' at header page");
+		wishListPage.clickToButtonLinkByName(driver, "Wishlist (1)");
+		
+		log.info("Wishlist_Compare_RecentView_02 - Step 2: Check to checbox 'Add to cart'");
+		wishListPage.clickToButtonByNameAttribute(driver, "addtocart");
+		
+		log.info("Wishlist_Compare_RecentView_02 - Step 3: Click to button 'Add to cart'");
+		wishListPage.clickToButtonByText(driver, "Add to cart");
+		
+		log.info("Wishlist_Compare_RecentView_02 - Step 4: Verify Shoppingcart(1) are displayed");
+		verifyTrue(wishListPage.isProductAddedToShoppingCart("Shopping cart (1)"));
 	}
 	
 	

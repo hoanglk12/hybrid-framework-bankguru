@@ -70,7 +70,7 @@ public class SearchPageObject extends BasePage {
 		clickToElement(driver, SearchPageUI.ADD_TO_WISHLIST_BUTTON);
 	}
 
-	public boolean isAddedToWishlishSuccessMsgDisplayed() {
+	public boolean isAddedToWishlistSuccessMsgDisplayed() {
 		waitForElementVisible(driver, SearchPageUI.SUCCESS_ADDED_WISHLIST_MSG);
 		return isElementDisplayed(driver, SearchPageUI.SUCCESS_ADDED_WISHLIST_MSG);
 	}

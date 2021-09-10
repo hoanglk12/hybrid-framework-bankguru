@@ -47,5 +47,6 @@ public class HomePageObject extends BasePage{
 		return isElementDisplayed(driver, HomePageUI.PAGINATION_LINK_BY_TEXT, iconName);
 	}
 	
+	
 
 }

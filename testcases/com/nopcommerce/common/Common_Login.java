@@ -16,9 +16,9 @@ import pageObjects.user.nopCommerce.RegisterPageObject;
 
 public class Common_Login extends BaseTest {
 	WebDriver driver;
-	String firstName, lastName, confirmPassword;
+	String  confirmPassword;
 
-	public static String email, password, homePageUrl;
+	public static String firstName, lastName, email, password, homePageUrl;
 	public static Set<Cookie> loginPageCookie;
 	@Parameters({ "browser", "url" })
 	@BeforeTest
