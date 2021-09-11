@@ -46,7 +46,6 @@ public class BasePage {
 	public Set<Cookie> getAllCookies(WebDriver driver){
 		return driver.manage().getCookies();
 	}
-	
 	public void setAllCookies(WebDriver driver, Set<Cookie> allCookies){
 		for (Cookie cookie : allCookies) {
 			driver.manage().addCookie(cookie);
@@ -558,7 +557,6 @@ public class BasePage {
 		hoverToElement(driver, BasePageUI.DYNAMIC_MENU_BY_TEXT, menuText);
 		
 	}
-	
 	public void clickToSubMenuByText(WebDriver driver, String subMenuText) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_SUBMENU_BY_TEXT, subMenuText);
 		clickToElement(driver, BasePageUI.DYNAMIC_SUBMENU_BY_TEXT, subMenuText);
@@ -569,7 +567,6 @@ public class BasePage {
 	public List<String> getListProductPrices(WebDriver driver) {
 		return getElements(driver, BasePageUI.PRODUCT_PRICES).stream().map(title->title.getText()).collect(Collectors.toList());
 	}
-	
 	public boolean isListSortedByOrder(WebDriver driver, List<String> arrayList) {
 		boolean isSortedByOrder = true;
 		for (int i = 0; i < arrayList.size()-1; i++) {
@@ -610,6 +607,16 @@ public class BasePage {
 	public void clickToProductTitleByText(WebDriver driver, String productTitle) {
 		waitForElementVisible(driver, BasePageUI.PRODUCT_TITLE_LINK_BY_TEXT, productTitle);
 		clickToElement(driver, BasePageUI.PRODUCT_TITLE_LINK_BY_TEXT, productTitle);
+	}
+	public void inputToTextboxByRowNumber(WebDriver driver, String headerName, String rowIndex, String value) {
+		int columnIndex = getElementSize(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, headerName) + 1;
+		waitForElementVisible(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, rowIndex, String.valueOf(columnIndex));
+		sendkeyToElement(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, rowIndex, value, String.valueOf(columnIndex));
+	}
+	public String getValueAtTableIDAtComlumnNameAndRowIndex(WebDriver driver, String tableID, String headerName, String rowIndex) {
+		int columnIndex = getElementSize(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, tableID, headerName) + 1;
+		waitForElementVisible(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, tableID, rowIndex, String.valueOf(columnIndex));
+		return getTextElement(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, tableID, rowIndex, String.valueOf(columnIndex)).trim();
 	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 

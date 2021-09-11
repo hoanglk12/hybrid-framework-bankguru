@@ -21,5 +21,7 @@ public class BasePageUI {
 	public static final String PRODUCT_TITLE_LINK = "//h2[@class='product-title']/a";
 	public static final String PRODUCT_PRICES = "//div[@class='prices']/span";
 	public static final String DYNAMIC_BUTTON_BY_PRODUCT = "//h2[contains(.,'%s')]/following-sibling::div[@class='add-info']//button[text()='%s']";
+	public static final String TABLE_HEADER_BY_ID_AND_NAME = "//table[@id='%s']//th[.='%s']/preceding-sibling::th";
+	public static final String TABLE_ROW_BY_COLUMN_INDEX_AND_ROW_INDEX = "//table[@id='%s']/tbody//tr[%s]//td[%s]";
 	
 }
