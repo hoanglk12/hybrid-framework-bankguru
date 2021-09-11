@@ -12,13 +12,13 @@
 	<test name="Run on Firefox">
 		<parameter name="browser" value="firefox"/>
 		<classes>
-			<class name="com.nopcommerce.common.Common_Login" />
+			<!--<class name="com.nopcommerce.common.Common_Login" />-->
 			<!--<class name="com.nopcommerce.register.Register_Account" />-->
 			<!--<class name="com.nopcommerce.login.Login_To_Page" />-->
 			<!--<class name="com.nopcommerce.myaccount.My_Account" />-->
 			<!--<class name="com.nopcommerce.search.Search_Advanced_Search" />-->
-			<class name="com.nopcommerce.sort.Sort_Display_Paging" />
-			<class name="com.nopcommerce.wishlist.Wishlist_Compare_RecentView" />
+			<!--<class name="com.nopcommerce.sort.Sort_Display_Paging" />-->
+			<!--<class name="com.nopcommerce.wishlist.Wishlist_Compare_RecentView" />-->
 			<!--<class name="com.nopcommerce.admin.Admin" />-->
 		</classes>
 	</test>
@@ -31,7 +31,7 @@
 			<!--<class name="com.nopcommerce.login.Login_To_Page" />-->
 			<!--<class name="com.nopcommerce.myaccount.My_Account" />-->
 			<!--<class name="com.nopcommerce.search.Search_Advanced_Search" />-->
-			<class name="com.nopcommerce.sort.Sort_Display_Paging" />
+			<!--<class name="com.nopcommerce.sort.Sort_Display_Paging" />-->
 			<class name="com.nopcommerce.wishlist.Wishlist_Compare_RecentView" />
 			<!--<class name="com.nopcommerce.admin.Admin" />-->
 		</classes>

@@ -27,4 +27,11 @@ public class WishlistPageObject extends BasePage {
 	public boolean isProductAddedToShoppingCart(String productNumber) {
 		return isElementDisplayed(driver, WishListPageUI.DYNAMIC_LINK_TEXT, productNumber);
 	}
+	public String getTextEmptyWishlistMsg() {
+		return getTextElement(driver, WishListPageUI.EMPTY_WISHLIST_MSG).trim();
+	}
+	
+	public boolean isAllProductInfoUndisplayed(String sku, String productName, String productPrice, String quantity) {
+		return isElementUndisplayed(driver, WishListPageUI.DYNAMIC_ROW_WISHLIST, sku, productName, productPrice, quantity);
+	}
 }

@@ -36,7 +36,6 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 		
 		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
 	}
-
 	@Test
 	public void Wishlist_Compare_RecentView_01_Add_To_Wishlist() {
 		log.info("Wishlist_Compare_RecentView_01 - Step 1: Open 'Search' link at Footer page");
@@ -91,6 +90,20 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 		
 		log.info("Wishlist_Compare_RecentView_02 - Step 4: Verify Shoppingcart(1) are displayed");
 		verifyTrue(wishListPage.isProductAddedToShoppingCart("Shopping cart (1)"));
+	}
+	@Test
+	public void Wishlist_Compare_RecentView_03_Add_To_Cart_From_Wishlist() {
+		log.info("Wishlist_Compare_RecentView_03 - Step 1: Click to 'Wishlist (1)' at header page");
+		wishListPage.openPageFooterByName(driver, "Wishlist");
+		
+		log.info("Wishlist_Compare_RecentView_03 - Step 2: Click to icon 'Remove'");
+		wishListPage.clickToIconByRowNumber(driver,"cart","Remove","1","button");
+	
+		log.info("Wishlist_Compare_RecentView_03 - Step 3: Verify message 'The wishlist is empty!' is displayed");
+		verifyEquals(wishListPage.getTextEmptyWishlistMsg(), "The wishlist is empty!");
+		
+		log.info("Wishlist_Compare_RecentView_03 - Step 4: Verify all product info is undisplayed");
+		verifyTrue(wishListPage.isAllProductInfoUndisplayed(sku, productName, price, quantity));
 	}
 	
 	

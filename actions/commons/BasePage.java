@@ -241,6 +241,18 @@ public class BasePage {
 			return false;
 		}
 	}
+	public boolean isElementUndisplayed(WebDriver driver, String locator, String...params) {
+		overrideGlobalTimeOut(driver, shortTimeOut);
+		List<WebElement> elements = getElements(driver, getDynamicLocator(locator, params));
+		overrideGlobalTimeOut(driver, longTimeOut);
+		if (elements.size() == 0) {
+			return true;
+		} else if (elements.size() > 0 && !elements.get(0).isDisplayed()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	public void overrideGlobalTimeOut(WebDriver driver, long timeOut) {
 		driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
 	}
@@ -608,15 +620,20 @@ public class BasePage {
 		waitForElementVisible(driver, BasePageUI.PRODUCT_TITLE_LINK_BY_TEXT, productTitle);
 		clickToElement(driver, BasePageUI.PRODUCT_TITLE_LINK_BY_TEXT, productTitle);
 	}
-	public void inputToTextboxByRowNumber(WebDriver driver, String headerName, String rowIndex, String value) {
-		int columnIndex = getElementSize(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, headerName) + 1;
-		waitForElementVisible(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, rowIndex, String.valueOf(columnIndex));
-		sendkeyToElement(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, rowIndex, value, String.valueOf(columnIndex));
+	public void inputToTextboxByRowNumber(WebDriver driver, String tableClassName, String headerName, String rowIndex, String value) {
+		int columnIndex = getElementSize(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, tableClassName, headerName) + 1;
+		waitForElementVisible(driver, BasePageUI.TABLE_ROW_BY_COLUMN_INDEX_AND_ROW_INDEX, tableClassName, rowIndex, String.valueOf(columnIndex));
+		sendkeyToElement(driver, BasePageUI.TABLE_ROW_BY_COLUMN_INDEX_AND_ROW_INDEX, rowIndex, value, String.valueOf(columnIndex));
 	}
-	public String getValueAtTableIDAtComlumnNameAndRowIndex(WebDriver driver, String tableID, String headerName, String rowIndex) {
-		int columnIndex = getElementSize(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, tableID, headerName) + 1;
-		waitForElementVisible(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, tableID, rowIndex, String.valueOf(columnIndex));
-		return getTextElement(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, tableID, rowIndex, String.valueOf(columnIndex)).trim();
+	public void clickToIconByRowNumber(WebDriver driver, String tableClassName, String headerName, String rowIndex, String tagType) {
+		int columnIndex = getElementSize(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, tableClassName, headerName) + 1;
+		waitForElementVisible(driver, BasePageUI.TABLE_ROW_BY_COLUMN_INDEX_AND_ROW_INDEX, tableClassName, rowIndex, String.valueOf(columnIndex),  tagType);
+		clickToElement(driver, BasePageUI.TABLE_ROW_BY_COLUMN_INDEX_AND_ROW_INDEX, tableClassName, rowIndex, String.valueOf(columnIndex), tagType);
+	}
+	public String getValueAtTableAtComlumnNameAndRowIndex(WebDriver driver, String tableClassName, String headerName, String rowIndex) {
+		int columnIndex = getElementSize(driver, BasePageUI.TABLE_HEADER_BY_ID_AND_NAME, tableClassName, headerName) + 1;
+		waitForElementVisible(driver, BasePageUI.TABLE_ROW_BY_COLUMN_INDEX_AND_ROW_INDEX, tableClassName, rowIndex, String.valueOf(columnIndex));
+		return getTextElement(driver, BasePageUI.TABLE_ROW_BY_COLUMN_INDEX_AND_ROW_INDEX, tableClassName, rowIndex, String.valueOf(columnIndex)).trim();
 	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 
