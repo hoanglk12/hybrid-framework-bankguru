@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import com.nopcommerce.common.Common_Login;
 
 import commons.BaseTest;
+import pageObjects.user.nopCommerce.ComparePageObject;
 import pageObjects.user.nopCommerce.HomePageObject;
 import pageObjects.user.nopCommerce.LoginPageObject;
 import pageObjects.user.nopCommerce.PageGeneratorManager;
@@ -18,7 +19,8 @@ import pageObjects.user.nopCommerce.WishlistPageObject;
 
 public class Wishlist_Compare_RecentView extends BaseTest {
 	WebDriver driver;
-	String productName, sku, price, quantity;
+	String productName, sku, price, quantity, productLenovoFullName, productBuildComputerFullName,
+	productBuildComputerPrice, productLenovoPrice;
 	@Parameters({"browser", "url"})
 	@BeforeClass
 	public void initBrowser(String browserName, String urlNopCommerce) {
@@ -26,6 +28,8 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 		driver = getBrowser(browserName, urlNopCommerce);
 		productName = "Lenovo IdeaCentre 600 All-in-One PC";
 		quantity = "1";
+		productLenovoFullName = productName;
+		productBuildComputerFullName = "Build your own computer";
 		homePage = PageGeneratorManager.getHomePage(driver);
 		loginPage = homePage.clickToLoginLink();
 		
@@ -62,7 +66,7 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 		searchPage.clickToAddToWishListButton();
 		
 		log.info("Wishlist_Compare_RecentView_01 - Step 8: Verify success message is displayed with content 'The product has been added to your wishlist'");
-		searchPage.isAddedToWishlistSuccessMsgDisplayed();
+		verifyTrue(searchPage.isAddedToWishlistSuccessMsgDisplayed());
 		
 		log.info("Wishlist_Compare_RecentView_01 - Step 9: Click to 'Wishlist' at footer page");
 		searchPage.openPageFooterByName(driver, "Wishlist");
@@ -92,18 +96,63 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 		verifyTrue(wishListPage.isProductAddedToShoppingCart("Shopping cart (1)"));
 	}
 	@Test
-	public void Wishlist_Compare_RecentView_03_Add_To_Cart_From_Wishlist() {
+	public void Wishlist_Compare_RecentView_03_Remove_Product_From_Wishlist() {
 		log.info("Wishlist_Compare_RecentView_03 - Step 1: Click to 'Wishlist (1)' at header page");
 		wishListPage.openPageFooterByName(driver, "Wishlist");
 		
 		log.info("Wishlist_Compare_RecentView_03 - Step 2: Click to icon 'Remove'");
 		wishListPage.clickToIconByRowNumber(driver,"cart","Remove","1","button");
-	
+		
 		log.info("Wishlist_Compare_RecentView_03 - Step 3: Verify message 'The wishlist is empty!' is displayed");
 		verifyEquals(wishListPage.getTextEmptyWishlistMsg(), "The wishlist is empty!");
 		
 		log.info("Wishlist_Compare_RecentView_03 - Step 4: Verify all product info is undisplayed");
 		verifyTrue(wishListPage.isAllProductInfoUndisplayed(sku, productName, price, quantity));
+	}
+	@Test
+	public void Wishlist_Compare_RecentView_04_Add_Product_To_Compare() {
+		log.info("Wishlist_Compare_RecentView_04 - Step 1: Click on menu 'Computers' >>> submenu 'Notebooks'");
+		homePage = PageGeneratorManager.getHomePage(driver);
+		homePage.hoverToMenuByText(driver, "Computers");
+		homePage.clickToSubMenuByText(driver, "Desktops");
+		
+		log.info("Wishlist_Compare_RecentView_04 - Step 2: Add 1 product to compare list with data '" + productBuildComputerFullName + "'");
+		productBuildComputerPrice = homePage.getTextProductNamePrice(productBuildComputerFullName);
+		homePage.clickToButtonByProductNameAndText(driver, productBuildComputerFullName, "Add to compare list");
+		homePage.sleepInSecond(1);
+		verifyTrue(homePage.isAddedProductToCompareListMsgDisplayed());
+		
+		log.info("Wishlist_Compare_RecentView_04 - Step 3: Add 1 products to compare list with data '" + productLenovoFullName + "'");
+		productLenovoPrice = homePage.getTextProductNamePrice(productLenovoFullName);
+		homePage.clickToButtonByProductNameAndText(driver, productLenovoFullName, "Add to compare list");
+		homePage.sleepInSecond(1);
+		verifyTrue(homePage.isAddedProductToCompareListMsgDisplayed());
+		
+		log.info("Wishlist_Compare_RecentView_04 - Step 4: Click to 'Compare products list' at footer page >>> Navigate to Compare list product page");
+		homePage.openPageFooterByName(driver, "Compare products list");
+		comparePage = PageGeneratorManager.getComparePage(driver);
+		
+		log.info("Wishlist_Compare_RecentView_04 - Step 5: Verify 2 remove icons are displayed");
+		verifyEquals(comparePage.getSizeRemoveIcons(), 2);
+		
+		log.info("Wishlist_Compare_RecentView_04 - Step 6: Verify name and price of 2 products displayed in Compare list and match with Home Page");
+		verifyTrue(comparePage.isProductNameDisplayedInCompareList(productBuildComputerFullName));
+		verifyTrue(comparePage.isProductNameDisplayedInCompareList(productLenovoFullName));
+		verifyTrue(comparePage.isProductPriceDisplayedInCompareList(productBuildComputerPrice));
+		verifyTrue(comparePage.isProductPriceDisplayedInCompareList(productLenovoPrice));
+		
+		log.info("Wishlist_Compare_RecentView_04 - Step 7: Click to button 'Clear list'");
+		comparePage.clickToButtonLinkByName(driver, "Clear list");
+		
+		log.info("Wishlist_Compare_RecentView_04 - Step 8: Verify message 'You have no items to compare.' is displayed");
+		verifyEquals(wishListPage.getTextEmptyWishlistMsg(), "You have no items to compare.");
+		
+		log.info("Wishlist_Compare_RecentView_04 - Step 9: Verify name and price of 2 products NOT displayed in Compare list");
+		verifyTrue(comparePage.isProductNameUndisplayedInCompareList(productBuildComputerFullName));
+		verifyTrue(comparePage.isProductNameUndisplayedInCompareList(productLenovoFullName));
+		verifyTrue(comparePage.isProductPriceUndisplayedInCompareList(productBuildComputerPrice));
+		verifyTrue(comparePage.isProductPriceUndisplayedInCompareList(productLenovoPrice));
+	
 	}
 	
 	
@@ -118,4 +167,5 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 	LoginPageObject loginPage;
 	SearchPageObject searchPage;
 	WishlistPageObject wishListPage;
+	ComparePageObject comparePage;
 }

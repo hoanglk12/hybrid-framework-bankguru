@@ -36,5 +36,8 @@ public class PageGeneratorManager {
 	public static AddressesPageObject getAddressesPage(WebDriver driver) {
 		return new AddressesPageObject(driver);
 	}
+	public static ComparePageObject getComparePage(WebDriver driver) {
+		return new ComparePageObject(driver);
+	}
 
 }

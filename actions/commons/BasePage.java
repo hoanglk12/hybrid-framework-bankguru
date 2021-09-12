@@ -635,6 +635,10 @@ public class BasePage {
 		waitForElementVisible(driver, BasePageUI.TABLE_ROW_BY_COLUMN_INDEX_AND_ROW_INDEX, tableClassName, rowIndex, String.valueOf(columnIndex));
 		return getTextElement(driver, BasePageUI.TABLE_ROW_BY_COLUMN_INDEX_AND_ROW_INDEX, tableClassName, rowIndex, String.valueOf(columnIndex)).trim();
 	}
+	public void clickToButtonByProductNameAndText(WebDriver driver, String productName, String buttonText) {
+		waitForElementClickable(driver, BasePageUI.DYNAMIC_BUTTON_BY_PRODUCT, productName, buttonText);
+		clickToElement(driver, BasePageUI.DYNAMIC_BUTTON_BY_PRODUCT, productName, buttonText);
+	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 
 	private long timeOut = 30;

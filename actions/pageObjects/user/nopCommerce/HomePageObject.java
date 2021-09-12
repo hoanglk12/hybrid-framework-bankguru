@@ -46,7 +46,12 @@ public class HomePageObject extends BasePage{
 	public boolean isNextOrPreviousIconDisplayed(String iconName) {
 		return isElementDisplayed(driver, HomePageUI.PAGINATION_LINK_BY_TEXT, iconName);
 	}
-	
-	
 
+	public boolean isAddedProductToCompareListMsgDisplayed() {
+		return isElementDisplayed(driver, HomePageUI.SUCCESS_MSG_ADDED_COMPARE_LIST);
+	}
+	public String getTextProductNamePrice(String productName) {
+		return getTextElement(driver, HomePageUI.DYNAMIC_PRODUCT_PRICE_BY_TEXT, productName).trim();
+	}
+	
 }
