@@ -1,5 +1,7 @@
 package commons;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -18,6 +20,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+
 
 import pageUIs.admin.nopCommerce.AdminBasePageUI;
 import pageUIs.admin.nopCommerce.CustomersPageUI;
@@ -603,6 +607,42 @@ public class BasePage {
 		}
 		return isSortedByReverseOrder;
 
+	}
+	public boolean isDataStringSortedAscending(WebDriver driver, String locator) {
+		List<WebElement> elements = getElements(driver, locator);
+		List<String> names = elements.stream().map(name->name.getText()).collect(Collectors.toList());
+		List<String> sortedNames = new ArrayList<String>(names);
+		Collections.sort(sortedNames);
+		return sortedNames.equals(names);
+	}
+	public boolean isDataStringSortedDescending(WebDriver driver, String locator) {
+		List<WebElement> elements = getElements(driver, locator);
+		List<String> names = elements.stream().map(name->name.getText()).collect(Collectors.toList());
+		List<String> sortedNames = new ArrayList<String>(names);
+		Collections.sort(sortedNames);
+		Collections.reverse(sortedNames);
+		return sortedNames.equals(names);
+	}
+	public boolean isDataFloatSortedAscending(WebDriver driver, String locator) {
+		ArrayList<Float> arrayList = new ArrayList<Float>();
+		List<WebElement> elements = getElements(driver, locator);
+		for (WebElement element : elements) {
+			arrayList.add(Float.parseFloat(element.getText().replace("$", "").replace(",", "").trim()));
+		}
+		ArrayList<Float> sortedList = new ArrayList<Float>(arrayList);
+		Collections.sort(sortedList);
+		return sortedList.equals(arrayList);
+	}
+	public boolean isDataFloatSortedDescending(WebDriver driver, String locator) {
+		ArrayList<Float> arrayList = new ArrayList<Float>();
+		List<WebElement> elements = getElements(driver, locator);
+		for (WebElement element : elements) {
+			arrayList.add(Float.parseFloat(element.getText().replace("$", "").replace(",", "").trim()));
+		}
+		ArrayList<Float> sortedList = new ArrayList<Float>(arrayList);
+		Collections.sort(sortedList);
+		Collections.reverse(sortedList);
+		return sortedList.equals(arrayList);
 	}
 	public void clickToLinkText(WebDriver driver, String textLink) {
 		waitForElementClickable(driver, BankGuruBasePageUI.DYNAMIC_LINK_BY_TEXT, textLink);

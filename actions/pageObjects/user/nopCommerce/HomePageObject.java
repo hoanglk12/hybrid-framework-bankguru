@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
+import pageUIs.user.nopCommerce.BasePageUI;
 import pageUIs.user.nopCommerce.HomePageUI;
 
 public class HomePageObject extends BasePage {
@@ -32,19 +33,19 @@ public class HomePageObject extends BasePage {
 	}
 
 	public boolean isProductTitlesSortedAlphabeticalOrder() {
-		return isListSortedByOrder(driver, getListProductTitles(driver));
+		return isDataStringSortedAscending(driver, BasePageUI.PRODUCT_TITLE_LINK);
 	}
 
 	public boolean isProductTitlesSortedReverseAlphabeticalOrder() {
-		return isListSortedByReverseOrder(driver, getListProductTitles(driver));
+		return isDataStringSortedDescending(driver, BasePageUI.PRODUCT_TITLE_LINK);
 	}
 
 	public boolean isProductPricesIncreasing() {
-		return isListSortedByOrder(driver, getListProductPrices(driver));
+		return isDataFloatSortedAscending(driver, BasePageUI.PRODUCT_PRICES);
 	}
 
 	public boolean isProductPricesDecreasing() {
-		return isListSortedByReverseOrder(driver, getListProductPrices(driver));
+		return isDataFloatSortedDescending(driver, BasePageUI.PRODUCT_PRICES);
 	}
 
 	public boolean isProductSizeLessOrEqualThan(int number) {
