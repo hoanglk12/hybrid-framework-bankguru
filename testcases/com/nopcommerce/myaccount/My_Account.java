@@ -24,7 +24,7 @@ public class My_Account extends BaseTest {
 	editFirstName, editLastName, editFullName,  newConfirmPassword,
 	dayItem, monthItem, yearItem, editCompanyName, addressFirstName, addressLastName, addressFullName,
 	addressEmail, addressCompany, addressCountry, addressState, addressCity, addressAddress1, addressAddress2, 
-	addressPostCode, addressPhone, addressFax;
+	addressPostCode, addressPhone, addressFax, reviewTitle, reviewText;
 	public static String newPassword, editEmail;
 	@Parameters({ "browser", "url" })
 	@BeforeClass
@@ -54,6 +54,8 @@ public class My_Account extends BaseTest {
 		addressPostCode = "550000"; 
 		addressPhone = "0123456789";
 		addressFax = "0987654321";
+		reviewTitle = "Worth money" ;
+		reviewText = "Excellent product";
 	}
 	@Test
 	public void My_Account_00_Login_To_Page() {
@@ -140,15 +142,15 @@ public class My_Account extends BaseTest {
 		searchPage.clickToSearchButton();
 		searchPage.clickToProductTitleLink();
 		searchPage.clickToAddYourReviewLink();
-		searchPage.enterToTextboxByName(driver, "Worth money", "AddProductReview_Title");
-		searchPage.enterToReviewTextArea("Excellent product");
+		searchPage.enterToTextboxByName(driver, reviewTitle, "AddProductReview_Title");
+		searchPage.enterToReviewTextArea(reviewText);
 		searchPage.clickToSubmitReviewButton();
 		searchPage.openPageFooterByName(driver, "My account");
 		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
 		myAccountPage.clickToMyProductsReviewLink();
 		
-		Assert.assertEquals(myAccountPage.getTextReviewTitle(), "Worth money");
-		Assert.assertEquals(myAccountPage.getTextReviewText(), "Excellent product");
+		Assert.assertEquals(myAccountPage.getTextReviewTitle(), reviewTitle);
+		Assert.assertEquals(myAccountPage.getTextReviewText(), reviewText);
 	}
 
 	

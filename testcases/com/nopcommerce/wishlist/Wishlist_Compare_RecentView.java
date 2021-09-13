@@ -26,7 +26,7 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 	WebDriver driver;
 	String productName, sku, price, quantity, productLenovoFullName, productBuildComputerFullName,
 	productBuildComputerPrice, productLenovoPrice;
-	List<String> fiveRandomProducts =  Arrays.asList("Apple MacBook Pro 13-inch","Asus N551JK-XO076H Laptop","Samsung Series 9 NP900X4C Premium Ultrabook","HP Spectre XT Pro UltraBook","HP Envy 6-1180ca 15.6-Inch Sleekbook");
+	List<String> fiveRandomProducts = Arrays.asList("Apple MacBook Pro 13-inch","Asus N551JK-XO076H Laptop","Samsung Series 9 NP900X4C Premium Ultrabook","HP Spectre XT Pro UltraBook","HP Envy 6-1180ca 15.6-Inch Sleekbook");
 	@Parameters({"browser", "url"})
 	@BeforeClass
 	public void initBrowser(String browserName, String urlNopCommerce) {

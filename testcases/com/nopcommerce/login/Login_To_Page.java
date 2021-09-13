@@ -17,7 +17,8 @@ import pageObjects.user.nopCommerce.RegisterPageObject;
 
 public class Login_To_Page extends BaseTest {
 	WebDriver driver;
-	String email, password ,confirmPassword;
+	String email, password, confirmPassword, emptyEmail, 
+	emptyPassword, invalidEmail, unregistedEmail, wrongPassword;
 	String homePageUrl;
 	
 	@Parameters({ "browser", "url" })
@@ -28,6 +29,11 @@ public class Login_To_Page extends BaseTest {
 		email = "cr7_" + generateEmail();
 		password = "123456";
 		confirmPassword = password;
+		emptyEmail = "";
+		emptyPassword = "";
+		invalidEmail = "123@";
+		unregistedEmail = "lucifer@hgmail.com";
+		wrongPassword = "123457";
 	}
 	
 	
@@ -45,10 +51,10 @@ public class Login_To_Page extends BaseTest {
 		loginPage = homePage.clickToLoginLink();
 		
 		log.info("Login_01 - Step 4: Leave blank in Email textbox");
-		loginPage.enterToEmailTextbox("");
+		loginPage.enterToEmailTextbox(emptyEmail);
 		
 		log.info("Login_01 - Step 5: Leave blank in Password textbox");
-		loginPage.enterToPasswordTextbox("");
+		loginPage.enterToPasswordTextbox(emptyPassword);
 		
 		log.info("Login_01 - Step 6: Click to Login button");
 		loginPage.clickToLoginButton();
@@ -60,7 +66,7 @@ public class Login_To_Page extends BaseTest {
 	@Test
 	public void Login_02_Invalid_Email() {
 		log.info("Login_02 - Step 1: Enter to Email textbox with data '123@'");
-		loginPage.enterToEmailTextbox("123@");
+		loginPage.enterToEmailTextbox(invalidEmail);
 		
 		log.info("Login_02 - Step 2: Enter to Email textbox with data with data '" + password + "'");
 		loginPage.enterToPasswordTextbox(password);
@@ -76,7 +82,7 @@ public class Login_To_Page extends BaseTest {
 	@Test
 	public void Login_03_Unregisted_Email() {
 		log.info("Login_03 - Step 1: Enter to Email textbox with data 'lucifer@hgmail.com'");
-		loginPage.enterToEmailTextbox("lucifer@hgmail.com");
+		loginPage.enterToEmailTextbox(unregistedEmail);
 		loginPage.enterToPasswordTextbox(password);
 		loginPage.clickToLoginButton();
 
@@ -87,7 +93,7 @@ public class Login_To_Page extends BaseTest {
 	@Test
 	public void Login_04_Registed_Email_Empty_Password() {
 		loginPage.enterToEmailTextbox(email);
-		loginPage.enterToPasswordTextbox("");
+		loginPage.enterToPasswordTextbox(emptyPassword);
 		loginPage.clickToLoginButton();
 
 		Assert.assertTrue(loginPage.isUnregEmailEmptyWrongPassErrorMsgDisplayed());
@@ -96,7 +102,7 @@ public class Login_To_Page extends BaseTest {
 	@Test
 	public void Login_05_Registed_Email_Wrong_Password() {
 		loginPage.enterToEmailTextbox(email);
-		loginPage.enterToPasswordTextbox("123457");
+		loginPage.enterToPasswordTextbox(wrongPassword);
 		loginPage.clickToLoginButton();
 
 		Assert.assertTrue(loginPage.isUnregEmailEmptyWrongPassErrorMsgDisplayed());
