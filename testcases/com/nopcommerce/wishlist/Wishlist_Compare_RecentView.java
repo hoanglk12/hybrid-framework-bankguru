@@ -1,5 +1,8 @@
 package com.nopcommerce.wishlist;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -14,6 +17,7 @@ import pageObjects.user.nopCommerce.ComparePageObject;
 import pageObjects.user.nopCommerce.HomePageObject;
 import pageObjects.user.nopCommerce.LoginPageObject;
 import pageObjects.user.nopCommerce.PageGeneratorManager;
+import pageObjects.user.nopCommerce.RecentlyViewedPageObject;
 import pageObjects.user.nopCommerce.SearchPageObject;
 import pageObjects.user.nopCommerce.WishlistPageObject;
 
@@ -21,6 +25,7 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 	WebDriver driver;
 	String productName, sku, price, quantity, productLenovoFullName, productBuildComputerFullName,
 	productBuildComputerPrice, productLenovoPrice;
+	List<String> fiveRandomProducts =  Arrays.asList("Apple MacBook Pro 13-inch","Asus N551JK-XO076H Laptop","Samsung Series 9 NP900X4C Premium Ultrabook","HP Spectre XT Pro UltraBook","HP Envy 6-1180ca 15.6-Inch Sleekbook");
 	@Parameters({"browser", "url"})
 	@BeforeClass
 	public void initBrowser(String browserName, String urlNopCommerce) {
@@ -154,6 +159,24 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 		verifyTrue(comparePage.isProductPriceUndisplayedInCompareList(productLenovoPrice));
 	
 	}
+	@Test
+	public void Wishlist_Compare_RecentView_05_Recently_Viewed_Products() {
+		log.info("Wishlist_Compare_RecentView_05 - Step 1: Click on menu 'Computers' >>> submenu 'Notebooks'");
+		homePage = PageGeneratorManager.getHomePage(driver);
+		homePage.hoverToMenuByText(driver, "Computers");
+		homePage.clickToSubMenuByText(driver, "Notebooks");
+		
+		log.info("Wishlist_Compare_RecentView_05 - Step 2: View 5 random products");
+		homePage.viewFiveRandomProducts(fiveRandomProducts);
+		
+		log.info("Wishlist_Compare_RecentView_05 - Step 3: Open 'Recently viewed products' at footer page >> Navigate to 'Recently viewed products' page ");
+		homePage.openPageFooterByName(driver, "Recently viewed products");
+		recentlyViewedPage = PageGeneratorManager.getRecentlyViewedPageObject(driver);
+		
+		log.info("Wishlist_Compare_RecentView_05 - Step 4: Verify header 'Recently viewed products' is displayed");
+		verifyTrue(recentlyViewedPage.isRecentlyViewedProductHeaderDisplayed());
+		
+	}
 	
 	
 	@Parameters("browser")
@@ -168,4 +191,5 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 	SearchPageObject searchPage;
 	WishlistPageObject wishListPage;
 	ComparePageObject comparePage;
+	RecentlyViewedPageObject recentlyViewedPage;
 }

@@ -39,5 +39,8 @@ public class PageGeneratorManager {
 	public static ComparePageObject getComparePage(WebDriver driver) {
 		return new ComparePageObject(driver);
 	}
+	public static RecentlyViewedPageObject getRecentlyViewedPageObject(WebDriver driver) {
+		return new RecentlyViewedPageObject(driver);
+	}
 
 }

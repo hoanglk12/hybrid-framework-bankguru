@@ -170,7 +170,7 @@ public class Admin extends BaseTest {
 		
 		log.info("Admin_04 - Step 4: Click to Seach button");
 		productSearchPage.clickToSearchButton();
-		productSearchPage.sleepInSecond(1);
+		productSearchPage.sleepInSecond(2);
 		
 		log.info("Admin_04 - Step 5: Verify only 1 item displayed");
 		verifyEquals(productSearchPage.getTotalEditButton(driver), 1);

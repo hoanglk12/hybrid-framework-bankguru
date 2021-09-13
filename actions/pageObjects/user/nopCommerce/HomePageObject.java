@@ -1,5 +1,7 @@
 package pageObjects.user.nopCommerce;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
@@ -53,5 +55,14 @@ public class HomePageObject extends BasePage{
 	public String getTextProductNamePrice(String productName) {
 		return getTextElement(driver, HomePageUI.DYNAMIC_PRODUCT_PRICE_BY_TEXT, productName).trim();
 	}
-	
+
+	public void viewFiveRandomProducts(List<String> fiveRandomProducts) {
+		fiveRandomProducts.stream().forEach(product -> {
+			clickToProductTitleByText(driver, product);
+			backToPage(driver);
+		});
+	}
+	public List<String> getLastThreeProducts(List<String> fiveRandomProducts) {
+		return fiveRandomProducts.subList(2, 4);
+	}
 }
