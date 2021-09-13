@@ -1,6 +1,7 @@
 package com.nopcommerce.wishlist;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -175,7 +176,13 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 		
 		log.info("Wishlist_Compare_RecentView_05 - Step 4: Verify header 'Recently viewed products' is displayed");
 		verifyTrue(recentlyViewedPage.isRecentlyViewedProductHeaderDisplayed());
+		recentlyViewedPage.sleepInSecond(3);
 		
+		log.info("Wishlist_Compare_RecentView_05 - Step 5: Verify ONLY last 3 product viewed are displayed");
+		Collections.sort(recentlyViewedPage.getListProductTitles(driver));
+		Collections.sort(homePage.getLastThreeProductsAtHomePage(fiveRandomProducts));
+		verifyEquals(recentlyViewedPage.getListProductTitles(driver), homePage.getLastThreeProductsAtHomePage(fiveRandomProducts));
+	
 	}
 	
 	
