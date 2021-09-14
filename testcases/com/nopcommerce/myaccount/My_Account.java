@@ -1,7 +1,6 @@
 package com.nopcommerce.myaccount;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -24,7 +23,7 @@ public class My_Account extends BaseTest {
 	editFirstName, editLastName, editFullName,  newConfirmPassword,
 	dayItem, monthItem, yearItem, editCompanyName, addressFirstName, addressLastName, addressFullName,
 	addressEmail, addressCompany, addressCountry, addressState, addressCity, addressAddress1, addressAddress2, 
-	addressPostCode, addressPhone, addressFax, reviewTitle, reviewText;
+	addressPostCode, addressPhone, addressFax, reviewTitle, reviewText, passwordSuccessMsg;
 	public static String newPassword, editEmail;
 	@Parameters({ "browser", "url" })
 	@BeforeClass
@@ -56,18 +55,18 @@ public class My_Account extends BaseTest {
 		addressFax = "0987654321";
 		reviewTitle = "Worth money" ;
 		reviewText = "Excellent product";
+		passwordSuccessMsg = "Password was changed";
 	}
 	@Test
 	public void My_Account_00_Login_To_Page() {
 		homePage = PageGeneratorManager.getHomePage(driver);
-		Assert.assertTrue(homePage.isSliderHomePageDisplayed());
-		
+		verifyTrue(homePage.isSliderHomePageDisplayed());
 		loginPage = homePage.clickToLoginLink();
-
-		loginPage.setAllCookies(driver, Common_Login.loginPageCookie);
-		loginPage.refreshCurrentPage(driver);
-		loginPage.handleUnexpectedAlert(driver);
-		loginPage.sleepInSecond(3);
+		
+		loginPage.enterToEmailTextbox(Common_Login.email);
+		loginPage.enterToPasswordTextbox(Common_Login.password);
+		homePage = loginPage.clickToLoginButton();
+		verifyTrue(homePage.isSliderHomePageDisplayed());
 
 	}
 
@@ -85,13 +84,13 @@ public class My_Account extends BaseTest {
 		myAccountPage.enterToTextboxByName(driver, editCompanyName, "Company");
 		myAccountPage.clickToSaveButton();
 		
-		Assert.assertTrue(myAccountPage.isGenderFemaleRadioSelected());
-		Assert.assertEquals(myAccountPage.getAttributeValueFromTextboxByName(driver, "value", "FirstName"), editFirstName);
-		Assert.assertEquals(myAccountPage.getAttributeValueFromTextboxByName(driver, "value", "LastName"), editLastName);
-		Assert.assertEquals(myAccountPage.getSelectedItemFromDayDropdown(), dayItem);
-		Assert.assertEquals(myAccountPage.getSeletecItemFromMonthDropdown(), monthItem);
-		Assert.assertEquals(myAccountPage.getSelectedItemFromYearDropdown(), yearItem);
-		Assert.assertEquals(myAccountPage.getAttributeValueFromTextboxByName(driver, "value", "Company"), editCompanyName);
+		verifyTrue(myAccountPage.isGenderFemaleRadioSelected());
+		verifyEquals(myAccountPage.getAttributeValueFromTextboxByName(driver, "value", "FirstName"), editFirstName);
+		verifyEquals(myAccountPage.getAttributeValueFromTextboxByName(driver, "value", "LastName"), editLastName);
+		verifyEquals(myAccountPage.getSelectedItemFromDayDropdown(), dayItem);
+		verifyEquals(myAccountPage.getSeletecItemFromMonthDropdown(), monthItem);
+		verifyEquals(myAccountPage.getSelectedItemFromYearDropdown(), yearItem);
+		verifyEquals(myAccountPage.getAttributeValueFromTextboxByName(driver, "value", "Company"), editCompanyName);
 	}
 	@Test
 	public void My_Account_02_Add_Addresses() {
@@ -111,15 +110,15 @@ public class My_Account extends BaseTest {
 		addressesPage.enterToAddressTextboxByName(driver, addressFax, "FaxNumber");
 		addressesPage.clickToSaveButton();
 		
-		Assert.assertTrue(addressesPage.isAddressInfoContains("name", addressFullName));
-		Assert.assertTrue(addressesPage.isAddressInfoContains("email", addressEmail));
-		Assert.assertTrue(addressesPage.isAddressInfoContains("fax", addressFax));
-		Assert.assertTrue(addressesPage.isAddressInfoContains("company", addressCompany));
-		Assert.assertTrue(addressesPage.isAddressInfoContains("address1", addressAddress1));
-		Assert.assertTrue(addressesPage.isAddressInfoContains("address2", addressAddress2));
-		Assert.assertTrue(addressesPage.isAddressInfoContains("city-state-zip", addressCity));
-		Assert.assertTrue(addressesPage.isAddressInfoContains("city-state-zip", addressPostCode));
-		Assert.assertTrue(addressesPage.isAddressInfoContains("country", addressCountry));
+		verifyTrue(addressesPage.isAddressInfoContains("name", addressFullName));
+		verifyTrue(addressesPage.isAddressInfoContains("email", addressEmail));
+		verifyTrue(addressesPage.isAddressInfoContains("fax", addressFax));
+		verifyTrue(addressesPage.isAddressInfoContains("company", addressCompany));
+		verifyTrue(addressesPage.isAddressInfoContains("address1", addressAddress1));
+		verifyTrue(addressesPage.isAddressInfoContains("address2", addressAddress2));
+		verifyTrue(addressesPage.isAddressInfoContains("city-state-zip", addressCity));
+		verifyTrue(addressesPage.isAddressInfoContains("city-state-zip", addressPostCode));
+		verifyTrue(addressesPage.isAddressInfoContains("country", addressCountry));
 		
 	}
 	@Test
@@ -132,7 +131,7 @@ public class My_Account extends BaseTest {
 		myAccountPage.enterToTextboxByName(driver, newConfirmPassword, "ConfirmNewPassword");
 		myAccountPage.clickToChangePasswordButton();
 		
-		Assert.assertEquals(myAccountPage.getTextPasswordSuccessMsg(), "Password was changed");
+		verifyEquals(myAccountPage.getTextPasswordSuccessMsg(), passwordSuccessMsg);
 	}
 	@Test
 	public void My_Account_04_Add_Review() {
@@ -149,8 +148,8 @@ public class My_Account extends BaseTest {
 		myAccountPage = PageGeneratorManager.getMyAccountPage(driver);
 		myAccountPage.clickToMyProductsReviewLink();
 		
-		Assert.assertEquals(myAccountPage.getTextReviewTitle(), reviewTitle);
-		Assert.assertEquals(myAccountPage.getTextReviewText(), reviewText);
+		verifyEquals(myAccountPage.getTextReviewTitle(), reviewTitle);
+		verifyEquals(myAccountPage.getTextReviewText(), reviewText);
 	}
 
 	

@@ -21,8 +21,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
-
 import pageUIs.admin.nopCommerce.AdminBasePageUI;
 import pageUIs.admin.nopCommerce.CustomersPageUI;
 import pageUIs.admin.nopCommerce.ProductDetailsPageUI;
@@ -479,6 +477,10 @@ public class BasePage {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, textboxName);
 		sendkeyToElementByJS(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, value, textboxName);
 	}
+	public void enterToTextboxTextareaByTextTagAndName(WebDriver driver, String value, String textField, String tagType, String idValue) {
+		waitForElementVisible(driver, BankGuruBasePageUI.DYNAMIC_TEXTBOX_TEXTAREA, textField, tagType, idValue);
+		sendkeyToElement(driver, BankGuruBasePageUI.DYNAMIC_TEXTBOX_TEXTAREA, value, textField, tagType, idValue);
+	}
 	public void checkToCheckboxOrRadioByName(WebDriver driver, String checboxAndRadioName) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, checboxAndRadioName);
 		checkToCheckboxOrRadio(driver, BasePageUI.DYNAMIC_TEXTBOX_INPUT_LOCATOR, checboxAndRadioName);
@@ -583,31 +585,6 @@ public class BasePage {
 	public List<String> getListProductPrices(WebDriver driver) {
 		return getElements(driver, BasePageUI.PRODUCT_PRICES).stream().map(title->title.getText()).collect(Collectors.toList());
 	}
-	public boolean isListSortedByOrder(WebDriver driver, List<String> arrayList) {
-		boolean isSortedByOrder = true;
-		for (int i = 0; i < arrayList.size()-1; i++) {
-			if (arrayList.get(i + 1).compareToIgnoreCase(arrayList.get(i)) < 0) {
-				isSortedByOrder = false;
-				break;
-			}
-			isSortedByOrder = true;
-		}
-		return isSortedByOrder;
-
-	}
-	public boolean isListSortedByReverseOrder(WebDriver driver, List<String> arrayList) {
-		boolean isSortedByReverseOrder = true;
-		for (int i = 0; i < arrayList.size()-1; i++) {
-			if (arrayList.get(i + 1).compareToIgnoreCase(arrayList.get(i)) > 0) {
-				isSortedByReverseOrder = false;
-				break;
-			}
-			isSortedByReverseOrder = true;
-
-		}
-		return isSortedByReverseOrder;
-
-	}
 	public boolean isDataStringSortedAscending(WebDriver driver, String locator) {
 		List<WebElement> elements = getElements(driver, locator);
 		List<String> names = elements.stream().map(name->name.getText()).collect(Collectors.toList());
@@ -678,6 +655,10 @@ public class BasePage {
 	public void clickToButtonByProductNameAndText(WebDriver driver, String productName, String buttonText) {
 		waitForElementClickable(driver, BasePageUI.DYNAMIC_BUTTON_BY_PRODUCT, productName, buttonText);
 		clickToElement(driver, BasePageUI.DYNAMIC_BUTTON_BY_PRODUCT, productName, buttonText);
+	}
+	public void pressKeyboardToElementByTextTagAndName(WebDriver driver, Keys key, String textField, String tagType, String idValue) {
+		waitForElementVisible(driver, BankGuruBasePageUI.DYNAMIC_TEXTBOX_TEXTAREA, textField, tagType, idValue);
+		getElement(driver, getDynamicLocator(BankGuruBasePageUI.DYNAMIC_TEXTBOX_TEXTAREA, textField, tagType, idValue)).sendKeys(key);
 	}
 	private Alert alert;
 	private WebDriverWait explicitWait; 

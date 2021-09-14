@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeTest;
@@ -26,7 +27,7 @@ public class BaseTest {
 	}
 
 	private enum BROWSER {
-		CHROME, FIREFOX, EDGE_LEGACY, EDGE_CHROMIUM, HEADLESS_CHROME, HEADLESS_FIREFOX;
+		CHROME, FIREFOX, EDGE_LEGACY, EDGE_CHROMIUM, HEADLESS_CHROME, HEADLESS_FIREFOX, INTERNETEXPLORER;
 	}
 
 	protected WebDriver getBrowser(String browserName) {
@@ -40,6 +41,9 @@ public class BaseTest {
 		} else if (browser == BROWSER.EDGE_CHROMIUM) {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
+		} else if (browser == BROWSER.INTERNETEXPLORER) {
+			System.setProperty("webdriver.ie.driver", GlobalConstants.PROJECT_PATH + File.separator + "browserDrivers" + File.separator + "IEDriverServer.exe");
+			driver = new InternetExplorerDriver();
 		} else {
 			throw new RuntimeException("Please input the correct browserName");
 		}
@@ -59,6 +63,9 @@ public class BaseTest {
 		} else if (browser == BROWSER.EDGE_CHROMIUM) {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
+		} else if (browser == BROWSER.INTERNETEXPLORER) {
+			System.setProperty("webdriver.ie.driver", GlobalConstants.PROJECT_PATH + File.separator + "browserDrivers" + File.separator + "IEDriverServer.exe");
+			driver = new InternetExplorerDriver();
 		} else {
 			throw new RuntimeException("Please input the correct browserName");
 		}
@@ -167,10 +174,6 @@ public class BaseTest {
 				} else {
 					cmd = "pkill chromedriver";
 				}
-			} else if (driver.toString().contains("internetexplorer")) {
-				if (osName.contains("windows")) {
-					cmd = "taskkill /F /FI \"IMAGENAME eq IEDriverServer*\"";
-				}
 			} else if (driver.toString().contains("firefox")) {
 				if (osName.contains("windows")) {
 					cmd = "taskkill /F /FI \"IMAGENAME eq geckodriver*\"";
@@ -183,6 +186,10 @@ public class BaseTest {
 				} else if (osName.contains("windows")) {
 					cmd = "pkill msedgedriver";
 				}
+//			} else if (driver.toString().contains("internetexplorer")) {
+//				if (osName.contains("windows")) {
+//					cmd = "taskkill /F /FI \"IMAGENAME eq IEDriverServer*\"";
+//				}
 			}
 			if (driver != null) {
 				driver.manage().deleteAllCookies();
@@ -203,18 +210,18 @@ public class BaseTest {
 		}
 
 	}
+
 	protected void closeDriverInstance() {
-	
-			try {
-				if (driver != null) {
-					driver.manage().deleteAllCookies();
-					driver.quit();
-				}
-			} catch (Exception e) {
-				
-				e.printStackTrace();
+		try {
+			if (driver != null) {
+				driver.manage().deleteAllCookies();
+				driver.quit();
 			}
-		
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
 	}
 	private WebDriver driver;
 	public WebDriver getDriver() {

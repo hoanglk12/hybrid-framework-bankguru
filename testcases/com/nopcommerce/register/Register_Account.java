@@ -99,7 +99,7 @@ public class Register_Account extends BaseTest {
 		
 		log.info(" Register_01 - Step 8: Click To Register Button");
 		registerPage.clickToRegisterButton();
-		registerPage.sleepInSecond(1);
+	
 		
 		log.info(" Register_01 - Step 9: Verify error messages displayed on 5 texboxes");
 		verifyEquals(registerPage.getEmptyFirstNameErrorMsg(), "First name is required.");
@@ -132,7 +132,7 @@ public class Register_Account extends BaseTest {
 		
 		log.info(" Register_02 - Step 7: Click To Register Button");
 		registerPage.clickToRegisterButton();
-		registerPage.sleepInSecond(1);
+		
 		
 		log.info(" Register_02 - Step 8: Verify error message is displayed with content 'Wrong email'");
 		verifyEquals(registerPage.getInvalidEmailErrorMsg(), "Wrong email");
@@ -161,7 +161,7 @@ public class Register_Account extends BaseTest {
 		
 		log.info(" Register_03 - Step 7: Click To Register Button");
 		registerPage.clickToRegisterButton();
-		registerPage.sleepInSecond(1);
+	
 		
 		log.info(" Register_03 - Step 8: Verify error message is displayed with content 'The specified email already exists'");
 		verifyEquals(registerPage.getEmailExistErrorMsg(), "The specified email already exists");
@@ -189,7 +189,7 @@ public class Register_Account extends BaseTest {
 		
 		log.info(" Register_04 - Step 7: Click To Register Button");
 		registerPage.clickToRegisterButton();
-		registerPage.sleepInSecond(1);
+		
 		
 		log.info(" Register_04 - Step 8: Verify error message is displayed with content 'Password must meet the following rules: must have at least 6 characters'");
 		verifyTrue(registerPage.isPasswordLessThanSixErrorMsgDisplayed());

@@ -5,10 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class PageGeneratorManager {
 	
-//	private static HomePageObject homePage;
-//	private static LoginPageObject loginPage;
-//	private static RegisterPageObject registerPage;
-//	private static MyAccountPageObject myAccountPage;
+
 	private PageGeneratorManager(){
 		
 	}

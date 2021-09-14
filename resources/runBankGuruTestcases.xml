@@ -12,21 +12,21 @@
 		<parameter name="browser" value="firefox" />
 		<classes>
 			<class name="com.bankguru.login.Login_01_Register_And_Login" />
-			<class name="com.bankguru.customer.New_Customer" />
+			<class name="com.bankguru.customer.New_Customer_01_Validate_Name" />
 		</classes>
 	</test> 
 	<test name="Run on Chrome">
 		<parameter name="browser" value="chrome" />
 		<classes>
-			<class name="com.bankguru.login.Login_01_Register_And_Login" />
-			<class name="com.bankguru.customer.New_Customer" />
+			<!--<class name="com.bankguru.login.Login_01_Register_And_Login" />
+			<class name="com.bankguru.customer.New_Customer_01_Validate_Name" />-->
 		</classes>
 	</test> 
 	<test name="Run on Edge Chromium">
 		<parameter name="browser" value="edge_chromium" />
 		<classes>
-			<class name="com.bankguru.login.Login_01_Register_And_Login" />
-			<class name="com.bankguru.customer.New_Customer" />
+			<!--<class name="com.bankguru.login.Login_01_Register_And_Login" />
+			<class name="com.bankguru.customer.New_Customer_01_Validate_Name" />-->
 		</classes>
 	</test> 
 </suite> 

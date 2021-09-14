@@ -12,6 +12,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.nopcommerce.common.Common_Login;
+import com.nopcommerce.register.Register_Account;
 
 import commons.BaseTest;
 import pageObjects.user.nopCommerce.ComparePageObject;
@@ -39,8 +40,8 @@ public class Wishlist_Compare_RecentView extends BaseTest {
 		homePage = PageGeneratorManager.getHomePage(driver);
 		loginPage = homePage.clickToLoginLink();
 		
-		loginPage.enterToEmailTextbox(Common_Login.email);
-		loginPage.enterToPasswordTextbox(Common_Login.password);
+		loginPage.enterToEmailTextbox(Register_Account.email);
+		loginPage.enterToPasswordTextbox(Register_Account.password);
 		homePage = loginPage.clickToLoginButton();
 		loginPage.sleepInSecond(1);
 		
