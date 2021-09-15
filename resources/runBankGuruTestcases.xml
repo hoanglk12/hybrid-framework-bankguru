@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Bank Guru" parallel="false">
 	<listeners>
-		<listener class-name="commons.MethodListener" />
+		<listener class-name="reportConfig.MethodListener" />
 		<listener class-name="org.uncommons.reportng.HTMLReporter" />
 		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
 		<listener class-name="reportConfig.ReportNGListener" />

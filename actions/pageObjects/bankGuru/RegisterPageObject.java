@@ -6,7 +6,7 @@ import commons.BasePage;
 import pageUIs.bankGuru.RegisterPageUI;
 
 public class RegisterPageObject extends BasePage {
-	protected WebDriver driver;
+	WebDriver driver;
 	public RegisterPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
