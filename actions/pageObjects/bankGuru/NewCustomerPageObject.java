@@ -10,8 +10,8 @@ public class NewCustomerPageObject extends BasePage {
 	public NewCustomerPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
-	public String getErrorValidationMessage() {
-		return getTextElement(driver, NewCustomerPageUI.ERROR_MESSGAE_VALIDATION);
+	public String getErrorValidationMessageByField(String fieldName) {
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_ERROR_MESSGAE_VALIDATION_BY_FIELD, fieldName);
 	}
 
 }

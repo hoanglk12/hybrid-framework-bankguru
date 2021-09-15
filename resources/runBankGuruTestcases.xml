@@ -13,6 +13,7 @@
 		<classes>
 			<class name="com.bankguru.login.Login_01_Register_And_Login" />
 			<class name="com.bankguru.customer.New_Customer_01_Validate_Name" />
+			<class name="com.bankguru.customer.New_Customer_02_Validate_Address" />
 		</classes>
 	</test> 
 	<test name="Run on Chrome">

@@ -28,4 +28,7 @@ public class DataHelper {
 	public int getRandomNumber() {
 		return faker.number().numberBetween(1,999);
 	}
+	public String getFullAddress() {
+		return faker.address().fullAddress();
+	}
 }
