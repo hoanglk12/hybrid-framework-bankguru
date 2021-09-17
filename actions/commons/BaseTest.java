@@ -51,7 +51,7 @@ public class BaseTest {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		} else if (browser == BROWSER.INTERNETEXPLORER) {
-			System.setProperty("webdriver.ie.driver", GlobalConstants.PROJECT_PATH + File.separator + "browserDrivers" + File.separator + "IEDriverServer.exe");
+			WebDriverManager.iedriver().arch32().driverVersion("3.141.59").setup();
 			driver = new InternetExplorerDriver();
 		} else if (browser == BROWSER.HEADLESS_FIREFOX) {
 			WebDriverManager.firefoxdriver().setup();
@@ -103,7 +103,7 @@ public class BaseTest {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		} else if (browser == BROWSER.INTERNETEXPLORER) {
-			System.setProperty("webdriver.ie.driver", GlobalConstants.PROJECT_PATH + File.separator + "browserDrivers" + File.separator + "IEDriverServer.exe");
+			WebDriverManager.iedriver().arch32().driverVersion("3.141.59").setup();
 			driver = new InternetExplorerDriver();
 		} else if (browser == BROWSER.HEADLESS_FIREFOX) {
 			WebDriverManager.firefoxdriver().setup();

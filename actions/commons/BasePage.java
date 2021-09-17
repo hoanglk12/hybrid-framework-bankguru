@@ -125,9 +125,17 @@ public class BasePage {
 		return driver.findElements(getByXpath(locator));
 	}
 	public void clickToElement(WebDriver driver, String locator) {
+		if(driver.toString().contains("internet explorer")) {
+			clickToElementByJS(driver, locator);
+			sleepInSecond(2);
+		}
 		getElement(driver, locator).click();
 	}
 	public void clickToElement(WebDriver driver, String locator, String...params) {
+		if(driver.toString().contains("internet explorer")) {
+			clickToElementByJS(driver, getDynamicLocator(locator, params));
+			sleepInSecond(2);
+		}
 		getElement(driver, getDynamicLocator(locator, params)).click();
 	}
 	public void clickToElementByAction(WebDriver driver, String locator, String...params) {
@@ -204,14 +212,24 @@ public class BasePage {
 	public int getElementSize(WebDriver driver, String locator, String...params) {
 		return getElements(driver, getDynamicLocator(locator, params)).size();
 	}
+
 	public void checkToCheckboxOrRadio(WebDriver driver, String locator) {
-		if(!getElement(driver, locator).isSelected()) {
-			getElement(driver, locator).click();
+		if (!getElement(driver, locator).isSelected()) {
+			if (driver.toString().contains("internet explorer")) {
+				clickToElementByJS(driver, locator);
+			} else {
+				getElement(driver, locator).click();
+			}
 		}
 	}
-	public void checkToCheckboxOrRadio(WebDriver driver, String locator, String...params) {
-		if(!getElement(driver, getDynamicLocator(locator, params)).isSelected()) {
-			getElement(driver, getDynamicLocator(locator, params)).click();
+
+	public void checkToCheckboxOrRadio(WebDriver driver, String locator, String... params) {
+		if (!getElement(driver, getDynamicLocator(locator, params)).isSelected()) {
+			if (driver.toString().contains("internet explorer")) {
+				clickToElementByJS(driver, getDynamicLocator(locator, params));
+			} else {
+				getElement(driver, getDynamicLocator(locator, params)).click();
+			}
 		}
 	}
 	public void uncheckToCheckbox(WebDriver driver, String locator) {
@@ -503,7 +521,7 @@ public class BasePage {
 	}
 	public void openExpandIconByCardTitle(WebDriver driver, String attribute, String cardTitle) {
 		waitForElementClickable(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, cardTitle);
-		if (getAttributeValue(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, attribute, cardTitle).contains("fa-plus")) {
+		if (!getAttributeValue(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, attribute, cardTitle).contains("fa-minus")) {
 			clickToElement(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, cardTitle);
 		}
 	}
@@ -547,6 +565,7 @@ public class BasePage {
 		}
 		clickToElement(driver, CustomersPageUI.DYNAMIC_BUTTON_LINK, buttonName);
 	}
+
 	public void clickToButtonByText(WebDriver driver, String buttonText) {
 		waitForElementClickable(driver, AdminBasePageUI.DYNAMIC_BUTTON_INPUT_BY_TEXT, buttonText);
 		if (driver.toString().contains("firefox")) {
