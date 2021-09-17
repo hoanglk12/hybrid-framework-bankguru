@@ -522,7 +522,11 @@ public class BasePage {
 	public void openExpandIconByCardTitle(WebDriver driver, String attribute, String cardTitle) {
 		waitForElementClickable(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, cardTitle);
 		if (!getAttributeValue(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, attribute, cardTitle).contains("fa-minus")) {
-			clickToElement(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, cardTitle);
+			if (driver.toString().contains("firefox")) {
+				clickToElementByJS(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, cardTitle);
+			} else {
+				clickToElement(driver, ProductDetailsPageUI.DYNAMIC_EXPAND_ICON_BY_CARD_TITLE, cardTitle);
+			}
 		}
 	}
 	public void openExpandIconSearchForm(WebDriver driver, String attribute) {
