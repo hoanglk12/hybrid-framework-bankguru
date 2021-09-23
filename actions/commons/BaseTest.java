@@ -2,6 +2,8 @@ package commons;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,6 +23,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeTest;
@@ -124,6 +129,84 @@ public class BaseTest {
 		driver.manage().window().maximize();
 		driver.get(urlPage);
 
+		return driver;
+	}
+
+	protected WebDriver getBrowser(String browserName, String appUrl, Platform platform, String ipAddress, String portNumber) {
+		BROWSER browser = BROWSER.valueOf(browserName.toUpperCase());
+		DesiredCapabilities capability = null;
+		if (browser == BROWSER.FIREFOX) {
+			WebDriverManager.firefoxdriver().setup();
+			capability = DesiredCapabilities.firefox();
+			capability.setBrowserName("firefox");
+			capability.setPlatform(platform);
+			FirefoxOptions options = new FirefoxOptions();
+			options.addArguments("--disable-infobars");
+			options.addArguments("--disable-notifications");
+			options.addArguments("--disable-geolocation");
+			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
+			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, GlobalConstants.BROWSER_LOGS_FOLDER_PATH + File.separator + "FirefoxLog.log");
+			options.merge(capability);
+		} else if (browser == BROWSER.CHROME) {
+			WebDriverManager.chromedriver().setup();
+			capability = DesiredCapabilities.chrome();
+			capability.setBrowserName("chrome");
+			capability.setPlatform(platform);
+			ChromeOptions options = new ChromeOptions();
+			Map<String, Object> prefs = new HashMap<String, Object>();
+			prefs.put("credentials_enable_service", false);
+			prefs.put("profile.password_manager_enabled", false);
+			options.setExperimentalOption("prefs", prefs);
+			options.addArguments("--disable-infobars");
+			options.addArguments("--disable-notifications");
+			options.addArguments("--disable-geolocation");
+			options.setExperimentalOption("useAutomationExtension", false);
+			options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+			System.setProperty("webdriver.chrome.args", "--disable-logging");
+			System.setProperty("webdriver.chrome.silentOutput", "true");
+			options.merge(capability);
+		} else if (browser == BROWSER.EDGE_CHROMIUM) {
+			WebDriverManager.edgedriver().setup();
+			capability = DesiredCapabilities.edge();
+			capability.setBrowserName("edge");
+			capability.setPlatform(platform);
+			capability.setJavascriptEnabled(true);
+		} else if (browser == BROWSER.INTERNETEXPLORER) {
+			WebDriverManager.iedriver().arch32().driverVersion("3.141.59").setup();
+			capability = DesiredCapabilities.edge();
+			capability.setBrowserName("internetexplorer");
+			capability.setPlatform(Platform.WINDOWS);
+			capability.setJavascriptEnabled(true);
+		} else {
+			throw new RuntimeException("Please input the correct browserName");
+		}
+		try {
+			driver = new RemoteWebDriver(new URL(String.format("https://%s:%s/wd/hub", ipAddress, portNumber)), capability);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		driver.get(appUrl);
+		return driver;
+	}
+	protected WebDriver getBrowser(String appUrl, String osName, String osVersion, String browserName, String browserVersion) {
+		DesiredCapabilities capability = new DesiredCapabilities();
+		capability.setCapability("os", "Windows");
+		capability.setCapability("os_version", "10");
+		capability.setCapability("browser", browserName);
+		capability.setCapability("browser_version", browserVersion);
+		capability.setCapability("browserstack.debug", "true");
+		capability.setCapability("browserstack.selenium_version", "3.141.59");
+		capability.setCapability("name", "Run on " + osName + " and " + browserName + " with version " + browserVersion);
+		try {
+			driver = new RemoteWebDriver(new URL(GlobalConstants.BROWSER_STACK_URL),capability);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		driver.get(appUrl);
 		return driver;
 	}
 
@@ -284,6 +367,7 @@ public class BaseTest {
 			});
 		}
 	}
+
 	public WebDriver getDriver() {
 		return this.driver;
 	}

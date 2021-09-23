@@ -17,10 +17,10 @@ public class Login_01_Register_And_Login_By_PageObject extends BaseTest {
 	
 	String email, firstName, lastName, password, confirmPassword;
 	
-	@Parameters({"browser","url"})
+	@Parameters({"url","os","os_version","browser","browser_version"})
 	@BeforeClass
-	public void initBrowser(String browserName, String url) {
-		driver = getBrowser(browserName, url);
+	public void initBrowser(String url, String osName, String osVersion, String browserName, String browserVersion) {
+		driver = getBrowser(url, osName, osVersion, browserName, browserVersion);
 		email = generateEmail();
 	}
 
