@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Live Guru" parallel="tests" thread-count="2">
 	<parameter name="url" value="http://live.demoguru99.com/" />
-	<test name="Run on Firefox">
+	<!--<test name="Run on Firefox">
 		<parameter name="os" value="Windows" />
 		<parameter name="os_version" value="10" />
 		<parameter name="browser" value="Firefox" />
@@ -9,8 +9,8 @@
 		<classes>
 			<class name="com.liveguru.login.Login_01_Register_And_Login_By_PageObject" />
 		</classes>
-	</test>
-	<test name="Run on Chrome">
+	</test>-->
+	<!--<test name="Run on Chrome">
 		<parameter name="os" value="Windows" />
 		<parameter name="os_version" value="10" />
 		<parameter name="browser" value="Chrome" />
@@ -18,12 +18,21 @@
 		<classes>
 			<class name="com.liveguru.login.Login_01_Register_And_Login_By_PageObject" />
 		</classes>
-	</test>
-	<test name="Run on Edge Chromium">
-		<parameter name="os" value="OS X" />
-		<parameter name="os_version" value="Big Sur" />
+	</test>-->
+	<!--<test name="Run on Edge Chromium">
+		<parameter name="os" value="Windows" />
+		<parameter name="os_version" value="8.1" />
 		<parameter name="browser" value="Edge" />
 		<parameter name="browser_version" value="89.0" />
+		<classes>
+			<class name="com.liveguru.login.Login_01_Register_And_Login_By_PageObject" />
+		</classes>
+	</test>-->
+	<test name="Run on Safari">
+		<parameter name="os" value="OS X" />
+		<parameter name="os_version" value="Catalina" />
+		<parameter name="browser" value="Safari" />
+		<parameter name="browser_version" value="13.0" />
 		<classes>
 			<class name="com.liveguru.login.Login_01_Register_And_Login_By_PageObject" />
 		</classes>

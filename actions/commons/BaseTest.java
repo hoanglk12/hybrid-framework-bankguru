@@ -192,8 +192,8 @@ public class BaseTest {
 	}
 	protected WebDriver getBrowser(String appUrl, String osName, String osVersion, String browserName, String browserVersion) {
 		DesiredCapabilities capability = new DesiredCapabilities();
-		capability.setCapability("os", "Windows");
-		capability.setCapability("os_version", "10");
+		capability.setCapability("os", osName);
+		capability.setCapability("os_version", osVersion);
 		capability.setCapability("browser", browserName);
 		capability.setCapability("browser_version", browserVersion);
 		capability.setCapability("browserstack.debug", "true");
