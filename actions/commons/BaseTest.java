@@ -209,7 +209,23 @@ public class BaseTest {
 		driver.get(appUrl);
 		return driver;
 	}
-
+	
+	protected WebDriver getBrowser(String appUrl, String platformName, String browserName, String browserVersion) {
+		DesiredCapabilities capability = new DesiredCapabilities();
+		capability.setCapability("platform_name", platformName);
+		capability.setCapability("browserName", browserName);
+		capability.setCapability("browser_version", browserVersion);
+		capability.setCapability("name", "Run on " + platformName + " and " + " with " + browserName + " version " + browserVersion);
+		try {
+			driver = new RemoteWebDriver(new URL(GlobalConstants.SAUCE_LABS_URL),capability);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		driver.get(appUrl);
+		return driver;
+	}
 	public static String generateEmail() {
 		Random rand = new Random();
 		return rand.nextInt(99999) + "@mail.com";

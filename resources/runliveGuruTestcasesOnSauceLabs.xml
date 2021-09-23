@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Live Guru" parallel="tests" thread-count="2">
+	<parameter name="url" value="http://live.demoguru99.com/" />
+	<test name="Run on Firefox">
+		<parameter name="platform_name" value="Windows 10" />
+		<parameter name="browserName" value="Firefox" />-->
+		<parameter name="browser_version" value="85" />
+		<classes>
+			<class name="com.liveguru.login.Login_01_Register_And_Login_SauceLabs" />
+		</classes>
+	</test>-->
+	<test name="Run on Chrome">
+		<parameter name="platform_name" value="macOS 10.15" />
+		<parameter name="browserName" value="Chrome" />
+		<parameter name="browser_version" value="93" />
+		<classes>
+			<class name="com.liveguru.login.Login_01_Register_And_Login_SauceLabs" />
+		</classes>
+	</test>-->
+	<!--<test name="Run on Edge Chromium">
+		<parameter name="os" value="Windows" />
+		<parameter name="os_version" value="8.1" />
+		<parameter name="browser" value="Edge" />
+		<parameter name="browser_version" value="89.0" />
+		<classes>
+			<class name="com.liveguru.login.Login_01_Register_And_Login_SauceLabs" />
+		</classes>
+	</test>-->
+	<!--<test name="Run on Edge">
+		<parameter name="platform_name" value="macOS 10.15" />
+		<parameter name="browserName" value="Edge" />
+		<parameter name="browser_version" value="93" />
+		<classes>
+			<class name="com.liveguru.login.Login_01_Register_And_Login_SauceLabs" />
+		</classes>
+	</test>-->
+	
+</suite>
