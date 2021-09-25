@@ -175,7 +175,6 @@ public class BaseTestThreadLocal {
 		} else {
 			throw new RuntimeException("Please input the correct browserName");
 		}
-		System.out.println("Driver at BaseTest: " + getDriver().toString());
 		getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		getDriver().manage().window().maximize();
 		getDriver().get(appUrl);

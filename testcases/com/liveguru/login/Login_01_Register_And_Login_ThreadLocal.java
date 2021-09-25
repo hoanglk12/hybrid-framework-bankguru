@@ -23,7 +23,6 @@ public class Login_01_Register_And_Login_ThreadLocal extends BaseTestThreadLocal
 	@BeforeClass
 	public void initBrowser(String appUrl, String browserName) {
 		driver = getBrowserDriver(browserName, appUrl);
-		System.out.println("Driver init : " + driver.toString());
 		email = generateEmail();
 	}
 
@@ -99,7 +98,7 @@ public class Login_01_Register_And_Login_ThreadLocal extends BaseTestThreadLocal
 	@AfterClass
 	public void closeBrowser() {
 		removeDriver();
-		System.out.println("Driver close : " + driver.toString());
+		
 	}
 
 
