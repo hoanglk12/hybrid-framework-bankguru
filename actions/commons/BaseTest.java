@@ -32,7 +32,7 @@ import org.testng.annotations.BeforeTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import reportConfig.VerificationFailures;
 
-public class BaseTest {
+public abstract class BaseTest {
 	String projectPath = System.getProperty("user.dir");
 	protected final Log log;
 

@@ -28,11 +28,11 @@ import pageUIs.bankGuru.BankGuruBasePageUI;
 import pageUIs.user.nopCommerce.BasePageUI;
 import pageUIs.user.nopCommerce.HomePageUI;
 
-public class BasePage {
+public abstract class BasePage {
 	
-	public static BasePage getBasePage()  {
-		return new BasePage();
-	}
+//	public static BasePage getBasePage()  {
+//		return new BasePage();
+//	}
 	public void openPageUrl(WebDriver driver, String pageUrl) {
 		driver.get(pageUrl);
 	}
