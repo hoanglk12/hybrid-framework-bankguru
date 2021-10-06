@@ -2,6 +2,8 @@ package commons;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +33,6 @@ public class BaseTestThreadLocal {
 	String projectPath = System.getProperty("user.dir");
 	protected final Log log;
 	protected static ThreadLocal<WebDriver> threadDriver = new ThreadLocal<WebDriver>();
-	
 
 	protected BaseTestThreadLocal() {
 		log = LogFactory.getLog(getClass());
@@ -128,6 +129,7 @@ public class BaseTestThreadLocal {
 
 		return driver;
 	}
+
 	protected WebDriver getBrowserDriver(String browserName, String appUrl) {
 		BROWSER browser = BROWSER.valueOf(browserName.toUpperCase());
 		if (browser == BROWSER.FIREFOX) {
@@ -339,20 +341,35 @@ public class BaseTestThreadLocal {
 			});
 		}
 	}
+
+	protected String getFormatDateWithDash(String dateInput) {
+		SimpleDateFormat fromUser = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String reformattedStr = "";
+		try {
+			reformattedStr = myFormat.format(fromUser.parse(dateInput));
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return reformattedStr;
+	}
+
 	protected void removeDriver() {
 		if (getDriver() != null) {
 			getDriver().quit();
 		}
 		threadDriver.remove();
 	}
+
 	private WebDriver getDriver() {
 		return threadDriver.get();
 	}
 
-	private void setDriver(WebDriver driver){
+	private void setDriver(WebDriver driver) {
 		threadDriver.set(driver);
 	}
-	
+
 	private WebDriver driver;
 
 }
