@@ -9,4 +9,5 @@ public class LoginPageObject extends BasePage{
 	public LoginPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
+
 }

@@ -10,19 +10,20 @@ import org.testng.annotations.Test;
 import com.bankguru.data.Customer.New_Customer_02;
 import com.bankguru.login.Login_01_Register_And_Login;
 
-import commons.BaseTest;
+import commons.BaseTestThreadLocal;
 import pageObjects.bankGuru.HomePageObject;
 import pageObjects.bankGuru.LoginPageObject;
 import pageObjects.bankGuru.NewCustomerPageObject;
 import pageObjects.bankGuru.PageGeneratorManager;
 import pageObjects.bankGuru.RegisterPageObject;
 
-public class New_Customer_02_Validate_Address extends BaseTest {
+public class New_Customer_02_Validate_Address extends BaseTestThreadLocal {
 	WebDriver driver;
 	@Parameters({"browser","urlBankGuru"})
 	@BeforeClass
 	public void initBrowser(String browser, String urlBankGuru) {
-		driver = getBrowser(browser, urlBankGuru);
+		driver = getBrowserDriver(browser, urlBankGuru);
+		System.out.println("Driver at Test Class : " + driver.toString());
 		newCustomerData02 = New_Customer_02.getNewCustomer02();
 		
 		loginPage = PageGeneratorManager.getLoginPage(driver);
@@ -71,7 +72,7 @@ public class New_Customer_02_Validate_Address extends BaseTest {
 	@AfterClass(alwaysRun = true)
 	public void closeBrowser(String browserName) {
 		log.info("Post-Condition - Close browser '" + browserName + "'");
-		closeBrowserAndDriver();
+		removeDriver();
 	}
 	
 	public HomePageObject homePage;

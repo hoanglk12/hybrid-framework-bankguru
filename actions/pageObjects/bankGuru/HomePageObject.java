@@ -10,7 +10,7 @@ public class HomePageObject extends BasePage {
 	public HomePageObject(WebDriver driver) {
 		this.driver = driver;
 	}
-	
+
 	public String getWelcomeTextMessage() {
 		return getTextElement(driver, HomePageUI.WELCOME_TEXT_MESSAGE);
 	}

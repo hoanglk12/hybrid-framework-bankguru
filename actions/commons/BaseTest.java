@@ -132,14 +132,14 @@ public abstract class BaseTest {
 		return driver;
 	}
 
-	protected WebDriver getBrowser(String browserName, String appUrl, Platform platform, String ipAddress, String portNumber) {
+	protected WebDriver getBrowserSeleniumGrid(String appUrl, String browserName, String ipAddress, String portNumber) {
 		BROWSER browser = BROWSER.valueOf(browserName.toUpperCase());
 		DesiredCapabilities capability = null;
 		if (browser == BROWSER.FIREFOX) {
-			WebDriverManager.firefoxdriver().setup();
+			//WebDriverManager.firefoxdriver().setup();
 			capability = DesiredCapabilities.firefox();
 			capability.setBrowserName("firefox");
-			capability.setPlatform(platform);
+			capability.setPlatform(Platform.WINDOWS);
 			FirefoxOptions options = new FirefoxOptions();
 			options.addArguments("--disable-infobars");
 			options.addArguments("--disable-notifications");
@@ -151,7 +151,7 @@ public abstract class BaseTest {
 			WebDriverManager.chromedriver().setup();
 			capability = DesiredCapabilities.chrome();
 			capability.setBrowserName("chrome");
-			capability.setPlatform(platform);
+			capability.setPlatform(Platform.WINDOWS);
 			ChromeOptions options = new ChromeOptions();
 			Map<String, Object> prefs = new HashMap<String, Object>();
 			prefs.put("credentials_enable_service", false);
@@ -169,7 +169,7 @@ public abstract class BaseTest {
 			WebDriverManager.edgedriver().setup();
 			capability = DesiredCapabilities.edge();
 			capability.setBrowserName("edge");
-			capability.setPlatform(platform);
+			capability.setPlatform(Platform.WINDOWS);
 			capability.setJavascriptEnabled(true);
 		} else if (browser == BROWSER.INTERNETEXPLORER) {
 			WebDriverManager.iedriver().arch32().driverVersion("3.141.59").setup();
@@ -181,7 +181,7 @@ public abstract class BaseTest {
 			throw new RuntimeException("Please input the correct browserName");
 		}
 		try {
-			driver = new RemoteWebDriver(new URL(String.format("https://%s:%s/wd/hub", ipAddress, portNumber)), capability);
+			driver = new RemoteWebDriver(new URL(String.format("http://%s:%s/wd/hub", ipAddress, portNumber)), capability);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}

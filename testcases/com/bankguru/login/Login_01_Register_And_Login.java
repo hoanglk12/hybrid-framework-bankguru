@@ -4,13 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
-import commons.BaseTest;
+import commons.BaseTestThreadLocal;
 import pageObjects.bankGuru.HomePageObject;
 import pageObjects.bankGuru.LoginPageObject;
 import pageObjects.bankGuru.PageGeneratorManager;
 import pageObjects.bankGuru.RegisterPageObject;
 
-public class Login_01_Register_And_Login extends BaseTest {
+public class Login_01_Register_And_Login extends BaseTestThreadLocal {
 	WebDriver driver;
 	String  name, dob, address, city, state, pin, phone, customerID ;
 	public static String userID, password, loginPageUrl, email;
@@ -18,7 +18,7 @@ public class Login_01_Register_And_Login extends BaseTest {
 	@Parameters({"browser","urlBankGuru"})
 	@BeforeTest
 	public void initBrowser(String browser, String urlBankGuru) {
-		driver = getBrowser(browser, urlBankGuru);
+		driver = getBrowserDriver(browser, urlBankGuru);
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 		loginPageUrl = loginPage.getCurrentPageUrl(driver);
 		email = "johnwick_" + generateEmail();
@@ -28,7 +28,8 @@ public class Login_01_Register_And_Login extends BaseTest {
 		registerPage.clickToButtonByNameAttribute(driver, "btnLogin");
 		userID = registerPage.getTextUserID();
 		password = registerPage.getTextPassword();
-		closeDriverInstance();
+		//closeDriverInstance();
+		removeDriver();
 	}
 
 	

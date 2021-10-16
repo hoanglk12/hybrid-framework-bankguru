@@ -33,6 +33,7 @@ public class BaseTestThreadLocal {
 	String projectPath = System.getProperty("user.dir");
 	protected final Log log;
 	protected static ThreadLocal<WebDriver> threadDriver = new ThreadLocal<WebDriver>();
+	public static ThreadLocal<String> browserName = new ThreadLocal<String>();
 
 	protected BaseTestThreadLocal() {
 		log = LogFactory.getLog(getClass());
@@ -132,55 +133,57 @@ public class BaseTestThreadLocal {
 
 	protected WebDriver getBrowserDriver(String browserName, String appUrl) {
 		BROWSER browser = BROWSER.valueOf(browserName.toUpperCase());
-		if (browser == BROWSER.FIREFOX) {
-			WebDriverManager.firefoxdriver().setup();
-			FirefoxOptions options = new FirefoxOptions();
-			options.addArguments("--disable-infobars");
-			options.addArguments("--disable-notifications");
-			options.addArguments("--disable-geolocation");
-			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
-			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, GlobalConstants.BROWSER_LOGS_FOLDER_PATH + File.separator + "FirefoxLog.log");
-			setDriver(new FirefoxDriver(options));
-		} else if (browser == BROWSER.CHROME) {
-			WebDriverManager.chromedriver().setup();
-			ChromeOptions options = new ChromeOptions();
-			Map<String, Object> prefs = new HashMap<String, Object>();
-			prefs.put("credentials_enable_service", false);
-			prefs.put("profile.password_manager_enabled", false);
-			options.setExperimentalOption("prefs", prefs);
-			options.addArguments("--disable-infobars");
-			options.addArguments("--disable-notifications");
-			options.addArguments("--disable-geolocation");
-			options.setExperimentalOption("useAutomationExtension", false);
-			options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-			System.setProperty("webdriver.chrome.args", "--disable-logging");
-			System.setProperty("webdriver.chrome.silentOutput", "true");
-			setDriver(new ChromeDriver(options));
-		} else if (browser == BROWSER.EDGE_CHROMIUM) {
-			WebDriverManager.edgedriver().setup();
-			setDriver(new EdgeDriver());
-		} else if (browser == BROWSER.INTERNETEXPLORER) {
-			WebDriverManager.iedriver().arch32().driverVersion("3.141.59").setup();
-			setDriver(new InternetExplorerDriver());
-		} else if (browser == BROWSER.HEADLESS_FIREFOX) {
-			WebDriverManager.firefoxdriver().setup();
-			FirefoxOptions options = new FirefoxOptions();
-			options.setHeadless(true);
-			options.addArguments("window-size=1366*768");
-			setDriver(new FirefoxDriver(options));
-		} else if (browser == BROWSER.HEADLESS_CHROME) {
-			WebDriverManager.chromedriver().setup();
-			ChromeOptions options = new ChromeOptions();
-			options.setHeadless(true);
-			options.addArguments("window-size=1366*768");
-			setDriver(new ChromeDriver(options));
-		} else {
-			throw new RuntimeException("Please input the correct browserName");
+		if (getDriver() == null) {
+			if (browser == BROWSER.FIREFOX) {
+				WebDriverManager.firefoxdriver().setup();
+				FirefoxOptions options = new FirefoxOptions();
+				options.addArguments("--disable-infobars");
+				options.addArguments("--disable-notifications");
+				options.addArguments("--disable-geolocation");
+				System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
+				System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, GlobalConstants.BROWSER_LOGS_FOLDER_PATH + File.separator + "FirefoxLog.log");
+				setDriver(new FirefoxDriver(options));
+			} else if (browser == BROWSER.CHROME) {
+				WebDriverManager.chromedriver().setup();
+				ChromeOptions options = new ChromeOptions();
+				Map<String, Object> prefs = new HashMap<String, Object>();
+				prefs.put("credentials_enable_service", false);
+				prefs.put("profile.password_manager_enabled", false);
+				options.setExperimentalOption("prefs", prefs);
+				options.addArguments("--disable-infobars");
+				options.addArguments("--disable-notifications");
+				options.addArguments("--disable-geolocation");
+				options.setExperimentalOption("useAutomationExtension", false);
+				options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+				System.setProperty("webdriver.chrome.args", "--disable-logging");
+				System.setProperty("webdriver.chrome.silentOutput", "true");
+				setDriver(new ChromeDriver(options));
+			} else if (browser == BROWSER.EDGE_CHROMIUM) {
+				WebDriverManager.edgedriver().setup();
+				setDriver(new EdgeDriver());
+			} else if (browser == BROWSER.INTERNETEXPLORER) {
+				WebDriverManager.iedriver().arch32().driverVersion("3.141.59").setup();
+				setDriver(new InternetExplorerDriver());
+			} else if (browser == BROWSER.HEADLESS_FIREFOX) {
+				WebDriverManager.firefoxdriver().setup();
+				FirefoxOptions options = new FirefoxOptions();
+				options.setHeadless(true);
+				options.addArguments("window-size=1366*768");
+				setDriver(new FirefoxDriver(options));
+			} else if (browser == BROWSER.HEADLESS_CHROME) {
+				WebDriverManager.chromedriver().setup();
+				ChromeOptions options = new ChromeOptions();
+				options.setHeadless(true);
+				options.addArguments("window-size=1366*768");
+				setDriver(new ChromeDriver(options));
+			} else {
+				throw new RuntimeException("Please input the correct browserName");
+			}
+			getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			getDriver().manage().window().maximize();
+			getDriver().get(appUrl);
 		}
-		getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		getDriver().manage().window().maximize();
-		getDriver().get(appUrl);
-
+		System.out.println("Driver at Base Test : " + getDriver().toString());
 		return getDriver();
 	}
 

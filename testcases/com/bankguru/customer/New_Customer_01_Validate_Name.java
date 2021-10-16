@@ -10,19 +10,20 @@ import org.testng.annotations.Test;
 import com.bankguru.data.Customer.New_Customer_01;
 import com.bankguru.login.Login_01_Register_And_Login;
 
-import commons.BaseTest;
+import commons.BaseTestThreadLocal;
 import pageObjects.bankGuru.HomePageObject;
 import pageObjects.bankGuru.LoginPageObject;
 import pageObjects.bankGuru.NewCustomerPageObject;
 import pageObjects.bankGuru.PageGeneratorManager;
 import pageObjects.bankGuru.RegisterPageObject;
 
-public class New_Customer_01_Validate_Name extends BaseTest {
+public class New_Customer_01_Validate_Name extends BaseTestThreadLocal {
 	WebDriver driver;
 	@Parameters({"browser","urlBankGuru"})
 	@BeforeClass
 	public void initBrowser(String browser, String urlBankGuru) {
-		driver = getBrowser(browser, urlBankGuru);
+		driver = getBrowserDriver(browser, urlBankGuru);
+		System.out.println("Driver at Test Class : " + driver.toString());
 		newCustomerData01 = New_Customer_01.getNewCustomer01();
 		
 		loginPage = PageGeneratorManager.getLoginPage(driver);
@@ -35,6 +36,7 @@ public class New_Customer_01_Validate_Name extends BaseTest {
 	public void  New_Customer_01_Validate_Name_01_Not_Empty() {
 		log.info("New_Customer_01_Validate_Name_01 - Step 1 - Verify Welcome message is displayed at Home Page");
 		homePage = PageGeneratorManager.getHomePage(driver);
+	
 		String welcomeMessage = "Welcome To Manager's Page of Guru99 Bank";
 		verifyEquals(homePage.getWelcomeTextMessage(), welcomeMessage);
 		
@@ -92,7 +94,7 @@ public class New_Customer_01_Validate_Name extends BaseTest {
 	@AfterClass(alwaysRun = true)
 	public void closeBrowser(String browserName) {
 		log.info("Post-Condition - Close browser '" + browserName + "'");
-		closeBrowserAndDriver();
+		removeDriver();
 	}
 	
 	public HomePageObject homePage;

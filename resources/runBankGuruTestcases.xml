@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Bank Guru" parallel="false">
+<suite name="Bank Guru" parallel="tests" thread-count="3">
 	<listeners>
 		<listener class-name="reportConfig.MethodListener" />
 		<listener class-name="org.uncommons.reportng.HTMLReporter" />
@@ -14,16 +14,16 @@
 			<class name="com.bankguru.login.Login_01_Register_And_Login" />
 			<class name="com.bankguru.customer.New_Customer_01_Validate_Name" />
 			<class name="com.bankguru.customer.New_Customer_02_Validate_Address" />
-			<class name="com.bankguru.customer.New_Customer_03_Validate_City" />
+			<!--<class name="com.bankguru.customer.New_Customer_03_Validate_City" />-->
 		</classes>
 	</test> 
 	<test name="Run on Firefox Headless">
 		<parameter name="browser" value="headless_firefox" />
 		<classes>
-			<class name="com.bankguru.login.Login_01_Register_And_Login" />
+			<!--<class name="com.bankguru.login.Login_01_Register_And_Login" />
 			<class name="com.bankguru.customer.New_Customer_01_Validate_Name" />
 			<class name="com.bankguru.customer.New_Customer_02_Validate_Address" />
-			<class name="com.bankguru.customer.New_Customer_03_Validate_City" />
+			<class name="com.bankguru.customer.New_Customer_03_Validate_City" />-->
 		</classes>
 	</test> 
 	<test name="Run on Chrome">
@@ -32,7 +32,7 @@
 			<class name="com.bankguru.login.Login_01_Register_And_Login" />
 			<class name="com.bankguru.customer.New_Customer_01_Validate_Name" />
 			<class name="com.bankguru.customer.New_Customer_02_Validate_Address" />
-			<class name="com.bankguru.customer.New_Customer_03_Validate_City" />
+			<!--<class name="com.bankguru.customer.New_Customer_03_Validate_City" />-->
 		</classes>
 	</test> 
 	<test name="Run on Edge Chromium">
@@ -41,7 +41,7 @@
 			<class name="com.bankguru.login.Login_01_Register_And_Login" />
 			<class name="com.bankguru.customer.New_Customer_01_Validate_Name" />
 			<class name="com.bankguru.customer.New_Customer_02_Validate_Address" />
-			<class name="com.bankguru.customer.New_Customer_03_Validate_City" />
+			<!--<class name="com.bankguru.customer.New_Customer_03_Validate_City" />-->
 		</classes>
 	</test> 
 	<test name="Run on Internet Explorer">
